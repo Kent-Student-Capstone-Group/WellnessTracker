@@ -15,5 +15,5 @@ class GoogleLogin(SocialLoginView):
         profile_url = "https://www.googleapis.com/oauth2/v2/userinfo"   
 
     adapter_class = GoogleAdapter
-    callback_url = "https://healm-e5z3j.ondigitalocean.app/oauth/"
+    callback_url = "https://healm-e5z3j.ondigitalocean.app"
     client_class = OAuth2Client
