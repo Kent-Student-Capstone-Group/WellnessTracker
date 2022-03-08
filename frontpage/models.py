@@ -1,8 +1,8 @@
 from django.db import models
 
 # Create your models here.
-from django.db import models
-from sqlalchemy import ForeignKey, true
+#from django.db import models
+#from sqlalchemy import ForeignKey, true
 
 
 class User(models.Model):
@@ -15,7 +15,7 @@ class User(models.Model):
     HeightInches = models.IntegerField(blank=1)
     Weight = models.FloatField(blank=1)
     Gender = models.CharField(max_length=20, blank=1)
-    IsActive = models.BooleanField(default=true, blank=1)
+    IsActive = models.BooleanField(default=True, blank=1)
 
     def __str__(self):
         return self.FirstName + ' ' + self.LastName
@@ -24,7 +24,7 @@ class Group(models.Model):
     Owner = models.ForeignKey(User, on_delete=models.CASCADE)
     GroupName = models.CharField(max_length=100)
     NumMembers = models.IntegerField(default=0)
-    IsActive = models.BooleanField(default=true)
+    IsActive = models.BooleanField(default=True)
 
     def __str__(self):
         return self.GroupName
