@@ -18,11 +18,15 @@ from django.urls import include, path
 
 from frontpage import views
 from oauth.views import GoogleLogin
+from django.views.generic import TemplateView
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
+    path('', TemplateView.as_view(template_name="index.html")),
+    path('accounts/', include('allauth.urls')),
+    path('logout', LogoutView.as_view()),
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/google/', GoogleLogin.as_view(), name='google_login'),
     
