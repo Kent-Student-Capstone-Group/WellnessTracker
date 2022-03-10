@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_auth',
     'allauth',
     'allauth.account',
+    'rest_auth.registration',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     #'frontpage.apps.FrontpageConfig',
@@ -71,7 +72,7 @@ ROOT_URLCONF = 'healm.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'frontpage/templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -165,6 +166,11 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
         'AUTH_PARAMS': {
             'access_type': 'online'
+        },
+        'APP': {
+            'client_id': '521282700960-lju3vq4krsln6o5et598s1sk0v2d42le.apps.googleusercontent.com',
+            'secret': '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',
+            'key':''
         }
     }
 }
