@@ -20,8 +20,10 @@
             html, body, h1{
                 font-family: Fredoka;
             }
-            body {background-color: rgb(85, 231, 250);}
-            #c{
+            body {
+                background-color: rgb(85, 231, 250);}
+
+            h1{
                 color: rgb(250, 23, 23);
             }
             div,footer,h3{
@@ -48,34 +50,35 @@
             
             <div class="layer">
                 <h1>
-                    <p id = "c"> Welcome to Healm</p>
+                    <p> Welcome to Healm</p>
                 </h1>
             </div>
-
+            
             <form>
             <div class="form-header">
                 <img src="C:\Users\bolem\Healm\WellnessTracker\frontpage\templates\src\Healm-logos_white.png" width="5%" alt="logo">  
             </div>
             <h3>Enter your Information</h3>
+
             <div class="input-container">
-                <input type="email" placeholder="Email">
-            
+                <input type="email" placeholder="Email" required>
+
             </div>
             <div class="input-container">
-                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Password" required>
             </div>
             <div class="input-container">
-                <br><input type="submit" value="login">
+                <input type="submit" value="login">
             </div>
             <div class="input-container">
-                <br><a href="#">Forgot password?</a>
+                <a href="#">Forgot password?</a>
             </div>
             <div class="input-container">
-                <br><a href="#"> Sign up</a>
+                <a href="#"> Sign up</a>
             </div>
             <div>
-            <p text-bold> OR </p>
-            <br>
+            <p text-bold > OR </p>
+            
             <a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=521282700960-lju3vq4krsln6o5et598s1sk0v2d42le.apps.googleusercontent.com&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile&access_type=offline&redirect_uri=https://healm-e5z3j.ondigitalocean.app">Sign in with Google</a>
             </div>
         
