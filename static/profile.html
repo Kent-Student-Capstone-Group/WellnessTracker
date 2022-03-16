@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <a href="welcome.html"><h4>Home</h4></a>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
+        <style>
+            html, body, h1
+            {
+                font-family: Fredoka;
+            }
+            </style>
+    </head>
+
+    <body>
+        <h1>Profile setup</h1>
+        <div class="form-control">
+            <label class="header">Profile Photo:</label>  
+            <input id="image" type="file" name="profile_photo" placeholder="Photo" required="" capture>
+        </div>
+            <label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value="">
+            <label class="labels">Surname</label><input type="text" class="form-control" value="" placeholder="surname">
+            <label class="labels">Date of birth</label><input type="date" class="form-control" value=""><br>
+            <label class="labels">Gender</label><br>
+            <input type="radio" name="gender" value="male"> Male<br>
+            <input type="radio" name="gender" value="female"> Female<br>
+            <input type="radio" name="gender" value="other"> Other<br>
+            <label class="labels">Height</label><input type="number" class="form-control" placeholder="in feet" value=""><br>
+            <label class="labels">Weight</label><input type="number" class="form-control" placeholder="in lbs" value=""><br>
+
+            <label class="labels">Mobile Number</label><input type="tel" class="form-control" placeholder="Phone number" value="">
+
+
+    </body>
+</html>

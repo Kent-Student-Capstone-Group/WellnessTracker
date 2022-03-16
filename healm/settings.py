@@ -39,15 +39,14 @@ SITE_ID = 1
 
 INSTALLED_APPS = [
     'django.contrib.sites',
-    'rest_framework',
-    'rest_framework.authtoken',
-    'rest_auth',
+    #'rest_framework',
+    #'rest_framework.authtoken',
+    #'rest_auth',
     'allauth',
     'allauth.account',
-    'rest_auth.registration',
+    #'rest_auth.registration',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    #'frontpage.apps.FrontpageConfig',
     'frontpage',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -166,7 +165,7 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
         'AUTH_PARAMS': {
             'access_type': 'online'
-        },
+        }, 
         'APP': {
             'client_id': '521282700960-lju3vq4krsln6o5et598s1sk0v2d42le.apps.googleusercontent.com',
             'secret': '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',

@@ -1,0 +1,33 @@
+{% load socialaccount %}
+{% load static %}
+
+<html>
+<br>
+<body>
+    <h1>Healm!</h1>
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}</p>
+        <a target="_black" href="admin">admin</a>
+        <a href="{% url 'frontpage:logout' %}">Logout</a>
+        <a href="{% url 'frontpage:userInfo' %}">User Info Form</a>
+        <a href="{% url 'frontpage:index' %}">Index</a><br>
+        {% if info %}
+        <p>Date of Birth:{{info.DateOfBirth}}</p>
+        <p>Height:{{info.HeightFeet}}'{{info.HeightInches}}"</p>
+        <p>Weight:{{info.Weight}}</p>
+        <p>Gender:{{info.Gender}}</p>
+        {% endif %}
+    {% else %}
+        {% if google_login %}
+            <p>hello</p>
+            <a href="{% provider_login_url 'google' %}">Login With Google</a>
+        {% else %}
+        <p>hello</p>
+        <a href="{% provider_login_url 'google' %}">Login With Google</a>
+        <a href="admin">admin</a>
+        {% endif %}
+
+    {% endif %}
+</body>
+
+</html>
