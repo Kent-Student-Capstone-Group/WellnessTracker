@@ -33,3 +33,48 @@ def createUserInfo(request):
     else:
         return HttpResponse("Not Authenticated")
 
+def chat(request):  # Latti 
+    return render(request, 'chat.html')
+
+def contact(request):   
+    return render(request, 'contact.html')
+
+def group(request):  
+    return render(request, 'group.html')
+
+def groupstat(request):   
+    return render(request, 'groupstat.html')
+
+def info(request):   
+    return render(request, 'info.html')
+
+def notification(request):   
+    return render(request, 'notification.html')
+
+def profile(request):   
+    return render(request, 'profile.html')
+
+def ps(request):   
+    return render(request, 'ps.html')
+
+def result(request):   
+    return render(request, 'result.html')
+
+def settings(request):   
+    return render(request, 'settings.html')
+
+def signup(request):   
+    return render(request, 'signup.html')
+
+def status(request):   
+    return render(request, 'status.html')
+
+def upload(request):   
+    return render(request, 'upload.html')
+
+def weekreport(request):   
+    return render(request, 'weekreport.html')
+
+def welcome(request):   
+    return render(request, 'welcome.html')
+
