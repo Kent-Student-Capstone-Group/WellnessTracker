@@ -13,6 +13,7 @@ urlpatterns = [
     path('group/', views.group), 
     path('groupstat/', views.groupstat), 
     path('info/', views.info), 
+    path('makegroup', views.makeGroup, name='makegroup'),
     path('profile/', views.profile), 
     path('ps/', views.ps), 
     path('result/', views.result), 

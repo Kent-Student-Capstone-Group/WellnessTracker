@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import UserInfo
-from .forms import EditUserInfo
+from .forms import EditUserInfo, MakeGroup
 
 # Create your views here.
 
@@ -47,6 +47,23 @@ def groupstat(request):
 
 def info(request):   
     return render(request, 'info.html')
+
+def makeGroup(request):
+    try:
+        info_sel = UserInfo.objects.get(User= request.user)
+    except UserInfo.DoesNotExist:
+        obj = UserInfo()
+        obj.User = request.user
+        obj.save()
+        return redirect('frontpage:userInfo')
+    if (request.user.is_authenticated):
+        form = MakeGroup(request.POST or None, instance = info_sel)
+        if form.is_valid():
+            form.save()
+            return redirect('frontpage:index')
+        return render(request, 'frontpage/userInfo_form.html', {'upload_form':form})
+    else:
+        return HttpResponse("Not Authenticated")
 
 def notification(request):   
     return render(request, 'notification.html')
