@@ -49,19 +49,13 @@ def info(request):
     return render(request, 'info.html')
 
 def makeGroup(request):
-    try:
-        info_sel = UserInfo.objects.get(User= request.user)
-    except UserInfo.DoesNotExist:
-        obj = UserInfo()
-        obj.User = request.user
-        obj.save()
-        return redirect('frontpage:userInfo')
+    #info_sel = UserInfo.objects.get(User= request.user)
     if (request.user.is_authenticated):
-        form = MakeGroup(request.POST or None, instance = info_sel)
+        form = MakeGroup(request.POST or None)
         if form.is_valid():
             form.save()
             return redirect('frontpage:index')
-        return render(request, 'frontpage/userInfo_form.html', {'upload_form':form})
+        return render(request, 'frontpage/makegroup.html', {'upload_form':form})
     else:
         return HttpResponse("Not Authenticated")
 
