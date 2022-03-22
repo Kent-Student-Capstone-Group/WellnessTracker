@@ -12,4 +12,7 @@ class EditUserInfo(forms.ModelForm):#forms.Form
 class MakeGroup(forms.ModelForm):
     class Meta:
         model=Group
-        fields=['Owner', 'GroupName', 'NumMembers', 'IsActive']
+        fields=[
+            'Owner',
+            'GroupName'
+        ]

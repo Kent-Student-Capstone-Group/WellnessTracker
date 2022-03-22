@@ -25,7 +25,7 @@ class UserInfo(models.Model):
 class Group(models.Model):
     Owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     GroupName = models.CharField(max_length=100)
-    NumMembers = models.IntegerField(default=0)
+    NumMembers = models.IntegerField(default=1)
     IsActive = models.BooleanField(default=True)
 
     def __str__(self):

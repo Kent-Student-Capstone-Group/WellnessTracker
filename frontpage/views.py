@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import UserInfo
+from .models import UserInfo, Group
 from .forms import EditUserInfo, MakeGroup
 
 # Create your views here.
@@ -55,7 +55,10 @@ def makeGroup(request):
         if form.is_valid():
             form.save()
             return redirect('frontpage:index')
-        return render(request, 'frontpage/makegroup.html', {'upload_form':form})
+        context = {
+            'form': form
+        }
+        return render(request, 'frontpage/makegroup.html', context)
     else:
         return HttpResponse("Not Authenticated")
 
