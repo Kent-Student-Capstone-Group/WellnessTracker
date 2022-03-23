@@ -2,9 +2,11 @@
 {% load static %}
 
 <html>
+
+{% extends 'base.html' %}
 <br>
 <body>
-    <h1>Healm!</h1>
+    <!--<h1>Healm!</h1>-->
     {% if user.is_authenticated %}
         <p>Welcome, {{ user.username }}</p>
         <a target="_black" href="admin">admin</a>
