@@ -53,12 +53,12 @@
         </ul>
         
         <ul>
-            <li><a href="">Profile</a></li>
-            <li><a href="">Personal Stats</a></li>
-            <li><a href="">Groups</a></li>
-            <li><a href="">Chat</a></li>
-            <li><a href="">Weekly Report</a></li>
-            <li style="float:right"><a href="">Logout</a></li>
+            <li><a href="{% url 'profile' %}">Profile</a></li>
+            <li><a href="{% url 'ps' %}">Personal Stats</a></li>
+            <li><a href="{% url 'group' %}">Groups</a></li>
+            <li><a href="{% url 'chat' %}">Chat</a></li>
+            <li><a href="{% url 'weekreport' %}">Weekly Report</a></li>
+            <li style="float:right"><a href="{% url 'logout' %}">Logout</a></li>
         </ul>
 
     </header>
