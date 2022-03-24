@@ -1,47 +1,48 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
 <style>
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 1px solid #e7e7e7;
-  background-color: #f3f3f3;
-}
-
-li {
-  float: left;
-}
-
-li a {
-  display: block;
-  color: #666;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
-  background-color: #ddd;
-}
-
-.row {
-    display: inline-block;
-}
-
-h1, li{
-    font-family: Verdana;
-}
+  .base ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    background-color: #f3f3f3;
+  }
+  
+  .base li {
+    float: left;
+  }
+  
+  .base li a {
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  .base li a:hover {
+    background-color: #ddd;
+  }
+  
+  .base .row {
+      display: inline-block;
+  }
+  
+  .base h1, li{
+      font-family: Verdana;
+  }
 
 </style>
 </head>
 <body>
-
+  <div class="base">
     <header>
         <div class="row">
-            <img src="src/title_logo.png" height="100">
+            <img src="frontpage/templates/frontpage/src/title_logo.png" height="100">
         </div>
         <div class="row">
             <h1>Healm</h1>
@@ -52,14 +53,15 @@ h1, li{
         </ul>
         
         <ul>
-            <li><a href="">Profile</a></li>
-            <li><a href="">Personal Stats</a></li>
-            <li><a href="">Groups</a></li>
-            <li><a href="">Chat</a></li>
-            <li><a href="">Weekly Report</a></li>
-            <li style="float:right"><a href="">Logout</a></li>
+            <li><a href="{% url 'profile' %}">Profile</a></li>
+            <li><a href="{% url 'ps' %}">Personal Stats</a></li>
+            <li><a href="{% url 'group' %}">Groups</a></li>
+            <li><a href="{% url 'chat' %}">Chat</a></li>
+            <li><a href="{% url 'weekreport' %}">Weekly Report</a></li>
+            <li style="float:right"><a href="{% url 'logout' %}">Logout</a></li>
         </ul>
     </header>
+  </div>
 
     {% block content %}
     {% endblock content%}
