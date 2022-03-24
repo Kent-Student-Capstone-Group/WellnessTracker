@@ -34,19 +34,19 @@ def createUserInfo(request):
         return HttpResponse("Not Authenticated")
 
 def chat(request):  # Latti 
-    return render(request, 'chat.html')
+    return render(request, 'frontpage/chat.html')
 
 def contact(request):   
-    return render(request, 'contact.html')
+    return render(request, 'frontpage/contact.html')
 
 def group(request):  
-    return render(request, 'group.html')
+    return render(request, 'frontpage/group.html')
 
 def groupstat(request):   
-    return render(request, 'groupstat.html')
+    return render(request, 'frontpage/groupstat.html')
 
 def info(request):   
-    return render(request, 'info.html')
+    return render(request, 'frontpage/info.html')
 
 def makeGroup(request):
     #info_sel = UserInfo.objects.get(User= request.user)
@@ -63,32 +63,32 @@ def makeGroup(request):
         return HttpResponse("Not Authenticated")
 
 def notification(request):   
-    return render(request, 'notification.html')
+    return render(request, 'frontpage/notification.html')
 
 def profile(request):   
-    return render(request, 'profile.html')
+    return render(request, 'frontpage/profile.html')
 
 def ps(request):   
-    return render(request, 'ps.html')
+    return render(request, 'frontpage/ps.html')
 
 def result(request):   
-    return render(request, 'result.html')
+    return render(request, 'frontpage/result.html')
 
 def settings(request):   
-    return render(request, 'settings.html')
+    return render(request, 'frontpage/settings.html')
 
 def signup(request):   
-    return render(request, 'signup.html')
+    return render(request, 'frontpage/signup.html')
 
 def status(request):   
-    return render(request, 'status.html')
+    return render(request, 'frontpage/status.html')
 
 def upload(request):   
-    return render(request, 'upload.html')
+    return render(request, 'frontpage/upload.html')
 
 def weekreport(request):   
-    return render(request, 'weekreport.html')
+    return render(request, 'frontpage/weekreport.html')
 
 def welcome(request):   
-    return render(request, 'welcome.html')
+    return render(request, 'frontpage/welcome.html')
 
