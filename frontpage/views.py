@@ -41,15 +41,19 @@ def contact(request):
 
 def group(request):  
     user = request.user
-    userGroups = []
-    i = 0
-    for e in UserGroupJoinTable.objects.filter(User = user):
-        userGroups[i] = e.Group
-        ++i
     context = {
-        'userGroups': userGroups
+        'userGroups': UserGroupJoinTable.objects.filter(User = user)
     }
     return render(request, 'frontpage/group.html', context)
+    # userGroups = []
+    # i = 0
+    # for e in UserGroupJoinTable.objects.filter(User = user):
+    #     userGroups[i] = e.Group
+    #     i = i + 1
+    # context = {
+    #     'userGroups': userGroups
+    # }
+    # return render(request, 'frontpage/group.html', context)
 
 def groupstat(request):   
     return render(request, 'frontpage/groupstat.html')
@@ -59,15 +63,26 @@ def info(request):
 
 def makeGroup(request):
     #info_sel = UserInfo.objects.get(User= request.user)
+
     if (request.user.is_authenticated):
         form = MakeGroup(request.POST or None)
-        if form.is_valid():
-            form.save()
-            return redirect('frontpage:index')
-        context = {
-            'form': form
-        }
-        return render(request, 'frontpage/makegroup.html', context)
+        #Ensure that there is not already a group with the same owner and name
+        userCurrentOwnedGroups = Group.objects.filter(Owner = request.user)
+        groupAlreadyExists = False
+        for e in userCurrentOwnedGroups:
+            if e.GroupName == form.GroupName:
+                groupAlreadyExists = True
+
+        if groupAlreadyExists:
+            if form.is_valid():
+                form.save()
+                return redirect('frontpage:index')
+            context = {
+                'form': form
+            }
+            return render(request, 'frontpage/makegroup.html', context)
+
+        
     else:
         return HttpResponse("Not Authenticated")
 

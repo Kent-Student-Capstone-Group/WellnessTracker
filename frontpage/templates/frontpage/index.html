@@ -6,6 +6,23 @@
 {% load static %}
 
 <html>
+
+<style>
+.login_box{
+    border-style: double;
+    padding: 20px;
+}
+.login_box a {
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.login_box a:hover {
+    background-color: #ddd;
+}
+</style>
 <br>
 <body>
     <!--<h1>Healm!</h1>-->
@@ -26,6 +43,9 @@
         {% if google_login %}
             <p>hello</p>
             <a href="{% provider_login_url 'google' %}">Login With Google</a>
+        <div class = "login_box">
+            <a href="{% provider_login_url 'google' %}">Login With Google</a>
+        </div>
         {% else %}
         <p>hello</p>
         <a href="{% provider_login_url 'google' %}">Login With Google</a>

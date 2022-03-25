@@ -11,9 +11,9 @@
     </head>
     <body>
         <table>
-            {% for group in userGroups %}
+            {% for userGroup in userGroups %}
             <tr>
-                <td><a href="">{{group.GroupName}}</a></td>
+                <td><a href="">{{userGroup.Group.GroupName}}</a></td>
             </tr>
             {% endfor %}
         </table>
