@@ -10,6 +10,13 @@
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <table>
+            {% for group in userGroups %}
+            <tr>
+                <td><a href="">{{group.GroupName}}</a></td>
+            </tr>
+            {% endfor %}
+        </table>
         <section>
             <div class="group">
                 
