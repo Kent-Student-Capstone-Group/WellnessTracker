@@ -42,7 +42,8 @@ def contact(request):
 def group(request):  
     user = request.user
     context = {
-        'userGroups': UserGroupJoinTable.objects.filter(User = user)
+        'userGroups': UserGroupJoinTable.objects.filter(User = user),
+        'ownerGroups': Group.objects.filter(Owner = request.user),
     }
     return render(request, 'frontpage/group.html', context)
     # userGroups = []
@@ -65,23 +66,35 @@ def makeGroup(request):
     #info_sel = UserInfo.objects.get(User= request.user)
 
     if (request.user.is_authenticated):
-        form = MakeGroup(request.POST or None)
-        #Ensure that there is not already a group with the same owner and name
-        userCurrentOwnedGroups = Group.objects.filter(Owner = request.user)
-        groupAlreadyExists = False
-        for e in userCurrentOwnedGroups:
-            if e.GroupName == form.GroupName:
-                groupAlreadyExists = True
+        if request.method == 'POST':
+            
+            #Ensure that there is not already a group with the same owner and name
+            try:
+                userCurrentOwnedGroups = Group.objects.get(Owner = request.user, GroupName=request.POST.get("GroupName"))  
+            except Group.DoesNotExist:
+                form = MakeGroup(request.POST or None)
+                if form.is_valid():
+                    form.save()
+                    return redirect('frontpage:index')
+                else:
+                    return HttpResponse("Invalid Form")
+            return HttpResponse("Group Already Exists")
+            # groupAlreadyExists = False
+            # for e in userCurrentOwnedGroups:
+            #     if e.GroupName == form.GroupName:
+            #         groupAlreadyExists = True
 
-        if groupAlreadyExists:
-            if form.is_valid():
-                form.save()
-                return redirect('frontpage:index')
-            context = {
-                'form': form
-            }
-            return render(request, 'frontpage/makegroup.html', context)
-
+            # if groupAlreadyExists:
+            #     if form.is_valid():
+            #         form.save()
+            #         return redirect('frontpage:index')
+            #     context = {
+            #         'form': form
+            #     }
+            #     return render(request, 'frontpage/makegroup.html', context)
+        else:
+            form = MakeGroup()
+            return render(request, 'frontpage/makegroup.html', {'form':form})
         
     else:
         return HttpResponse("Not Authenticated")
