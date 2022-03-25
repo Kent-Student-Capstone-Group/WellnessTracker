@@ -13,7 +13,6 @@ class MakeGroup(forms.ModelForm):
     class Meta:
         model=Group
         fields=[
-            'Owner',
             'GroupName'
         ]
 

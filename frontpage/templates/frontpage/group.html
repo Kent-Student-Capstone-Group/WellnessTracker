@@ -10,6 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <a href="{% url 'frontpage:makegroup' %}">Make a New Group</a>
         <h3>Owner:</h3>
         <table>
             {% for ownerGroup in ownerGroups %}
