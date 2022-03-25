@@ -67,6 +67,7 @@ def makeGroup(request):
                 userCurrentOwnedGroups = Group.objects.get(Owner = request.user, GroupName=request.POST.get("GroupName"))  
             except Group.DoesNotExist:
                 form = MakeGroup(request.POST or None)
+                form.Owner = request.user
                 if form.is_valid():
                     form.save()
                     return redirect('frontpage:index')
