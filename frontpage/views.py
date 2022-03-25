@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import UserInfo, Group
+from .models import UserGroupJoinTable, UserInfo, Group
 from .forms import EditUserInfo, MakeGroup
 
 # Create your views here.
@@ -40,7 +40,16 @@ def contact(request):
     return render(request, 'frontpage/contact.html')
 
 def group(request):  
-    return render(request, 'frontpage/group.html')
+    user = request.user
+    userGroups = []
+    i = 0
+    for e in UserGroupJoinTable.objects.filter(User = user):
+        userGroups[i] = e.Group
+        ++i
+    context = {
+        'userGroups': userGroups
+    }
+    return render(request, 'frontpage/group.html', context)
 
 def groupstat(request):   
     return render(request, 'frontpage/groupstat.html')
