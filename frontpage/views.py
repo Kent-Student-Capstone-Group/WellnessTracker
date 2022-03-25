@@ -39,6 +39,9 @@ def chat(request):  # Latti
 def contact(request):   
     return render(request, 'frontpage/contact.html')
 
+def dailyReport(request):
+    return render(request, 'frontpage/dailyreport.html')
+
 def group(request):  
     user = request.user
     context = {
@@ -46,15 +49,6 @@ def group(request):
         'ownerGroups': Group.objects.filter(Owner = request.user),
     }
     return render(request, 'frontpage/group.html', context)
-    # userGroups = []
-    # i = 0
-    # for e in UserGroupJoinTable.objects.filter(User = user):
-    #     userGroups[i] = e.Group
-    #     i = i + 1
-    # context = {
-    #     'userGroups': userGroups
-    # }
-    # return render(request, 'frontpage/group.html', context)
 
 def groupstat(request):   
     return render(request, 'frontpage/groupstat.html')

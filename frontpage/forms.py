@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserInfo, Group
+from .models import DailyReport, UserInfo, Group
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -15,4 +15,22 @@ class MakeGroup(forms.ModelForm):
         fields=[
             'Owner',
             'GroupName'
+        ]
+
+class DailyReportForm(forms.ModelForm):
+    class Meta:
+        model = DailyReport
+        fields=[
+            'RatingOfDay',
+            'StepsTaken',
+            'HoursSitting',
+            'HoursSlept',
+            'WorkedOut',
+            'LengthOfWorkout',
+            'IntensityOfWorkout',
+            'MealsEaten',
+            'SnacksEaten',
+            'FoodHealth',
+            'CigarettesSmoked',
+            'AlcoholicDrinks'
         ]

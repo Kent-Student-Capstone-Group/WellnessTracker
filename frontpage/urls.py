@@ -10,6 +10,7 @@ urlpatterns = [
     path('userInfo_form', views.createUserInfo, name='userInfo'),
     path('chat/', views.chat, name='chat'), #Latti
     path('contact/', views.contact, name='contact'), 
+    path('dailyreport/', views.dailyReport, name='dailyreport'),
     path('group/', views.group, name='group'), 
     path('groupstat/', views.groupstat, name='groupstat'), 
     path('info/', views.info, name='info'), 
