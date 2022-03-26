@@ -42,7 +42,7 @@
   <div class="base">
     <header>
         <div class="row">
-            <img src="{% static 'frontpage/src/title_logo.png' %}" height="100">
+            <a href="{% url 'frontpage:index' %}"><img src="{% static 'frontpage/src/title_logo.png' %}" height="100"></a>
         </div>
         <div class="row">
             <h1>Healm</h1>
@@ -55,6 +55,7 @@
         <ul>
             <li><a href="{% url 'frontpage:profile' %}">Profile</a></li>
             <li><a href="{% url 'frontpage:ps' %}">Personal Stats</a></li>
+            <li><a href="{% url 'frontpage:dailyreport' %}">Daily Report</a></li>
             <li><a href="{% url 'frontpage:group' %}">Groups</a></li>
             <li><a href="{% url 'frontpage:chat' %}">Chat</a></li>
             <li><a href="{% url 'frontpage:weekreport' %}">Weekly Report</a></li>

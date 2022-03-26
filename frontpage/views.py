@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import UserInfo, Group
+from .models import UserGroupJoinTable, UserInfo, Group
 from .forms import EditUserInfo, MakeGroup
 
 # Create your views here.
@@ -43,8 +43,16 @@ def chat(request):
 def contact(request):   
     return render(request, 'frontpage/contact.html')
 
+def dailyReport(request):
+    return render(request, 'frontpage/dailyreport.html')
+
 def group(request):  
-    return render(request, 'frontpage/group.html')
+    user = request.user
+    context = {
+        'userGroups': UserGroupJoinTable.objects.filter(User = user),
+        'ownerGroups': Group.objects.filter(Owner = request.user),
+    }
+    return render(request, 'frontpage/group.html', context)
 
 def groupstat(request):   
     return render(request, 'frontpage/groupstat.html')
@@ -54,15 +62,39 @@ def info(request):
 
 def makeGroup(request):
     #info_sel = UserInfo.objects.get(User= request.user)
+
     if (request.user.is_authenticated):
-        form = MakeGroup(request.POST or None)
-        if form.is_valid():
-            form.save()
-            return redirect('frontpage:index')
-        context = {
-            'form': form
-        }
-        return render(request, 'frontpage/makegroup.html', context)
+        if request.method == 'POST':
+            
+            #Ensure that there is not already a group with the same owner and name
+            try:
+                userCurrentOwnedGroups = Group.objects.get(Owner = request.user, GroupName=request.POST.get("GroupName"))  
+            except Group.DoesNotExist:
+                form = MakeGroup(request.POST or None)
+                form.Owner = request.user
+                if form.is_valid():
+                    form.save()
+                    return redirect('frontpage:index')
+                else:
+                    return HttpResponse("Invalid Form")
+            return HttpResponse("Group Already Exists")
+            # groupAlreadyExists = False
+            # for e in userCurrentOwnedGroups:
+            #     if e.GroupName == form.GroupName:
+            #         groupAlreadyExists = True
+
+            # if groupAlreadyExists:
+            #     if form.is_valid():
+            #         form.save()
+            #         return redirect('frontpage:index')
+            #     context = {
+            #         'form': form
+            #     }
+            #     return render(request, 'frontpage/makegroup.html', context)
+        else:
+            form = MakeGroup()
+            return render(request, 'frontpage/makegroup.html', {'form':form})
+        
     else:
         return HttpResponse("Not Authenticated")
 

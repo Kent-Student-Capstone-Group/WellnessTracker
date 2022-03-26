@@ -10,6 +10,23 @@
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <a href="{% url 'frontpage:makegroup' %}">Make a New Group</a>
+        <h3>Owner:</h3>
+        <table>
+            {% for ownerGroup in ownerGroups %}
+            <tr>
+                <td><a href="">{{ownerGroup.GroupName}}</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <h3>Member:</h3>
+        <table>
+            {% for userGroup in userGroups %}
+            <tr>
+                <td><a href="">{{userGroup.Group.GroupName}}</a></td>
+            </tr>
+            {% endfor %}
+        </table>
         <section>
             <div class="group">
                 
