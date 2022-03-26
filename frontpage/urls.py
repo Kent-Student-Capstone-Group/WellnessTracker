@@ -8,7 +8,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view(), name="logout"),
     path('userInfo_form', views.createUserInfo, name='userInfo'),
-    path('chat/', views.chat, name='chat'), #Latti
+    path('chat/', views.chat, name='chat'), 
     path('contact/', views.contact, name='contact'), 
     path('dailyreport/', views.dailyReport, name='dailyreport'),
     path('group/', views.group, name='group'), 
