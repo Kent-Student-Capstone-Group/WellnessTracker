@@ -33,8 +33,12 @@ def createUserInfo(request):
     else:
         return HttpResponse("Not Authenticated")
 
-def chat(request):  # Latti 
-    return render(request, 'frontpage/chat.html')
+def chat(request):   
+    if (request.user.is_authenticated):
+        return render(request, 'frontpage/chat.html')
+    
+    else:
+        return HttpResponse("Not Authenticated")
 
 def contact(request):   
     return render(request, 'frontpage/contact.html')
