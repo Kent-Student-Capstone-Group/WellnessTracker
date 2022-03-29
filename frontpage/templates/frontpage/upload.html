@@ -9,13 +9,63 @@
         <meta content="width=device-width,initial-scale=1" name="viewport" />
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" type="image/png" href="src\title_logo.png" />
-    </head>
+    
     <style>
         *{
             font-family: Fredoka;
-            text-align: center;
+            margin: 0;
         }
+        header{
+            position: relative;
+            text-align: center;
+            background-color: aqua;
+            color: aliceblue;
+            height: 100px;
+            width: auto;
+            padding: 5px;
+        }
+        nav{
+            float: left;
+            align-items: center;
+            width: 20%;
+            height: 100%;
+            background-color: green;
+            color: aliceblue;
+            clear: both;
+        }
+        nav ul{
+            list-style: none;
+            text-decoration: none;
+        }
+        .logo{
+            width: 140px;
+        }
+    </style>
+    </head>
     <body>
+        <header>
+            <img src="src\Healm-logos_transparentw.png" class="logo" alt="logo">
+                <h1> Hello User</h1>
+                <ul>
+                    <li><a href="{% url 'frontpage:logout' %}">Logout</a></li>
+                </ul>
+            
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Personal Statistics</a></li>
+                <li><a href="#">Groups</a></li>
+                <li><a href="#">Chat</a></li>
+                <li><a href="#">Weekly report</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </nav>
+        <section>
+        <p>We need your data to display your statistics</p>
+        <p>Please upload your data through the link below</p>
+        </section>
 
     </body>
 </html>

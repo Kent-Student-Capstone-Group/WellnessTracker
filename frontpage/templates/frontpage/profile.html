@@ -5,13 +5,19 @@
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" type="image/png" href="src\title_logo.png" />
         <style>
-            html, body, h1
-            {
+            *{
                 font-family: Fredoka;
                 background-color: rgb(227, 250, 209);
+                text-align: center;
             }
             h1,h2{
                 color: rgb(250, 151, 37);
+            }
+            .form1{
+                background-color: aqua;
+                color: aliceblue;
+                padding: 10px;
+                border: 2px red;
             }
             </style>
     </head>
@@ -19,11 +25,12 @@
     <body>
         <h1>Welcome to your profile setup:</h1>
         <h2>Profile setup</h2>
-        <div class="form-control">
+        <div class="form1">
             
             <label class="header">Profile Photo:</label>  
             <input id="image" type="file" name="profile_photo" placeholder="Photo" required="" capture>
         </div>
+
             <label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value="">
             <label class="labels">Surname</label><input type="text" class="form-control" value="" placeholder="surname">
             <label class="labels">Date of birth</label><input type="date" class="form-control" value=""><br>
