@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+<style>
+  .base ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    background-color: #f3f3f3;
+  }
+  
+  .base li {
+    float: left;
+  }
+  
+  .base li a {
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  .base li a:hover {
+    background-color: #ddd;
+  }
+  
+  .base .row {
+      display: inline-block;
+  }
+  
+  .base h1, li{
+      font-family: Verdana;
+  }
+
+</style>
+</head>
+<body>
+  <div class="base">
+    <header>
+        <div class="row">
+            <a href="{% url 'frontpage:index' %}"><img src="{% static 'frontpage/src/title_logo.png' %}" height="100"></a>
+        </div>
+        <div class="row">
+            <h1>Healm</h1>
+        </div>
+        <ul>
+            
+            
+        </ul>
+        
+        <ul>
+            <li><a href="{% url 'frontpage:profile' %}">Profile</a></li>
+            <li><a href="{% url 'frontpage:ps' %}">Personal Stats</a></li>
+            <li><a href="{% url 'frontpage:dailyreport' %}">Daily Report</a></li>
+            <li><a href="{% url 'frontpage:group' %}">Groups</a></li>
+            <li><a href="{% url 'frontpage:chat' %}">Chat</a></li>
+            <li><a href="{% url 'frontpage:weekreport' %}">Weekly Report</a></li>
+            <li style="float:right"><a href="{% url 'frontpage:logout' %}">Logout</a></li>
+        </ul>
+
+    </header>
+  </div>
+
+    {% block content %}
+    {% endblock content%}
+
+
+</body>
+</html>
+
+

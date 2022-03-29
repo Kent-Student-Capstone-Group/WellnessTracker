@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset = "UTF-8">
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
+        
+        <link rel="Fredoka" href="https://healmks.com/">
+        <meta name="description" content="The official website of Healm - the Kent State Wellness tracker." />
+        <meta property="og:site_name" content="Healm">
+        <meta property="og:url" content="https://healmks.com/">
+        <meta property="og:title" content="Healm">
+        <meta property="og:type" content="website">
+        <meta property="og:description" content="The official website of Healm - the Kent State Wellness tracker. ">
+
+        <title text-bold>Healm</title>
+        <link rel="shortcut icon" type="image/png" href="src\title_logo.png" />
+
+        <style>
+            *{
+                font-family: Fredoka;
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            h1{
+                font-size: 30px;
+                color: rgb(33, 41, 41);
+                align-content: center;
+            }
+            .header{
+                height: 100vh;
+                width: 100%;
+                padding: 0 8%;
+                position: relative;
+            }
+            nav{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .logo{
+                width: 140px;
+            }
+            .nlinks{
+                padding: 28px 0;
+            }
+            .nlinks li{
+                display: inline-block;
+                margin: 0 15px;
+            }
+            .nlinks li a{
+                text-decoration: none;
+                color: rgb(31, 247, 211);
+                padding: 5px 0;
+                position: relative;
+            }
+            .nlinks li a::after{
+                content: '';
+                background: rgb(245, 129, 63);
+                width: 0;
+                height: 3px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                transition: width 0.8ms;
+            }
+            .nlinks li a:hover::after{
+                width: 100%;
+            }
+            .btn
+            {
+                background: rgb(38, 247, 212);
+                color: black;
+                padding: 10px 30px;
+                border-radius: 5px;
+            }
+            .content{
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                width: 90%;
+                max-width: 900px;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                padding-top: 50px;
+            }
+            .content h3{
+                font-size: 30px;
+                margin-bottom: 20px;
+            }
+            .content form{
+                background: rgba(0, 225, 255, 0.712);
+                padding: 60px;
+                border-radius: 5px;
+                display: flex;
+            }
+            .content form input{
+                flex: 1;
+                border: none;
+                outline: none;
+                padding: 0 20px;
+                font-size: 10px;
+            }
+            .backv{
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                min-width: 100%;
+                min-height: 100%;
+                width: 0;
+                height: auto;
+                z-index: -100;
+            }
+            @media(min-aspect-ratiio:16/9){
+                .backv{
+                    width: 100%;
+                    height: auto;
+                }
+            }
+            @media(max-aspect-ratiio:16/9){
+                .backv{
+                    width: auto;
+                    height: 100%;
+                }
+            }
+
+
+        </style>
+        
+    </head>
+    <body>
+        <div class="header">
+
+            <video autoplay loop class="backv" muted plays-inline>
+                <source src="src\video.mp4" type="video/mp4">
+            </video>
+
+            <nav>
+                <img src="src\Healm-logos_transparentw.png" class="logo" alt="logo">
+                <h1> Welcome to Healm </h1>
+                <ul class="nlinks">
+                    <li><a href="info.html">Information</a></li> 
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+             
+        </div>
+       
+        <div class="content">       
+                             <h3>Enter your Information</h3>
+                <form>
+                            <div class="input-container">
+                                <input type="email" placeholder="Email" required>
+                
+                            </div>
+                            <div class="input-container">
+                                <input type="password" placeholder="Password" required>
+                            </div>
+                            <div class="input-container">
+                                <input class="btn" type="submit" value="login">
+                            </div>
+                            <div class="input-container">
+                                <a href="#">Forgot password?</a>
+                            </div>
+                            <div class="input-container">
+                                <a class="btn" href="signup.html"> Sign up</a>
+                            </div>
+                            <div>
+                                <p text-bold > OR </p>
+                            </div>
+                            <div>
+                                <a class="btn" href="https://accounts.google.com/o/oauth2/v2/auth?client_id=521282700960-lju3vq4krsln6o5et598s1sk0v2d42le.apps.googleusercontent.com&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile&access_type=offline&redirect_uri=https://healm-e5z3j.ondigitalocean.app">Sign in with Google</a>
+                            </div> 
+                            <h3>Administrator login</h3>
+                            <div class="input-container">
+                                <input type="email" placeholder="Admin's email">
+                            </div>
+                            <div class="input-container">
+                                <input type="password" placeholder="password">
+                            </div>
+                        </form>
+                        </div>                
+            
+                
+           
+    </body>
+</html>
