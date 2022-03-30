@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import UserGroupJoinTable, UserInfo, Group
+from .models import UserGroupJoinTable, UserInfo, Group, Message
 from .forms import EditUserInfo, MakeGroup
 
 # Create your views here.
@@ -35,7 +35,8 @@ def createUserInfo(request):
 
 def chat(request):   
     if (request.user.is_authenticated):
-        return render(request, 'frontpage/chat.html')
+        userMessages = Message.objects.all()
+        return render(request, 'frontpage/chat.html', {'Messages': userMessages})
     
     else:
         return HttpResponse("Not Authenticated")

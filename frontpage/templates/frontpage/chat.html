@@ -11,8 +11,8 @@
     </head>
     <body>
         <ul>
-            {% for x in message %}
-            <li>{{x.sender x.MessageTitle</li>
+            {% for x in Messages %}
+            <li>{{ x.sender }} {{ x.MessageTitle }}</li> <!-- add time/date use if statement-->
             {% endfor %}
         </ul>
         <!-- Prob need some kind of loop to show desired number of emails or make it 20 or something-->
