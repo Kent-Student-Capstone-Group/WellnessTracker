@@ -10,21 +10,26 @@
                 font-family: Fredoka;
                 background-color: rgb(227, 250, 209);
                 text-align: center;
+                margin: 0;
             }
             h1{
                 color: rgb(250, 37, 37);
             }
             .form1{
+                position: relative;
                 background-color: aqua;
                 color: rgb(2, 15, 27);
                 padding: 10px;
                 border: 2px red;
             }
             label{
-                border: 5px solid rgb(243, 222, 32);
+                text-align: center;
+                padding: 4px;
+                border: 6px solid rgb(243, 222, 32);
                 border-radius: 2px;
                 width: auto;
                 height: 10px;
+                display: inline-block;
             }
             .logo{
                 width: 140px;
@@ -54,6 +59,7 @@
         <header>
             <nav>
             <img src="src\Healm-logos_transparentw.png" class="logo" alt="logo">
+            <h1>Welcome to your profile setup:</h1>
             <ul>
                 <li><a href="{% url 'frontpage:index' %}"><h4>Home</h4></a></li>
             </ul>
@@ -61,7 +67,7 @@
 
             </nav>
         </header>
-        <h1>Welcome to your profile setup:</h1>
+        
         <div class="form1">
             
             <label class="header">Profile Photo:</label>  
