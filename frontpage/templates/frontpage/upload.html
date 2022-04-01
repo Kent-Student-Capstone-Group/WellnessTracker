@@ -4,7 +4,7 @@
 {% block content %}
 <html>
     <head>
-    <title>Upload</title>
+    <title>Upload page</title>
     <meta charset = "UTF-8">
         <meta content="width=device-width,initial-scale=1" name="viewport" />
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
@@ -15,43 +15,69 @@
             font-family: Fredoka;
             margin: 0;
         }
-        header{
+        .header{
             position: relative;
             text-align: center;
-            background-color: aqua;
+            background-color: rgb(60, 250, 209);
             color: aliceblue;
             height: 100px;
             width: auto;
             padding: 5px;
         }
-        nav{
-            float: left;
+        .header nav{
+            display: flex;
             align-items: center;
-            width: 20%;
-            height: 100%;
-            background-color: green;
-            color: aliceblue;
-            clear: both;
+            justify-content: space-between;
+            }
+        .logo{
+            width: 140px;
         }
-        nav ul{
+        h1{
+            color: black;
+            font-size: 30px;
+        }
+        ul{
             list-style: none;
             text-decoration: none;
         }
-        .logo{
-            width: 140px;
+        .left-portion{
+            align-items: center;
+            flex-basis: 30%;
+            flex-grow: 1;
+            border: 2px solid rgb(13, 14, 13);
+            padding: 5px;
+            width: 30%;
+            height: auto;
+            background-color: rgb(107, 250, 64);
+        }
+        .right-portion{
+            flex-basis: 70%;
+            flex-grow: 1;
+            background-color: bisque;
+        }
+        .u-box{
+            align-items: center;
+            border: 2px sloid black;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px;
+            background-color: rgb(248, 138, 252);
+
         }
     </style>
     </head>
     <body>
-        <header>
+        <div class="header">
+            <nav>
             <img src="src\Healm-logos_transparentw.png" class="logo" alt="logo">
                 <h1> Hello User</h1>
                 <ul>
                     <li><a href="{% url 'frontpage:logout' %}">Logout</a></li>
                 </ul>
-            
-        </header>
+            </nav>
+        </div>  
 
+        <div class="left-portion">
         <nav>
             <ul>
                 <li><a href="#">Profile</a></li>
@@ -62,10 +88,15 @@
                 <li><a href="settings.html">Settings</a></li>
             </ul>
         </nav>
-
-        <section>
+        </div>
+        <section class="right-portion">
         <p>We need your data to display your statistics</p>
         <p>Please upload your data through the link below</p>
+        <div class="u-box">
+            <img src="src\fitbit-logo.jpg" type="img/jpg" width="7%" alt="Fitbit logo"/>
+            <h1>Upload your smart watch data</h1>
+            <input class="btn" type="button" value="upload">
+        </div>
         </section>
 
     </body>
