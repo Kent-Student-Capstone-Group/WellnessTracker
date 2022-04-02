@@ -16,7 +16,7 @@
             margin: 0;
         }
         .header{
-            position: relative;
+            
             text-align: center;
             background-color: rgb(60, 250, 209);
             color: aliceblue;
@@ -36,33 +36,66 @@
             color: black;
             font-size: 30px;
         }
-        ul{
-            list-style: none;
-            text-decoration: none;
-        }
+        
         .left-portion{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
-            flex-basis: 30%;
-            flex-grow: 1;
             border: 2px solid rgb(13, 14, 13);
             padding: 5px;
-            width: 30%;
+            width: 20%;
             height: auto;
-            background-color: rgb(107, 250, 64);
+            background-color: rgb(202, 238, 255);
+        }
+        .left-portion a{
+            line-height: 2em;
+            border: 2px solid white;
+            margin: 4px;
+            border-radius: 5px;
         }
         .right-portion{
-            flex-basis: 70%;
-            flex-grow: 1;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
             background-color: bisque;
         }
         .u-box{
+            text-align: center;
             align-items: center;
             border: 2px sloid black;
             border-radius: 5px;
             padding: 20px;
-            margin: 10px;
+            margin: 40px;
             background-color: rgb(248, 138, 252);
-
+        }
+        .u-box h1{
+            margin-bottom: 20px;
+        }
+        ul{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+        }
+        a:visited{
+            color: black;
+        }
+        a:hover{
+            color: red;
+        }
+        a:active{
+            color: rgb(61, 241, 16);
+        }
+        .u-box input{
+            background-color: rgb(250, 51, 51);
+            color: white;
+            border: 1px solid white;
+            border-radius: 2px;
+            margin: 4px;
+            padding: 3px;
+            cursor: hand;
         }
     </style>
     </head>
@@ -80,22 +113,26 @@
         <div class="left-portion">
         <nav>
             <ul>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Personal Statistics</a></li>
-                <li><a href="#">Groups</a></li>
-                <li><a href="#">Chat</a></li>
-                <li><a href="#">Weekly report</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="ps.html">Personal Statistics</a></li>
+                <li><a href="group.html">Groups</a></li>
+                <li><a href="chat.html">Chat</a></li>
+                <li><a href="weekreport.html">Weekly report</a></li>
                 <li><a href="settings.html">Settings</a></li>
             </ul>
         </nav>
         </div>
         <section class="right-portion">
-        <p>We need your data to display your statistics</p>
-        <p>Please upload your data through the link below</p>
+        <h1>We need your data to display your statistics</h1>
+        <h3>Please upload your data through the link below</h3>
+
         <div class="u-box">
             <img src="src\fitbit-logo.jpg" type="img/jpg" width="7%" alt="Fitbit logo"/>
             <h1>Upload your smart watch data</h1>
-            <input class="btn" type="button" value="upload">
+
+            <input type="file" id="myFile" name="filename">
+            <input type="submit" >
+
         </div>
         </section>
 
