@@ -9,6 +9,7 @@
         <meta content="width=device-width,initial-scale=1" name="viewport" />
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" type="image/png" href="src\title_logo.png" />
+        <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
     
     <style>
         *{
@@ -52,16 +53,18 @@
             background-color: rgb(202, 238, 255);
         }
         .left-portion a{
-            line-height: 2em;
-            border: 2px solid white;
+            line-height: 3em;
+            border: 2px solid rgb(24, 23, 23);
             margin: 4px;
+            padding: 3px;
             border-radius: 5px;
+            background-color: white;
         }
         .right-portion{
             display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: flex-start;
+            flex-direction: column;
+            justify-content: space-between;
+       
             background-color: bisque;
         }
         .u-box{
@@ -101,6 +104,9 @@
             padding: 3px;
             cursor: hand;
         }
+        .u-box img{
+            border-radius: 2px;
+        }
     </style>
     </head>
     <body>
@@ -126,15 +132,16 @@
             </ul>
         </nav>
         </div>
+
         <section class="right-portion">
-        <h1>We need your data to display your statistics</h1>
+            <h1>We need your data to display your statistics</h1>
 
-        <div class="u-box">
-            <img src="src\fitbit-logo.jpg" type="img/jpg" width="7%" alt="Fitbit logo"/>
-            <h1>Please Upload your smart watch data</h1>
+            <div class="u-box">
+                <img src="src\fitbit-logo.jpg" type="img/jpg" width="10%" alt="Fitbit logo"/>
+                <h1>Please Upload your smart watch data</h1>
 
-            <input type="file" id="myFile" name="filename">
-            <input type="submit" >
+                <input type="file" id="myFile" name="filename">
+                <input type="submit" >
 
         </div>
         </section>
