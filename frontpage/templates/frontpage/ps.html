@@ -9,15 +9,84 @@
         <meta content="width=device-width,initial-scale=1" name="viewport" />
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" type="image/png" href="src\title_logo.png" />
+        <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
     </head>
     <style>
         *{
             font-family: Fredoka;
             text-align: center;
+            margin: 0;
+        }
+        h1{
+            font-size: 50px;
+            color: blue;
+        }
+        .header{
+            height: 100px;
+            width: auto;
+            padding: 5px;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: rgb(97, 238, 207);
+        }
+        nav{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo{
+            width: 140px;
+        }
+        .left-portion{
+            align-items: center;
+            line-height: 2em;
+            float: left;
+            width: 15%;
+            height: 100%;
+            background: rgb(112, 253, 69);
+            border: 2px solid rgb(1, 16, 22);
+        }
+        .left-portion a{
+            text-decoration: none;
+        }
+        ul{
+            list-style: none;
+        }
+        .right-portion{
+            float: right;
+            width: 85%;
+            height: 100%;
         }
     </style>
     <body>
-
+        <div class="header">
+            
+            <nav>
+                <img src="src\Healm-logos_transparentw.png" class="logo" alt="logo">
+                <h1>Personal Statistics</h1>
+                <ul>
+                    <li><a href="{% url 'frontpage:logout' %}">Logout</a></li>
+                </ul>
+            </nav>
+             
+        </div>
+        <section class="left-portion">
+                <nav>
+                    <ul>
+                        <li><a href="profile.html">Profile</a></li>
+                        <li><a href="ps.html">Personal Stats</a></li>
+                        <li><a href="group.html">Groups</a></li>
+                        <li><a href="chat.html">Chat</a></li>
+                        <li><a href="settings.html">Settings</a></li>
+                        <li><a href="notification.html">notifications</a></li>
+                    </ul>
+                    </nav>
+        </section>
+        <section class="right-portion">
+            <h1> These are Statistics retrieved from your smart watch!</h1>
+            
+        </section>
     </body>
 </html>
 {% endblock content %}
