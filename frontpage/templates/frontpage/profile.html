@@ -62,7 +62,7 @@
     <body>
         <div class="header">
             <nav>
-            <img src="{% static 'frontpage\src\Healm-logos_transparentw.png' %}" class="logo" alt="logo">
+            <img src="src\Healm-logos_transparentw.png" class="logo" alt="logo">
             <h1>Welcome to your profile setup:</h1>
             <ul>
                 <li><a href="{% url 'frontpage:index' %}"><h4>Home</h4></a></li>
@@ -75,7 +75,7 @@
         <div class="form1">
 
             <div class="dp">
-                <img src="{% 'frontpage\src\id.png' %}" type="img/png" width=7% alt="DP"/>  
+                <img src="src\id.png" type="img/png" width=7% alt="DP"/>  
                 <h3>Profile Picture</h3>
                 <label class="labels"><input id="image" type="file" name="profile_photo" placeholder="Photo" required="" capture></label>
             </div>
@@ -93,7 +93,7 @@
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                         <option value="other">Other</option>
-                        <option value="Prefernot">Prefer not to mention</option>
+                        <option value="Prefernot">Perfer not to mention</option>
                         </select>
             </div>
             
