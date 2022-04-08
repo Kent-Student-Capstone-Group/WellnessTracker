@@ -19,3 +19,10 @@ auth2_client = fitbit.Fitbit(CLIENT_ID, CLIENT_SECRET, oauth2=True, access_token
 
 #AUTHORIZATION CODE USED FROM https://towardsdatascience.com/using-the-fitbit-web-api-with-python-f29f119621ea
 
+### Get today's data
+currentDate = datetime.today()
+currentDayData = auth2_client.intraday_time_series()
+
+
+### Get alltime data
+
