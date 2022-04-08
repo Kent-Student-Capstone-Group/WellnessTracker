@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-<<<<<<< HEAD
+
 from .models import UserGroupJoinTable, UserInfo, Group, Message
-=======
 from django.utils import timezone
-from .models import UserGroupJoinTable, UserInfo, Group
->>>>>>> bb47d6eb37b3ba6b40106ed545ca3faafd13f50d
+#from .models import UserGroupJoinTable, UserInfo, Group
+
 from .forms import EditUserInfo, MakeGroup
 
 # Create your views here.
