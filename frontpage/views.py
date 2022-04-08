@@ -80,7 +80,7 @@ def makeGroup(request):
                 if form.is_valid():
                     form.save()
                     # Code for adding an item to the usergroupjointable
-                    NewGroup = Group.objects.get(GroupName = request.POST.get("GroupName"))
+                    NewGroup = Group.objects.get(GroupName = "kremlins")
                     NewUserGroupJoin = UserGroupJoinTable(User=request.user, Group = NewGroup)
                     NewUserGroupJoin.save()
                     return redirect('frontpage:index')
