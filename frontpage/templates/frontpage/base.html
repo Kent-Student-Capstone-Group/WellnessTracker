@@ -36,7 +36,10 @@
   .base h1, li{
       font-family: Verdana;
   }
-
+  .goals{
+    border: 2px solid black;
+    width: 20%;
+  }
 </style>
 </head>
 <body>
@@ -65,7 +68,17 @@
 
     </header>
   </div>
-  
+  <section class="goals">
+    <div>
+      <h1>Goals:</h1>
+        <select>
+          <option value=""></option>
+          <option value="1000 steps">1000 steps in a day</option>
+          <option value="10000 steps">10000 steps in a day</option>
+          <option value="new">Create your own Goals</option>
+        </select>
+      </div>
+  </section>
     {% block content %}
     {% endblock content%}
 

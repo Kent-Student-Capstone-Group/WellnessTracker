@@ -4,7 +4,7 @@
 {% block content %}
 <html>
     <head>
-    <title>Groups</title>
+    <title>Weekly report</title>
     <meta charset = "UTF-8">
         <meta content="width=device-width,initial-scale=1" name="viewport" />
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
@@ -15,21 +15,38 @@
         *{
             font-family: Fredoka;
             text-align: center;
+            margin: 0;
+        }
+        h1{
+            background-color: aqua;
+            color: red;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        .report{
+            display: flex;
+            justify-content: space-between;
+            margin: 10px;
         }
     </style>
-
     
     <body>
+        <h1>Weekly report</h1>
+        <h2>Your performance over the past week</h2>
+        <div class="report">
 
-        <div class="right-portion">
-            <h1>Your performance over the past week</h1>
-            <div class="report-left">
-                
-            </div>
-            <div class="report-right">
-
-            </div>
             
+            <div class="water">
+                <p>Number of times you drinked water youv'e planned to:</p>
+
+                <p>Number of times you missed drinking water</p>
+            </div>
+            <div class="steps">
+
+            </div>
+            <div class="calories">
+
+            </div>
         </div>
     </body>
 </html>
