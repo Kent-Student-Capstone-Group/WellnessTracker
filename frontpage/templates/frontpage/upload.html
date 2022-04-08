@@ -14,22 +14,30 @@
     <style>
         *{
             font-family: Fredoka;
-        }
-        body{
             margin: 0;
         }
         h1{
-            color: black;
-            font-size: 30px;
+            color: rgba(252, 244, 244, 0.871);
+            font-size: 40px;
             text-align: center;
+            background-color: rgb(255, 153, 11);
+            padding: 15px;
+            margin-bottom: 20px;
         }
 
         .right-portion{
             display: flex;
             flex-direction: column;
-            justify-content: space-between;   
-            background-color: rgba(107, 247, 42, 0.752);
+            justify-content: space-between; 
+            align-items: center;  
+            background-color: rgba(42, 247, 138, 0.833);
             box-sizing: border-box;
+        }
+        .right-portion p{
+            color: rgba(0, 0, 0, 0.871);
+            font-size: 40px;
+            text-align: center;
+            margin-top: 15px;
         }
         .u-box{
             text-align: center;
@@ -38,11 +46,12 @@
             border-radius: 5px;
             padding: 20px;
             margin: 40px;
-            background-color: rgba(254, 47, 47, 0.797);
+            background-color: rgb(254, 47, 47);
         }
-        .u-box h1{
+        .u-box h2{
             text-align: center;
             margin-bottom: 20px;
+            color: rgba(32, 183, 243, 0.907);
         }
         .u-box input{
             background-color: rgba(243, 247, 246, 0.874);
@@ -57,7 +66,7 @@
         .u-box img{
             border-radius: 2px;
         }
-         .submit {
+        .submit {
             background-color: #08d;
             border-radius: 12px;
             border: 0;
@@ -66,33 +75,36 @@
             cursor: pointer;
             font-size: 18px;
             height: 50px;
-            margin-top: 38px;
+            margin-top: 10px;
             text-align: center;
             width: 100px;
             align-items: center;
+            margin-bottom: 20px;
         }
         .submit:active {
             background-color: rgb(244, 248, 251);
             color: rgb(6, 6, 6);
-            }
+        }
     </style>
     </head>
     <body> 
-
-        <section class="right-portion">
-            <h1>We need your data to display your statistics</h1>
+        <div>
+            <h1>Upload Page</h1>
+        </div>
+        <div class="right-portion">
+            <p><b>We need your data to display your statistics</b></p>
 
             <div class="u-box">
                 <img src="src\fitbit-logo.jpg" type="img/jpg" width="10%" alt="Fitbit logo"/>
-                <h1>Please Upload your smart watch data</h1>
+                <h2>Please Upload your smart watch data</h2>
                 <div>
                     <input type="file" id="myFile" name="filename">
                 </div>
             </div>
-            </div>
+            <div>
                 <button type="text" class="submit">Submit</button>
             </div>
-        </section>
+        </div>
 
     </body>
 </html>
