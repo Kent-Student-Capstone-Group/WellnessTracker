@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+{% extends 'frontpage/base.html' %}
+
+{% block content %}
 <html>
     
     <head>
@@ -10,106 +13,126 @@
             *{
                 font-family: Fredoka;
                 margin: 0;
+                align-items: center;
             }
             h1{
-                color: rgb(250, 37, 37);
+                font-size: 40px;
+                color: rgb(54, 185, 250);
                 text-align: center;
             }
-            .header{
-                height: 100px;
-                width: auto;
-                padding: 5px;
-                position: relative;
-                margin-left: auto;
-                margin-right: auto;
-                background-color: rgb(97, 238, 207);
-            }
-            nav{
-                display: flex;
+            body .form1{
                 align-items: center;
-                justify-content: space-between;
-            }
-            nav li a{
-                text-decoration: none;
-                font-size: 20px;
             }
             .form1{
+                display: flex;
+                justify-content: space-evenly;
+                align-items: stretch;
                 text-align: center;
                 line-height: 2.5em;
+                background-color: #feb21bd0;
+                border-radius: 20px;
+                box-sizing: border-box;
+                height: 600px;
+                padding: 20px;
+                width: auto;
             }
             .logo{
                 width: 140px;
             }
-            .labels{
-                border: 2px solid black;
-                background-color: rgb(95, 233, 146);
-                color: white;
-                padding: 2px;
-                width: 40px;
-                height: 10px;
+            .dp{
+                width: 40%;
+                line-height: 3em;
             }
             .dp img{
                 clip-path: circle(40%);
-                width: 10%;
+                width: 20%;
             }
+            .form1 input {
+                background-color: #f0f1fb;
+                border-radius: 12px;
+                border: 0;
+                box-sizing: border-box;
+                color: rgb(0, 0, 0);
+                font-size: 18px;
+                height: 100%;
+                outline: 0;
+                padding: 4px 20px 0;
+                width: 100%;
+}
             ul{
                 text-decoration: none;
                 list-style: none;
             }
+            .submit {
+                background-color: rgba(6, 255, 139, 0.838);
+                border-radius: 12px;
+                border: 0;
+                box-sizing: border-box;
+                color: #eee;
+                cursor: pointer;
+                font-size: 18px;
+                height: 50px;
+                margin-top: 38px;
+                text-align: center;
+                width: 100px;
+                justify-self: center;
+                align-items: center;
+            }
+            .submit:active {
+            background-color: rgb(244, 248, 251);
+            color: rgb(6, 6, 6);
+            }
+
             </style>
     </head>
 
     <body>
-        <div class="header">
-            <nav>
-            <img src="src\Healm-logos_transparentw.png" class="logo" alt="logo">
-            <h1>Welcome to your profile setup:</h1>
-            <ul>
-                <li><a href="{% url 'frontpage:index' %}"><h4>Home</h4></a></li>
-            </ul>
-            
-
-            </nav>
-        </div>
-        
+        <h1>Welcome to your profile Setup:</h1>
         <div class="form1">
 
             <div class="dp">
-                <img src="src\id.png" type="img/png" width=7% alt="DP"/>  
+                <div>
+                <img src="..\frontpage\src\id.png" type="img/png" width=7% alt="DP"/>
+                </div>
                 <h3>Profile Picture</h3>
-                <label class="labels"><input id="image" type="file" name="profile_photo" placeholder="Photo" required="" capture></label>
+                <label><input id="image" type="file" name="profile_photo" placeholder="Photo" required="" capture></label>
             </div>
-
+            <section>
             <div>
-                <label class="labels">Name:</label><input type="text" class="form-control" placeholder="first name" value=""></div>
+                <label>Name:</label><input type="text" class="form-control" placeholder="first name" value=""></div>
             <div>
-                <label class="labels">Surname:</label><input type="text" class="form-control" value="" placeholder="surname"></div>
+                <label>Surname:</label><input type="text" class="form-control" value="" placeholder="surname"></div>
             <div>
-                <label class="labels">Date of birth:</label><input type="date" class="form-control" value=""></div>
+                <label>Date of birth:</label><input type="date" class="form-control" value=""></div>
             <div>
-                <label class="labels">Gender:</label>
+                <label>Gender:</label>
+                    <div>
                     <select name="gender">
                         <option value=""></option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                         <option value="other">Other</option>
                         <option value="Prefernot">Perfer not to mention</option>
-                        </select>
+                    </select>
+                    </div>
             </div>
-            
+            </section>
+            <section>
             <div>
-                <label class="labels">Height:</label><input type="number" class="form-control" placeholder="in feet" value="">
-            </div>
-            <div>
-                <label class="labels">Weight:</label><input type="number" class="form-control" placeholder="in lbs" value="">
-            </div>
-            <div>
-                <label class="labels">Mobile Number:</label><input type="tel" class="form-control" placeholder="(+1) Phone number" value="">
+                <label>Height:</label><input type="number" class="form-control" placeholder="in feet" value="">
             </div>
             <div>
-                <label class="labels"><input type="submit" class="form-control"></label>
+                <label>Weight:</label><input type="number" class="form-control" placeholder="in lbs" value="">
             </div>
-        </div>
-
+            <div>
+                <label>Mobile Number:</label><input type="tel" class="form-control" placeholder="(+1) Phone number" value="">
+            </div>
+            </section>
+            </div> 
+            <div>
+                <button type="text" class="submit">Submit</button>
+            </div>
     </body>
 </html>
+
+{% endblock content %}

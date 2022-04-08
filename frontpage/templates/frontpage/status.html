@@ -4,7 +4,7 @@
 {% block content %}
 <html>
     <head>
-    <title>Groups</title>
+    <title>Status</title>
     <meta charset = "UTF-8">
         <meta content="width=device-width,initial-scale=1" name="viewport" />
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
@@ -15,24 +15,94 @@
         *{
             font-family: Fredoka;
             text-align: center;
+            margin: 0;
         }
-    </style>
-    <body>
-        <div class="header">
+        h1{
+            background-color: rgba(233, 251, 45, 0.856);
+            color: black;
+            padding: 30px;
+            margin-bottom: 20px;
+            width: 100%;
+            height: 30px;
+        }
+        a{
+            list-style: none;
+            text-decoration: none;
+            border: 2px solid black;
+            padding: 5px;
+            margin: 5px;
+            background-color: aliceblue;
+            color: rgb(253, 47, 47);
+            font-family: Fredoka;
+        }
+        .structure{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .status{
+            border: 3px solid rgba(0, 255, 191, 0.874);
+            height: 300px;
+            background-color: rgb(250, 247, 244);
+            color: black;
+            width: 30%;
+            box-sizing: border-box;
+            border-radius: 5px;
+            margin-left: 20px;
+        }
+        .statistics{
+            border: 3px solid rgba(0, 255, 191, 0.874);
+            height: 300px;
+            background-color: rgb(251, 249, 247);
+            color: black;
+            width: 30%;
+            box-sizing: border-box;
+            border-radius: 5px; 
+        }
+        .cycle{
+            border: 3px solid rgba(42, 254, 229, 0.874);
+            height: 300px;
+            background-color: rgb(250, 248, 246);
+            color: black;
+            width: 30%;
+            box-sizing: border-box;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+        h2{
+            color: rgb(51, 248, 123);
+        }
+        h3{
+            columns: rgba(250, 104, 26, 0.892);
+        }
 
-        </div>
-        <div class="left-portion">
-            <nav>
-                <li><a href="profile.html">Profile</a></li>
-                    <li><a href="ps.html">Personal Stats</a></li>
-                    <li><a href="group.html">Groups</a></li>
-                    <li><a href="chat.html">Chat</a></li>
-                    <li><a href="settings.html">Settings</a></li>
-                    <li><a href="notification.html">notifications</a></li>
-            </nav>
-        </div>
-        <div class="right-portion">
-            <h1>Your current Status</h1>
+    </style>
+
+    
+    <body>
+        <h1>Your current Status</h1>
+        <div class="structure">
+            <div class="status">
+                <h2>These are ideal statistics that you should maintain for your height</h2>
+                    <div>
+                        <p><b>According to Rush.</b></p>
+                    </div>
+                    <p><b> You can check link below made by Rush.edu</b></p>
+                
+                <div>
+                    <a href="https://www.rush.edu/how-much-should-i-weigh">Learn more</a>
+                </div>
+                </div>
+            <div class="statistics">
+                
+                    <h3>Number of Calories burnt today:</h3>
+                    <h3>Number of Calories In-take:</h3>
+            </div>
+            <div class="cycle">
+                <h2>Your 24 Hour time cycle</h2>
+
+            </div>
+        
         </div>
     </body>
 </html>

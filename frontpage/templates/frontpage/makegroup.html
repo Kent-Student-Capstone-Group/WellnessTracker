@@ -1,6 +1,7 @@
 {% extends 'frontpage/base.html' %}
 
 {% block content %}
+<a href="{% url 'frontpage:group' %}">Back to Groups</a>
 <h1>Enter Group Info</h1>
 <form method='POST'>
     {% csrf_token %}

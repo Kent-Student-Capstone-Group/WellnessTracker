@@ -15,54 +15,79 @@
         *{
             font-family: Fredoka;
             text-align: center;
+            margin: 0;
+        }
+        h1{
+            background-color: red;
+            color: antiquewhite;
+            font-size: 40px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .arrange{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .newg a{
+            border: 2px solid black;
+            background-color: blue;
+            color: aliceblue;
+            text-decoration: none;
+            width: 100%;
+            height: 30px;
+        }
+        .newg{
+            border: 4px solid green;
+            border-radius: 10px;
+            padding: 5px;
+            margin: 10px;
+            background-color: bisque;
+        }
+        .owner{
+            border: 4px solid green;
+            border-radius: 10px;
+            padding: 5px;
+            margin: 10px;
+            background-color: bisque;
+        }
+        .member{
+            border: 4px solid green;
+            border-radius: 10px;
+            padding: 5px;
+            margin: 10px;
+            background-color: bisque;
         }
     </style>
+
+    
     <body>
-        <div class="header">
-
-        </div>
-
-        <div class="left-portion">
-            <nav>
-                <li><a href="profile.html">Profile</a></li>
-                    <li><a href="ps.html">Personal Stats</a></li>
-                    <li><a href="group.html">Groups</a></li>
-                    <li><a href="chat.html">Chat</a></li>
-                    <li><a href="settings.html">Settings</a></li>
-                    <li><a href="notification.html">notifications</a></li>
-            </nav>
-        </div>
-        <div class="right-portion">
-
-        
-        <a href="{% url 'frontpage:makegroup' %}">Make a New Group</a>
-        <h3>Owner:</h3>
-        <table>
-            {% for ownerGroup in ownerGroups %}
-            <tr>
-                <td><a href="">{{ownerGroup.GroupName}}</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-        <h3>Member:</h3>
-        <table>
-            {% for userGroup in userGroups %}
-            <tr>
-                <td><a href="">{{userGroup.Group.GroupName}}</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-        <section>
-            <div class="group">
-                <h1>Groups</h1>
+        <h1>Groups</h1>
+        <div class="arrange">
+            <div class="newg">
+                <a href="{% url 'frontpage:makegroup' %}">Make a New Group</a>
             </div>
-        </section>
-        <section>
-            <div class="join-group">
-                <h1>Join a Group or Make a group</h1>
+            <div class="owner">
+                    <h3>Owner:</h3>
+                    <table>
+                        {% for ownerGroup in ownerGroups %}
+                        <tr>
+                            <td><a href="">{{ownerGroup.GroupName}}</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
             </div>
-        </section>
-        </div>
+            <div class="member">
+                    <h3>Member:</h3>
+                    <table>
+                        {% for userGroup in userGroups %}
+                        <tr>
+                            <td><a href="">{{userGroup.Group.GroupName}}</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+            </div> 
+        </div>    
     </body>
 </html>
 

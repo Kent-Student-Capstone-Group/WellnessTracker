@@ -14,29 +14,70 @@
     <style>
         *{
             font-family: Fredoka;
+            margin: 0;
+        }
+        h1{
+            background-color: rgb(255, 64, 0);
+            color: rgb(244, 238, 238);
+            padding: 20px;
+            margin-bottom: 20px;
             text-align: center;
         }
+        
+        .nsettings{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .nsettings p{
+            font-size: 30px;
+            color: aquamarine;
+        }
+        .nsettings div{
+            border: 4px solid rgba(0, 255, 64, 0.848);
+            border-radius: 10px;
+            padding: 10px;
+            margin: 3px;
+            height: 100px;
+            width: 200px;
+        }
     </style>
-    <body>
-        <div class="header">
 
-        </div>
-        <div class="left-portion">
-            <nav>
-                <li><a href="profile.html">Profile</a></li>
-                    <li><a href="ps.html">Personal Stats</a></li>
-                    <li><a href="group.html">Groups</a></li>
-                    <li><a href="chat.html">Chat</a></li>
-                    <li><a href="settings.html">Settings</a></li>
-                    <li><a href="notification.html">Notifications</a></li>
-            </nav>
-        </div>
-        <div class="left-portion">
+    <body>
             <h1>Notification Settings</h1>
             <div class="nsettings">
+                <p><b>Choose which Notification you would like to recieve:</b></p>
                 
+                <div>
+                    <h2>Water Notification:</h2>
+                    <select>
+                        <option value=""></option>
+                        <option value="1 hour">Every 1 hour</option>
+                        <option value="2 hours">Every 2 hour</option>
+                        <option value="4 hours">Every 4 hour</option>
+                        <option value="Turn off">Turn off</option>
+                    </select>
+                </div>
+                <div>
+                    <h2>Group goals Notification</h2>
+                    <select>
+                        <option value=""></option>
+                        <option value="Mute 1 hour">Mute for 1 hour</option>
+                        <option value="Mute 6 hours">Mute for 6 hour</option>
+                        <option value="Turn off">Turn off</option>
+                    </select>
+                </div>
+                <div>
+                    <h2>Chat Notifications</h2>
+                    <select>
+                        <option value=""></option>
+                        <option value="Mute 1 hour">Mute for 1 hour</option>
+                        <option value="Mute 6 hours">Mute for 6 hour</option>
+                        <option value="Turn off">Turn off</option>
+                    </select>
+                </div>
             </div>
-        </div>
     </body>
 </html>
 {% endblock content %}

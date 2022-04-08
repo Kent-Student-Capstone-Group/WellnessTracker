@@ -18,6 +18,7 @@
         }
     </style>
     <body>
+        <button type="button" onclick="alert('Hello world!')">Compose</button>  <!-- button to compose a new message -->
         <ul>
             {% for x in Messages %}
             <li>{{ x.sender }} {{ x.MessageTitle }}</li> <!-- add time/date use if statement-->
