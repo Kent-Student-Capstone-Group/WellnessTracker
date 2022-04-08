@@ -15,7 +15,7 @@
         <meta property="og:description" content="The official website of Healm - the Kent State Wellness tracker. ">
 
         <title text-bold>Healm</title>
-        <link rel="shortcut icon" type="image/png" href="src\title_logo.png" />
+        <link rel="shortcut icon" type="image/png" href="{% static 'frontpage/src/title_logo.png' %}" />
 
         <style>
             *{
@@ -139,11 +139,11 @@
         <div class="header">
 
             <video autoplay loop class="backv" muted plays-inline>
-                <source src="src\video.mp4" type="video/mp4">
+                <source src="{% static 'frontpage/src/video.mp4' %}" type="video/mp4">
             </video>
 
             <nav>
-                <img src="src\Healm-logos_transparentw.png" class="logo" alt="logo">
+                <img src="{% static 'frontpage/src/Healm-logos_transparentw.png' %}" class="logo" alt="logo">
                 
                 <ul class="nlinks">
                     <li><a href="info.html">Information</a></li> 
