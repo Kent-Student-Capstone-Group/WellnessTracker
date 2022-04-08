@@ -14,19 +14,38 @@
             text-align: center;
             margin: 0;
         }
+        h1{
+            background-color: aqua;
+            color: aliceblue;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .details{
+            line-height: 3em;
+        }
+        label{
+            font-size: 20px;
+        }
     </style>
     
     <body>
         <h1>Make a new group:</h1>
         <div class="details">
-            <label>Group Name:</label><input type="text" name="Groupname" value="" placeholder="Name of your group"/>
+            <label><b>Group Name: </b></label><input type="text" name="Groupname" value="" placeholder="Name of your group"/>
             <h3>Group description:</h3>
             <textarea></textarea>
             <div>
                 <h3>Type of group:</h3>
                     <select>
-                        <option></option>
+                        <option value=""></option>
+                        <option value="Friends">Friends</option>
+                        <option value="Family">Family</option>
+                        <option value="Organization">Organization</option>
                     </select>
+            </div>
+            <div>
+                <h3>Number of members you want in the group:</h3>
+                <input type="number" value="number"/>
             </div>
         </div>
     </body>
