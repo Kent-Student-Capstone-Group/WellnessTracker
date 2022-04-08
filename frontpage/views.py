@@ -48,6 +48,7 @@ def dailyReport(request):
     if (request.user.is_authenticated):
         form = DailyReportForm(request.POST or None)
         form.User = request.user
+        form.DateAndTime = timezone.now()
         if form.is_valid():
             form.save()
             return redirect('frontpage:index')
