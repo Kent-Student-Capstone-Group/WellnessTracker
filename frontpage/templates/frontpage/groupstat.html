@@ -15,21 +15,59 @@
         *{
             font-family: Fredoka;
             text-align: center;
+            margin: 0;
+        }
+        h1{
+            background-color: aqua;
+            color: red;
+            padding: 20px;
+            margin: 10px;
+        }
+        .group{
+            border: 2px solid black;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            margin: 20px;
+        }
+        .group-stats{
+            border: 2px solid black;
+            padding: 20px;
+            width: 500px;
+            height: 400px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+        .group-stats h2{
+            background-color: antiquewhite;
+        }
+        .group-goals h2{
+            background-color: antiquewhite;
+        }
+        .group-goals{
+            border: 2px solid black;
+            padding: 20px;
+            width: 500px;
+            height: 400px;
+            margin: 10px;
+            border-radius: 10px;
         }
     </style>
     <body>
+        <h1>Group Statistics</h1>
 
-        <div class="right-portiom">
-            <h1>Group Statistics</h1>
+        <div class="group">
 
-
-            <div class="group-goals">
+            <div class="group-stats">
+                <h2>Group-stats</h2>
 
             </div>
-            <div class="chat">
-                
+            <div class="group-goals">
+                <h2>Group goals</h2>
             </div>
         </div>
+        
 
     </body>
 </html>
