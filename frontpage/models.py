@@ -1,6 +1,7 @@
 from this import d
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 
 # Create your models here.
 #from django.db import models
@@ -73,7 +74,7 @@ class UserGroupRequest(models.Model):
 class UserGroupJoinTable(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     Group = models.ForeignKey(Group, on_delete=models.CASCADE)
-    DateJoined = models.DateTimeField()
+    DateJoined = models.DateTimeField(default=timezone.now())
 
     # def __str__(self):
     #     return self.User.FirstName + self.User.LastName + ":" + self.Group.GroupName
