@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.utils import timezone
 from .models import UserGroupJoinTable, UserInfo, Group
 from .forms import EditUserInfo, MakeGroup
 
@@ -74,6 +75,10 @@ def makeGroup(request):
                 form.Owner = request.user
                 if form.is_valid():
                     form.save()
+                    # Code for adding an item to the usergroupjointable
+                    NewGroup = Group.objects.filter(GroupName = request.POST.get("GroupName"))[0]
+                    NewUserGroupJoin = UserGroupJoinTable(User=request.user, Group = NewGroup, DateJoined = timezone.now())
+                    NewUserGroupJoin.save()
                     return redirect('frontpage:index')
                 else:
                     return HttpResponse("Invalid Form")
