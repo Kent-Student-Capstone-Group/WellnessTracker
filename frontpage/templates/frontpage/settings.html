@@ -18,26 +18,6 @@
                 line-height: 2em;
                 background-color: rgb(181, 245, 245);
             }
-            .header{
-                height: 100px;
-                width: auto;
-                padding: 5px;
-                position: relative;
-                margin-left: auto;
-                margin-right: auto;
-                background-color: rgb(97, 238, 207);
-            }
-            nav{
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
-            .logo{
-                width: 140px;
-            }
-            ol, ul{
-                list-style: none;
-            }
 
             .box-2{
                 align-items: center;
@@ -87,20 +67,12 @@
         </style>
     </head>
     
-    <body>
-        <div class="header">
-            
-            <nav>
-                <img src="src\Healm-logos_transparentw.png" class="logo" alt="logo">
-                <h1>Settings</h1>
-                <ul>
-                    <li><a href="{% url 'frontpage:logout' %}">Logout</a></li>
-                </ul>
-            </nav>
-             
+    <body> 
+        <div>
+            <h1>Settings</h1>
         </div>
-
-            <div class="box-2">
+        
+        <div class="box-2">
                 <img src="src/id.png" alt="img">
                 <p> username and other information</p>
             </div>
