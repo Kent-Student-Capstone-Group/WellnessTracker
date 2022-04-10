@@ -49,6 +49,7 @@
             box-sizing: border-box;
             border-radius: 5px;
             margin-left: 20px;
+            align-items: center;
         }
         .statistics{
             border: 3px solid rgba(0, 255, 191, 0.874);
@@ -58,6 +59,10 @@
             width: 30%;
             box-sizing: border-box;
             border-radius: 5px; 
+        }
+        .statistics h3{
+            background-color: black;
+            color: white;
         }
         .cycle{
             border: 3px solid rgba(42, 254, 229, 0.874);
@@ -69,13 +74,53 @@
             border-radius: 5px;
             margin-right: 20px;
         }
+        .cycle h2{
+            background-color: rgb(15, 18, 17);
+        }
         h2{
             color: rgb(51, 248, 123);
         }
         h3{
             columns: rgba(250, 104, 26, 0.892);
         }
+        .hover-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
 
+        .hover-nav li {
+            float: inherit;
+        }
+
+        .hover-nav li a {
+            position: relative;
+            display: block;
+            color: rgb(253, 251, 251);
+            text-align: center;
+            padding: 8px 12px;
+            text-decoration: none;
+            z-index: 0;
+        }
+
+        li a:before {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 100%;
+            bottom: 0;
+            left: 0;
+            background-color: #2683f6;
+            z-index: -1;
+            transform: scale(0);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        li a:hover:before,
+        li a:focus:before {
+            transform: scale(1);
+        }
     </style>
 
     
@@ -90,7 +135,10 @@
                     <p><b> You can check link below made by Rush.edu</b></p>
                 
                 <div>
-                    <a href="https://www.rush.edu/how-much-should-i-weigh">Learn more</a>
+                    <nav class="hover-nav">
+                        <ul>
+                        <li><a href="https://www.rush.edu/how-much-should-i-weigh">Learn more</a></li>
+                        </ul>
                 </div>
                 </div>
             <div class="statistics">
