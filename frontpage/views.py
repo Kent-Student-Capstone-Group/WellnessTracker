@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.utils import timezone
 from .models import UserGroupJoinTable, UserInfo, Group
-from .forms import EditUserInfo, MakeGroup
+from .forms import EditUserInfo, MakeGroup, DailyReportForm
 
 # Create your views here.
 
@@ -45,7 +45,17 @@ def contact(request):
     return render(request, 'frontpage/contact.html')
 
 def dailyReport(request):
-    return render(request, 'frontpage/dailyreport.html')
+    if (request.user.is_authenticated):
+        form = DailyReportForm(request.POST or None)
+        form.User = request.user
+        form.DateAndTime = timezone.now()
+        if form.is_valid():
+            form.save()
+            return redirect('frontpage:index')
+        return render(request, 'frontpage/dailyreport.html', {'form': form})
+    else:
+        return HttpResponse("Not Authenticated")
+    
 
 def group(request):  
     user = request.user

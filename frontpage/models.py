@@ -44,7 +44,7 @@ class Message(models.Model):
 
 class DailyReport(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    DateAndTime = models.DateTimeField()
+    DateAndTime = models.DateTimeField(default=timezone.now())
     RatingOfDay = models.IntegerField(blank=1)
     StepsTaken = models.IntegerField(blank=1)
     HoursSitting = models.FloatField(blank=1)
