@@ -25,9 +25,16 @@
         }
     </style>
     <body>
+        <h1>Send Message</h1>
+        <form method='POST'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save" />
+        </form>
+
         <ul>
-            {% for x in message %}
-            <li>{{x.sender x.MessageTitle</li>
+            {% for x in messages %}
+            <li>{{ x.sender }} {{ x.MessageTitle }}</li>
             {% endfor %}
         </ul>
 
