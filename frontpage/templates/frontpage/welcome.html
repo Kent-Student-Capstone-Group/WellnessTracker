@@ -69,32 +69,29 @@
             .nlinks li a:hover::after{
                 width: 100%;
             }
-            .btn
-            {
-                background: rgb(247, 37, 30);
-                color: black;
-                padding: 10px 30px;
-                border-radius: 5px;
-            }
+            
             .content{
                 position: absolute;
                 left: 50%;
                 top: 50%;
                 width: 90%;
-                max-width: 400px;
+                max-width: 500px;
                 transform: translate(-50%, -50%);
                 text-align: center;
                 padding-top: 40px;
             }
             .content h3{
+                color: rgb(17, 17, 17);
                 font-size: 30px;
-                margin-bottom: 20px;
+                margin-bottom: 50px;
             }
             .content form{
-                background: rgba(240, 249, 250, 0.767);
+                background: rgba(249, 252, 252, 0.83);
                 padding: 60px;
                 border-radius: 8px;
                 display: flex;
+                justify-content: center;
+                align-items: center;
             }
             .content form input{
                 flex: 1;
@@ -102,6 +99,18 @@
                 outline: none;
                 padding:  5px 20px;
                 font-size: 10px;
+            }
+            .btn{
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                background: rgb(252, 254, 254);
+                color: rgb(15, 14, 14);   
+                border-radius: 15px;  
+            }
+            .btn img{
+                width: 30px;
+                height: 30px;
             }
             .align{
                 text-align: center;
@@ -158,7 +167,7 @@
                     <div class="align">     
                     <h3> Welcome to Healm </h3>
                         <div>
-                            <a class="btn" href="">Sign in with Google</a>
+                            <a class="btn" href=""><img src="src/Google-Icon.jpg" alt="Google logo"> Sign in with Google</a>
                         </div> 
                     </div>
                 </form>
