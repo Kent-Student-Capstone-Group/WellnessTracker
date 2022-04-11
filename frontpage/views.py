@@ -17,6 +17,13 @@ def index(request):
     else:
         return render(request, 'frontpage/index.html')
 
+def badges(request):
+    if (request.user.is_authenticated):
+        return render(request, 'frontpage/badges.html')
+    
+    else:
+        return HttpResponse("Not Authenticated")
+
 def createUserInfo(request):
     if (request.user.is_authenticated):
         try:
