@@ -1,6 +1,5 @@
 from django import forms
-from zmq import Message
-from .models import DailyReport, UserInfo, Group
+from .models import DailyReport, UserInfo, Group, Message
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
