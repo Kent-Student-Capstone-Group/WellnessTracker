@@ -54,8 +54,8 @@ def contact(request):
 def dailyReport(request):
     if (request.user.is_authenticated):
         form = DailyReportForm(request.POST or None)
-        form.User = request.user
-        form.DateAndTime = timezone.now()
+        #form.User = request.user
+        #form.DateAndTime = timezone.now()
         if form.is_valid():
             form.save()
             return redirect('frontpage:index')
@@ -93,9 +93,9 @@ def makeGroup(request):
                 if form.is_valid():
                     form.save()
                     # Code for adding an item to the usergroupjointable
-                    NewGroup = Group.objects.get(GroupName = "kremlins")
-                    NewUserGroupJoin = UserGroupJoinTable(User=request.user, Group = NewGroup)
-                    NewUserGroupJoin.save()
+                    #NewGroup = Group.objects.get(GroupName = "kremlins")
+                    #NewUserGroupJoin = UserGroupJoinTable(User=request.user, Group = NewGroup)
+                    #NewUserGroupJoin.save()
                     return redirect('frontpage:index')
                 else:
                     return HttpResponse("Invalid Form")
