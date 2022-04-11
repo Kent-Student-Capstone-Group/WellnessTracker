@@ -27,7 +27,7 @@
 
         <ul>
             {% for x in messages %}
-            <li>{{x.sender x.MessageTitle}}</li>
+            <li>{{ x.sender }} {{ x.MessageTitle }}</li>
             {% endfor %}
         </ul>
         <!-- Prob need some kind of loop to show desired number of emails or make it 20 or something-->
