@@ -3,9 +3,14 @@ from django.http import HttpResponse
 
 from .models import UserGroupJoinTable, UserInfo, Group, Message
 from django.utils import timezone
+<<<<<<< HEAD
 #from .models import UserGroupJoinTable, UserInfo, Group
 
 from .forms import EditUserInfo, MakeGroup
+=======
+from .models import UserGroupJoinTable, UserInfo, Group
+from .forms import EditUserInfo, MakeGroup, DailyReportForm
+>>>>>>> 62046f56a2f53a620bf5f2f6e38d75610f65936f
 
 # Create your views here.
 
@@ -19,6 +24,13 @@ def index(request):
             return render(request, 'frontpage/index.html')
     else:
         return render(request, 'frontpage/index.html')
+
+def badges(request):
+    if (request.user.is_authenticated):
+        return render(request, 'frontpage/badges.html')
+    
+    else:
+        return HttpResponse("Not Authenticated")
 
 def createUserInfo(request):
     if (request.user.is_authenticated):
@@ -49,7 +61,17 @@ def contact(request):
     return render(request, 'frontpage/contact.html')
 
 def dailyReport(request):
-    return render(request, 'frontpage/dailyreport.html')
+    if (request.user.is_authenticated):
+        form = DailyReportForm(request.POST or None)
+        #form.User = request.user
+        #form.DateAndTime = timezone.now()
+        if form.is_valid():
+            form.save()
+            return redirect('frontpage:index')
+        return render(request, 'frontpage/dailyreport.html', {'form': form})
+    else:
+        return HttpResponse("Not Authenticated")
+    
 
 def group(request):  
     user = request.user
@@ -80,9 +102,9 @@ def makeGroup(request):
                 if form.is_valid():
                     form.save()
                     # Code for adding an item to the usergroupjointable
-                    NewGroup = Group.objects.get(GroupName = "kremlins")
-                    NewUserGroupJoin = UserGroupJoinTable(User=request.user, Group = NewGroup)
-                    NewUserGroupJoin.save()
+                    #NewGroup = Group.objects.get(GroupName = "kremlins")
+                    #NewUserGroupJoin = UserGroupJoinTable(User=request.user, Group = NewGroup)
+                    #NewUserGroupJoin.save()
                     return redirect('frontpage:index')
                 else:
                     return HttpResponse("Invalid Form")

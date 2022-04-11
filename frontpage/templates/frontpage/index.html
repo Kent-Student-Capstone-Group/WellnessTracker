@@ -38,6 +38,18 @@
         <p>Height:{{info.HeightFeet}}'{{info.HeightInches}}"</p>
         <p>Weight:{{info.Weight}}</p>
         <p>Gender:{{info.Gender}}</p>
+
+        <section class="goals">
+            <div>
+              <h1>Goals:</h1>
+                <select>
+                  <option value=""></option>
+                  <option value="1000 steps">1000 steps in a day</option>
+                  <option value="10000 steps">10000 steps in a day</option>
+                  <option value="new">Create your own Goals</option>
+                </select>
+              </div>
+        </section>
         {% endif %}
     {% else %}
         {% if google_login %}

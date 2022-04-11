@@ -43,20 +43,20 @@ class Message(models.Model):
     #     return self.Sender + ': ' + self.MessageTitle
 
 class DailyReport(models.Model):
-    User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    DateAndTime = models.DateTimeField()
-    RatingOfDay = models.IntegerField(blank=1)
-    StepsTaken = models.IntegerField(blank=1)
-    HoursSitting = models.FloatField(blank=1)
-    HoursSlept = models.FloatField(blank=1)
-    WorkedOut = models.BooleanField(blank=1)
-    LengthOfWorkout = models.FloatField(blank=1)
-    IntensityOfWorkout = models.IntegerField(blank=1)
-    MealsEaten = models.IntegerField(blank=1)
-    SnacksEaten = models.IntegerField(blank=1)
-    FoodHealth = models.FloatField(blank=1)
-    CigarettesSmoked = models.IntegerField(blank=1)
-    AlcoholicDrinks = models.IntegerField(blank=1)
+    User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    DateAndTime = models.DateTimeField(default=timezone.now(), null=True)
+    RatingOfDay = models.IntegerField(blank=1, null=True)
+    StepsTaken = models.IntegerField(blank=1, null=True)
+    HoursSitting = models.FloatField(blank=1, null=True)
+    HoursSlept = models.FloatField(blank=1, null=True)
+    WorkedOut = models.BooleanField(blank=1, null=True)
+    LengthOfWorkout = models.FloatField(blank=1, null=True)
+    IntensityOfWorkout = models.IntegerField(blank=1, null=True)
+    MealsEaten = models.IntegerField(blank=1, null=True)
+    SnacksEaten = models.IntegerField(blank=1, null=True)
+    FoodHealth = models.FloatField(blank=1, null=True)
+    CigarettesSmoked = models.IntegerField(blank=1, null=True)
+    AlcoholicDrinks = models.IntegerField(blank=1, null=True)
 
     # def __str__(self):
     #     return self.User.FirstName + self.User.LastName + ":" + self.DateAndTime

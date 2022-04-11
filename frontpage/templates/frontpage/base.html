@@ -63,22 +63,13 @@
             <li><a href="{% url 'frontpage:group' %}">Groups</a></li>
             <li><a href="{% url 'frontpage:chat' %}">Chat</a></li>
             <li><a href="{% url 'frontpage:weekreport' %}">Weekly Report</a></li>
+            <li><a href="{% url 'frontpage:settings' %}">Settings</a></li>
+            <li><a href="{% url 'frontpage:badges' %}">Badges</a></li>
             <li style="float:right"><a href="{% url 'frontpage:logout' %}">Logout</a></li>
         </ul>
 
     </header>
   </div>
-  <section class="goals">
-    <div>
-      <h1>Goals:</h1>
-        <select>
-          <option value=""></option>
-          <option value="1000 steps">1000 steps in a day</option>
-          <option value="10000 steps">10000 steps in a day</option>
-          <option value="new">Create your own Goals</option>
-        </select>
-      </div>
-  </section>
     {% block content %}
     {% endblock content%}
 
