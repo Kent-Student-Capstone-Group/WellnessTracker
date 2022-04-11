@@ -58,8 +58,7 @@ def contact(request):
 def dailyReport(request):
     if (request.user.is_authenticated):
         form = DailyReportForm(request.POST or None)
-        #form.User = request.user
-        #form.DateAndTime = datetime.datetime.now()
+        form.User = request.user
         if form.is_valid():
             form.save()
             return redirect('frontpage:index')

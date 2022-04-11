@@ -20,8 +20,6 @@ class DailyReportForm(forms.ModelForm):
     class Meta:
         model = DailyReport
         fields=[
-            'User',
-            'DateAndTime',
             'RatingOfDay',
             'StepsTaken',
             'HoursSitting',
