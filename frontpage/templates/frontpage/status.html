@@ -25,6 +25,11 @@
             width: 100%;
             height: 30px;
         }
+
+        .heading h1{
+            background-color: white;
+            color: black;
+        }
         a{
             list-style: none;
             text-decoration: none;
@@ -47,7 +52,7 @@
             color: black;
             width: 30%;
             box-sizing: border-box;
-            border-radius: 5px;
+            border-radius: 20px;
             margin-left: 20px;
             align-items: center;
         }
@@ -58,11 +63,13 @@
             color: black;
             width: 30%;
             box-sizing: border-box;
-            border-radius: 5px; 
+            border-radius: 20px; 
         }
         .statistics h3{
             background-color: black;
             color: white;
+            border-radius: 5px;
+            padding-top: 10px;
         }
         .cycle{
             border: 3px solid rgba(42, 254, 229, 0.874);
@@ -71,11 +78,13 @@
             color: black;
             width: 30%;
             box-sizing: border-box;
-            border-radius: 5px;
+            border-radius: 20px;
             margin-right: 20px;
         }
         .cycle h2{
             background-color: rgb(15, 18, 17);
+            padding-top: 10px;
+            border-radius: 5px;
         }
         h2{
             color: rgb(51, 248, 123);
@@ -97,7 +106,7 @@
         .hover-nav li a {
             position: relative;
             display: block;
-            color: rgb(253, 251, 251);
+            color: rgb(22, 22, 22);
             text-align: center;
             padding: 8px 12px;
             text-decoration: none;
@@ -126,26 +135,35 @@
     
     <body>
         <h1>Your current Status</h1>
+        <div class="heading">
+            <h1>Here are the results based on data retrieved!</h1>
+        </div>
         <div class="structure">
             <div class="status">
-                <h2>These are ideal statistics that you should maintain for your height</h2>
+                <h2>These are ideal statistics that recommended for your height</h2>
+                    <div>
+                        
+                    </div>
                     <div>
                         <p><b>According to Rush.</b></p>
                     </div>
                     <p><b> You can check link below made by Rush.edu</b></p>
                 
-                <div>
-                    <nav class="hover-nav">
-                        <ul>
-                        <li><a href="https://www.rush.edu/how-much-should-i-weigh">Learn more</a></li>
-                        </ul>
+                    <div>
+                        <nav class="hover-nav">
+                            <ul>
+                            <li><a href="https://www.rush.edu/how-much-should-i-weigh">Learn more</a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
-                </div>
+
             <div class="statistics">
                 
                     <h3>Number of Calories burnt today:</h3>
                     <h3>Number of Calories In-take:</h3>
             </div>
+
             <div class="cycle">
                 <h2>Your 24 Hour time cycle</h2>
 
