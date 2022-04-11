@@ -47,7 +47,7 @@ def chat(request):
         form = SendMessage(request.POST or None)
         if form.is_valid():
             form.save()
-        return render(request, 'frontpage/chat.html', {'messages': messages})
+        return render(request, 'frontpage/chat.html', {'messages': messages, 'form': form})
     
     else:
         return HttpResponse("Not Authenticated")
