@@ -1,5 +1,5 @@
 from django import forms
-from .models import DailyReport, UserInfo, Group
+from .models import DailyReport, UserInfo, Group, Message
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -20,8 +20,6 @@ class DailyReportForm(forms.ModelForm):
     class Meta:
         model = DailyReport
         fields=[
-            'User',
-            'DateAndTime',
             'RatingOfDay',
             'StepsTaken',
             'HoursSitting',
@@ -34,4 +32,13 @@ class DailyReportForm(forms.ModelForm):
             'FoodHealth',
             'CigarettesSmoked',
             'AlcoholicDrinks'
+        ]
+
+class SendMessage(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields=[
+            'Recipient',
+            'MessageTitle',
+            'MessageBody'
         ]

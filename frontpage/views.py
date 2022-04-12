@@ -1,10 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
-from .models import UserGroupJoinTable, UserInfo, Group, Message
 from django.utils import timezone
-
-from .forms import EditUserInfo, MakeGroup, DailyReportForm
+from .models import UserGroupJoinTable, UserInfo, Group, Message
+from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendMessage
 
 # Create your views here.
 
@@ -45,8 +43,11 @@ def createUserInfo(request):
 
 def chat(request):   
     if (request.user.is_authenticated):
-        userMessages = Message.objects.filter(Recipient = request.user)
-        return render(request, 'frontpage/chat.html', {'Messages': userMessages})
+        messages = Message.objects.filter(recipient=request.user)
+        form = SendMessage(request.POST or None)
+        if form.is_valid():
+            form.save()
+        return render(request, 'frontpage/chat.html', {'messages': messages, 'form': form})
     
     else:
         return HttpResponse("Not Authenticated")
@@ -57,8 +58,7 @@ def contact(request):
 def dailyReport(request):
     if (request.user.is_authenticated):
         form = DailyReportForm(request.POST or None)
-        #form.User = request.user
-        #form.DateAndTime = timezone.now()
+        form.User = request.user
         if form.is_valid():
             form.save()
             return redirect('frontpage:index')

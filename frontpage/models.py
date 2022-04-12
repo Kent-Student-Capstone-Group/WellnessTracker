@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
-from django.utils import timezone
+#from django.utils import timezone
+import datetime
 
 # Create your models here.
 #from django.db import models
@@ -35,7 +36,7 @@ class Group(models.Model):
 class Message(models.Model):
     Sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='Sender')
     Recipient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='Recipient')
-    TimeSent = models.DateTimeField()
+    TimeSent = models.DateTimeField(default=datetime.datetime.now())
     MessageTitle = models.CharField(max_length=100)
     MessageBody = models.CharField(max_length=5000)
 
@@ -44,7 +45,7 @@ class Message(models.Model):
 
 class DailyReport(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
-    DateAndTime = models.DateTimeField(default=timezone.now(), null=True)
+    DateAndTime = models.DateTimeField(default=datetime.datetime.now(), null=True)
     RatingOfDay = models.IntegerField(blank=1, null=True)
     StepsTaken = models.IntegerField(blank=1, null=True)
     HoursSitting = models.FloatField(blank=1, null=True)
@@ -72,7 +73,7 @@ class UserGroupRequest(models.Model):
 class UserGroupJoinTable(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     Group = models.ForeignKey(Group, on_delete=models.CASCADE)
-    DateJoined = models.DateTimeField(default=timezone.now())
+    DateJoined = models.DateTimeField(default=datetime.datetime.now())
 
     # def __str__(self):
     #     return self.User.FirstName + self.User.LastName + ":" + self.Group.GroupName

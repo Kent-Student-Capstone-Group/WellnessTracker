@@ -4,13 +4,16 @@
 <head>
   <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
 <style>
+  *{
+    margin: 0;
+  }
   .base ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     border: 1px solid #e7e7e7;
-    background-color: #f3f3f3;
+    background: linear-gradient(to top, #99ffcc 0%, #0033cc 100%);
   }
   
   .base li {
@@ -19,37 +22,50 @@
   
   .base li a {
     display: block;
-    color: #666;
+    color: rgb(249, 246, 246);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
   }
   
   .base li a:hover {
-    background-color: #ddd;
+    
+    background-color: rgb(11, 11, 11);
+    text-decoration: underline rgba(249, 41, 41, 0.707);
   }
-  
+  .head{
+    text-align: center;
+  }
+  .row h1{
+    font-size: 45px;
+    font-weight: 700;
+    padding: 15px;
+    margin-bottom: 10px;
+  }
   .base .row {
       display: inline-block;
   }
   
-  .base h1, li{
+  .base h1{
       font-family: Verdana;
+      background-color: transparent;
   }
-  .goals{
-    border: 2px solid black;
-    width: 20%;
+
+  .base li{
+    font-family: Verdana;
   }
 </style>
 </head>
 <body>
   <div class="base">
     <header>
-        <div class="row">
-            <a href="{% url 'frontpage:index' %}"><img src="{% static 'frontpage/src/title_logo.png' %}" height="100"></a>
-        </div>
-        <div class="row">
-            <h1>Healm</h1>
+        <div class="head">
+          <div class="row">
+              <a href="{% url 'frontpage:index' %}"><img src="{% static 'frontpage/src/title_logo.png' %}" height="100"></a>
+          </div>
+          <div class="row">
+              <h1>Healm</h1>
+          </div>
         </div>
         <ul>
             
