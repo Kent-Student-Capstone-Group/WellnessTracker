@@ -7,6 +7,16 @@ from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendMessage
 # Create your views here.
 
 
+def welcome(request):
+    if(request.user.is_authenticated):
+        try:
+            info = UserInfo.objects.get(User=request.user)
+            return render(request, 'frontpage/index.html', {'info':info})
+        except UserInfo.DoesNotExist:
+            return render(request, 'frontpage/index.html')
+    else:
+        return render(request, 'frontpage/welcome.html')
+
 def index(request):
     if(request.user.is_authenticated):
         try:
@@ -150,6 +160,6 @@ def upload(request):
 def weekreport(request):   
     return render(request, 'frontpage/weekreport.html')
 
-def welcome(request):   
-    return render(request, 'frontpage/welcome.html')
+# def welcome(request):   
+#     return render(request, 'frontpage/welcome.html')
 
