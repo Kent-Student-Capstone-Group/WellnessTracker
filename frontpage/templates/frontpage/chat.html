@@ -21,7 +21,7 @@
         <!-- ** <button type="button" onclick="alert('Hello world!')">Compose</button>  **button to compose a new message -->
         <ul>
             {% for x in Messages %}
-            <li>{{ x.sender }} {{ x.MessageTitle }}</li> <!-- add time/date use if statement-->
+            <li>{{ x.Sender }} {{ x.MessageTitle }} {{x.TimeSent}}</li> <!-- add time/date use if statement-->
             {% endfor %}
         </ul>
         <!-- Prob need some kind of loop to show desired number of emails or make it 20 or something-->

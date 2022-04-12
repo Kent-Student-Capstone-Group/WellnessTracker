@@ -3,14 +3,8 @@ from django.http import HttpResponse
 
 from .models import UserGroupJoinTable, UserInfo, Group, Message
 from django.utils import timezone
-<<<<<<< HEAD
-#from .models import UserGroupJoinTable, UserInfo, Group
 
-from .forms import EditUserInfo, MakeGroup
-=======
-from .models import UserGroupJoinTable, UserInfo, Group
 from .forms import EditUserInfo, MakeGroup, DailyReportForm
->>>>>>> 62046f56a2f53a620bf5f2f6e38d75610f65936f
 
 # Create your views here.
 
@@ -51,7 +45,7 @@ def createUserInfo(request):
 
 def chat(request):   
     if (request.user.is_authenticated):
-        userMessages = Message.objects.all()
+        userMessages = Message.objects.filter(Recipient = request.user)
         return render(request, 'frontpage/chat.html', {'Messages': userMessages})
     
     else:
