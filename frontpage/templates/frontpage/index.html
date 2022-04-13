@@ -33,7 +33,7 @@
         <a href="{% url 'frontpage:userInfo' %}">User Info Form</a>
         <a href="{% url 'frontpage:makegroup' %}">Make Group</a>
         <a href="{% url 'frontpage:index' %}">Index</a><br>
-        {% if info %}
+        <!-- {% if info %}
         <p>Date of Birth:{{info.DateOfBirth}}</p>
         <p>Height:{{info.HeightFeet}}'{{info.HeightInches}}"</p>
         <p>Weight:{{info.Weight}}</p>
@@ -50,7 +50,7 @@
                 </select>
               </div>
         </section>
-        {% endif %}
+        {% endif %} -->
     {% else %}
         {% if google_login %}
             <p>hello</p>

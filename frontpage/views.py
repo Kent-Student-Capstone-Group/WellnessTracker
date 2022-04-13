@@ -9,23 +9,25 @@ from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendMessage
 
 def welcome(request):
     if(request.user.is_authenticated):
-        try:
-            info = UserInfo.objects.get(User=request.user)
-            return render(request, 'frontpage/index.html', {'info':info})
-        except UserInfo.DoesNotExist:
-            return render(request, 'frontpage/index.html')
+        return render(request, 'frontpage/index.html')
+        # try:
+        #     info = UserInfo.objects.get(User=request.user)
+        #     return render(request, 'frontpage/index.html', {'info':info})
+        # except UserInfo.DoesNotExist:
+        #     return render(request, 'frontpage/index.html')
     else:
         return render(request, 'frontpage/welcome.html')
 
 def index(request):
-    if(request.user.is_authenticated):
-        try:
-            info = UserInfo.objects.get(User=request.user)
-            return render(request, 'frontpage/index.html', {'info':info})
-        except UserInfo.DoesNotExist:
-            return render(request, 'frontpage/index.html')
-    else:
-        return render(request, 'frontpage/index.html')
+    return render(request, 'frontpage/index.html')
+    # if(request.user.is_authenticated):
+    #     try:
+    #         info = UserInfo.objects.get(User=request.user)
+    #         return render(request, 'frontpage/index.html', {'info':info})
+    #     except UserInfo.DoesNotExist:
+    #         return render(request, 'frontpage/index.html')
+    # else:
+    #     return render(request, 'frontpage/index.html')
 
 def badges(request):
     if (request.user.is_authenticated):
@@ -102,9 +104,15 @@ def makeGroup(request):
                 userCurrentOwnedGroups = Group.objects.get(Owner = request.user, GroupName=request.POST.get("GroupName"))  
             except Group.DoesNotExist:
                 form = MakeGroup(request.POST or None)
-                form.Owner = request.user
                 if form.is_valid():
-                    form.save()
+                    NewGroup = Group()
+                    NewGroup.Owner = request.user
+                    NewGroup.GroupName = request.POST.get("GroupName")
+                    NewGroup.save()
+                #form = MakeGroup(request.POST or None)
+                #form.Owner = request.user
+                #if form.is_valid():
+                    #form.save()
                     # Code for adding an item to the usergroupjointable
                     #NewGroup = Group.objects.get(GroupName = "kremlins")
                     #NewUserGroupJoin = UserGroupJoinTable(User=request.user, Group = NewGroup)
