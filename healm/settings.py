@@ -17,6 +17,18 @@ import sys
 import dj_database_url
 
 
+#| #### Comment/Uncomment These For Local Environment ####
+#|
+#V
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.getenv("DEBUG", "False") == "True"  # Comment out for local enviornment
+# DEBUG = True # Uncomment for local enviornment
+
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True" # Comment out for local enviornment
+#DEVELOPMENT_MODE = True # Uncomment for local environment
+#^
+#|
+#| #### Comment/Uncomment These For Local Environment ####
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,9 +40,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "False") == "True"
-
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 SITE_ID = 1
@@ -38,6 +47,7 @@ SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = [
+    'frontpage',
     'django.contrib.sites',
     #'rest_framework',
     #'rest_framework.authtoken',
@@ -47,7 +57,6 @@ INSTALLED_APPS = [
     #'rest_auth.registration',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'frontpage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -89,10 +98,6 @@ WSGI_APPLICATION = 'healm.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-#DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
-
-DEVELOPMENT_MODE = False
 
 if DEVELOPMENT_MODE is True:
     DATABASES = {

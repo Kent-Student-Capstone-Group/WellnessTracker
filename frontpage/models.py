@@ -1,3 +1,4 @@
+from this import d
 from django.db import models
 from django.conf import settings
 #from django.utils import timezone
@@ -20,6 +21,7 @@ class UserInfo(models.Model):
     Gender = models.CharField(max_length=20, blank=1, null=True)
     #IsActive = models.BooleanField(default=True, blank=1)
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    UserSteps = models.IntegerField(blank=1, null=True)
 
     # def __str__(self):
     #     return self.FirstName + ' ' + self.LastName
@@ -77,3 +79,14 @@ class UserGroupJoinTable(models.Model):
 
     # def __str__(self):
     #     return self.User.FirstName + self.User.LastName + ":" + self.Group.GroupName
+
+class MetalsTable(models.Model):
+    User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    ReachedUserGoal = models.BooleanField(default=False)
+    FirstSteps = models.BooleanField(default=False)
+    StepsTaken = models.BooleanField(default=False)
+    Over6Months = models.BooleanField(default=False)
+    Powerhouse = models.BooleanField(default=False)
+    TeamWork = models.BooleanField(default=False)
+    Teamleader = models.BooleanField(default=False)
+    ReachedTeamGoal = models.BooleanField(default=False)

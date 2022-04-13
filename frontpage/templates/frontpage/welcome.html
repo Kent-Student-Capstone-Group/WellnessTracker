@@ -1,3 +1,6 @@
+{% load socialaccount %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,7 +18,7 @@
         <meta property="og:description" content="The official website of Healm - the Kent State Wellness tracker. ">
 
         <title text-bold>Healm</title>
-        <link rel="shortcut icon" type="image/png" href="src/title_logo.png" />
+        <link rel="shortcut icon" type="image/png" href="{% static 'frontpage/src/title_logo.png' %}" />
 
         <style>
             *{
@@ -144,15 +147,18 @@
         </style>
         
     </head>
+{% load socialaccount %}
+{% load static %}
+    
     <body>
         <div class="header">
 
             <video autoplay loop class="backv" muted plays-inline>
-                <source src="src/video.mp4" type="video/mp4">
+                <source src="{% static 'frontpage/src/video.mp4' %}" type="video/mp4">
             </video>
 
             <nav>
-                <img src="src/Healm-logos_transparentw.png" class="logo" alt="logo">
+                <img src="{% static 'frontpage/src/Healm-logos_transparentw.png' %}" class="logo" alt="logo">
                 
                 <ul class="nlinks">
                     <li><a href="info.html">Information</a></li> 
@@ -167,7 +173,7 @@
                     <div class="align">     
                     <h3> Welcome to Healm </h3>
                         <div>
-                            <a class="btn" href=""><img src="src/Google-Icon.jpg" alt="Google logo"> Sign in with Google</a>
+                            <a class="btn" href="{% provider_login_url 'google' %}"><img src="{% static 'frontpage/src/Google-Icon.jpg' %}" alt="Google logo"> Sign in with Google</a>
                         </div> 
                     </div>
                 </form>

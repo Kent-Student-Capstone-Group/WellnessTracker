@@ -34,7 +34,7 @@
 
         <ul>
             {% for x in messages %}
-            <li>{{ x.sender }} {{ x.MessageTitle }}</li>
+            <li>{{ x.Sender }}: {{ x.MessageTitle }}: {{x.TimeSent}}</li>
             {% endfor %}
         </ul>
 
@@ -42,11 +42,6 @@
 
         <!-- Prob need some kind of loop to show desired number of emails or make it 20 or something-->
 
-       <!--<form>--> 
-            <!--<input type="checkbox" id="Message1" name="Message1" value="Content">
-            <label for="Message1"> Sender MessageTitle </label><br>
-           
-        </form> -->
 
           <div class="groups-chat">
             
