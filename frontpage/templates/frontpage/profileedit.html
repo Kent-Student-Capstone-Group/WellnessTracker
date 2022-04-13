@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+{% extends 'frontpage/base.html' %}
+
+{% block content %}
+<html>
+    
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" type="image/png" href="src\title_logo.png" />
+        <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
+        <title>Profile Edit</title>
+        <style>
+            *{
+                font-family: Fredoka;
+                margin: 0;
+                align-items: center;
+            }
+            h1{
+                background: linear-gradient(to top left, #ff6600 10%, #ffff99 91%);
+                font-size: 40px;
+                color: rgb(250, 246, 246);
+                text-align: center;
+                padding: 20px;
+                font-weight: bolder;
+                text-decoration: none;
+            }
+            body .form1{
+                text-align: center;
+                align-items: center;
+            }
+            .form1{
+                display: flex;
+                justify-content: space-evenly;
+                align-items: stretch;
+                text-align: center;
+                line-height: 2.5em;
+                background: linear-gradient(to bottom right, #33ccff 0%, #ffff99 100%);
+                border-radius: 20px;
+                box-sizing: border-box;
+                height: 600px;
+                width: auto;
+                margin: 20px;
+            }
+            .logo{
+                width: 140px;
+            }
+            .dp{
+                width: 30%;
+                line-height: 3em;
+                border: 5px solid rgb(118, 253, 81);
+                background-color: rgb(253, 251, 248);
+                border-radius: 15px;
+                padding-top: 40px;
+                padding-bottom: 30px;
+            }
+            .dp img{
+                clip-path: circle(40%);
+                width: 20%;
+            }
+            .details{
+                border: 5px solid rgb(118, 253, 81);
+                background-color: rgb(251, 250, 248);
+                border-radius: 15px;
+                padding: 10px;
+                padding-bottom: 30px;
+            }
+            .info{
+                border: 5px solid rgb(118, 253, 81);
+                background-color: rgb(250, 249, 247);
+                border-radius: 15px;
+                padding: 10px;
+            }
+            .form1 input {
+                background-color: #f0f1fb;
+                border-radius: 12px;
+                border: 0;
+                box-sizing: border-box;
+                color: rgb(0, 0, 0);
+                font-size: 18px;
+                height: 100%;
+                outline: 0;
+                padding: 4px 20px 0;
+                width: 100%;
+            }
+            ul{
+                text-decoration: none;
+                list-style: none;
+            }
+            .submit {
+                background-color: rgba(33, 249, 213, 0.932);
+                border-radius: 12px;
+                border: 0;
+                box-sizing: border-box;
+                color: rgb(253, 246, 246);
+                cursor: pointer;
+                font-size: 18px;
+                height: 50px;
+                text-align: center;
+                width: 100px;
+                justify-self: center;
+                align-items: center;
+            }
+            .form1 label{
+                font-weight: 700 ;
+                font-size: 20px;
+            }
+            .submit:active {
+            background-color: rgb(244, 248, 251);
+            color: rgb(6, 6, 6);
+            }
+            .center{
+                text-align: center;
+            }
+
+            </style>
+    </head>
+
+    <body>
+        <h1>Edit your Profile:</h1>
+        <div class="form1">
+
+            <div class="dp">
+                <div>
+                    <img src="..\frontpage\src\id.png" type="img/png" width=7% alt="DP"/>
+                </div>
+                <h3>Profile Picture</h3>
+                <label><input id="image" type="file" name="profile_photo" placeholder="Photo" required="" capture></label>
+            </div>
+            <div class="details">
+                <div>
+                    <label>First Name:</label><input type="text" class="form-control" placeholder="First name" value="">
+                </div>
+                <div>
+                    <label>Last name:</label><input type="text" class="form-control" value="" placeholder="Last name">
+                </div>
+                <div>
+                    <label>Date of birth:</label><input type="date" class="form-control" value="">
+                </div>
+                <div>
+                    <label>Gender:</label>
+                        <div>
+                            <select name="gender">
+                                <option value=""></option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                                <option value="Prefernot">Perfer not to mention</option>
+                            </select>
+                        </div>
+                </div>
+                
+            </div>
+            <div class="info">
+            <div>
+                <label>Height:</label><input type="number" class="form-control" placeholder="in feet" value="">
+            </div>
+            <div>
+                <label>Weight:</label><input type="number" class="form-control" placeholder="in lbs" value="">
+            </div>
+            <div>
+                <label>Mobile Number:</label><input type="tel" class="form-control" placeholder="(+1) Phone number" value="">
+            </div>
+            </div>
+            </div> 
+            <div class="center">
+                <button type="text" class="submit">Submit</button>
+            </div>
+    </body>
+</html>
+
+{% endblock content %}
