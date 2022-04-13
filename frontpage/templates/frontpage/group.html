@@ -29,46 +29,43 @@
             justify-content: space-between;
             align-items: center;
         }
+        
         .newg a{
-            border: 2px solid black;
-            background-color: blue;
-            color: aliceblue;
+            border: 5px solid rgb(30, 251, 225);
+            color: rgb(17, 18, 18);
             text-decoration: none;
-            width: 100%;
+            font-size: 30px;
+            border-radius: 15px;
+            width: 50%;
             height: 30px;
-        }
-        .newg{
-            border: 4px solid green;
-            border-radius: 10px;
-            padding: 5px;
-            margin: 10px;
-            background-color: bisque;
+            text-align: center;
         }
         .owner{
-            border: 4px solid green;
+            border: 4px solid rgb(20, 247, 20);
             border-radius: 10px;
             padding: 5px;
             margin: 10px;
-            background-color: bisque;
+            background-color: rgb(248, 246, 244);
         }
         .member{
-            border: 4px solid green;
+            border: 4px solid rgb(30, 249, 30);
             border-radius: 10px;
             padding: 5px;
             margin: 10px;
-            background-color: bisque;
+            background-color: rgb(255, 252, 248);
         }
     </style>
 
     
     <body>
         <h1>Groups</h1>
+        <div class="newg">
+            <a href="{% url 'frontpage:makegroup' %}">Make a New Group</a>
+        </div>
         <div class="arrange">
-            <div class="newg">
-                <a href="{% url 'frontpage:makegroup' %}">Make a New Group</a>
-            </div>
+            
             <div class="owner">
-                    <h3>Owner:</h3>
+                    <h3>You are the Owner of these groups:</h3>
                     <table>
                         {% for ownerGroup in ownerGroups %}
                         <tr>
@@ -76,9 +73,31 @@
                         </tr>
                         {% endfor %}
                     </table>
+                    <div class="group-goals">
+                        <h3>Set a New Goal:</h3>
+                            <select>
+                                <option value=""></option>
+                                <option value="3000 steps">3000 Steps in a day</option>
+                                <option value="2 hours">2 hours excersizing everyday.</option>
+                                <option value="Custom goal">Custom goal</option>
+                            </select>
+                            <button type="submit" value="Submit">Submit</button>
+                        <h3>Group goals:</h3>
+                            
+                        
+                    </div>
+                    <div class="group-stats">
+                        <h3>Progress of the members in the groups</h3>
+                        <table>
+                            <td>member name</td>
+                            <td>member name</td>
+                            <td>member name</td>
+                            <td>member name</td>
+                        </table>
+                    </div> 
             </div>
             <div class="member">
-                    <h3>Member:</h3>
+                    <h3>You are a member of these Groups:</h3>
                     <table>
                         {% for userGroup in userGroups %}
                         <tr>
@@ -86,8 +105,11 @@
                         </tr>
                         {% endfor %}
                     </table>
+                    <h3>Other members in the group:</h3>
             </div> 
-        </div>    
+        </div>
+          
+        
     </body>
 </html>
 

@@ -25,7 +25,7 @@
         }
     </style>
     <body>
-        <h1>Send Message</h1>
+        <h1>Send Message to your group members</h1>
         <form method='POST'>
             {% csrf_token %}
             {{ form.as_p }}
@@ -37,8 +37,6 @@
             <li>{{ x.Sender }}: {{ x.MessageTitle }}: {{x.TimeSent}}</li>
             {% endfor %}
         </ul>
-
-        <h1>Chat</h1>
 
         <!-- Prob need some kind of loop to show desired number of emails or make it 20 or something-->
 
