@@ -109,6 +109,10 @@ def makeGroup(request):
                     NewGroup.Owner = request.user
                     NewGroup.GroupName = request.POST.get("GroupName")
                     NewGroup.save()
+                    NewUserGroupJoin = UserGroupJoinTable()
+                    NewUserGroupJoin.Group = NewGroup
+                    NewUserGroupJoin.User = request.user
+                    NewUserGroupJoin.save()
                 #form = MakeGroup(request.POST or None)
                 #form.Owner = request.user
                 #if form.is_valid():
