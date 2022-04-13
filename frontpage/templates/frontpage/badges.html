@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% extends 'frontpage/base.html' %}
+
+{% block content %}
+<html>
+    <head>
+        <title>My Badges</title>
+        <meta charset = "UTF-8">
+            <meta content="width=device-width,initial-scale=1" name="viewport" />
+            <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
+            <link rel="shortcut icon" type="image/png" href="src\title_logo.png" />
+            <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
+        <style>
+                *{
+                    font-family: Fredoka;
+                    margin: 0;
+                }
+                h1{
+                    background-color: red;
+                    color: white;
+                    padding: 20px;
+                    margin-bottom: 10px;
+                    text-align: center;
+                }
+                .badges{
+                    text-align: center;
+                    margin: 50px;
+                }
+                .badges h2{
+                    color: aquamarine;
+                    margin: 20px;
+                }
+                .images{
+                    display: grid;
+                    gap: 50px;
+                    grid-template-columns: auto auto auto auto;
+                    padding: 20px;
+                }
+                .images img{
+                    clip-path: circle(40%);
+                    width: 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>My Badges</h1>
+
+        <div class="badges">
+            <h2>You get Badges everytime you complete your goals or surpass your previous records</h2>
+
+            <div class="images">
+                <div>
+                    <img src="badges/1000Steps.png" type="img/png" alt="1000 steps badge">
+                    <p>1000 steps</p>
+                </div>
+                <div>
+                    <img src="badges/1000Steps.png" type="img/png" alt="1000 steps badge">
+                    <p>1000 steps</p>
+                </div>
+                <div>
+                    <img src="badges/1000Steps.png" type="img/png" alt="1000 steps badge">
+                    <p>1000 steps</p>
+                </div>
+                <div>
+                    <img src="badges/1000Steps.png" type="img/png" alt="1000 steps badge">
+                    <p>1000 steps</p>
+                </div>
+                <div>
+                    <img src="badges/1000Steps.png" type="img/png" alt="1000 steps badge">
+                    <p>1000 steps</p>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </body>
+
+</html>
+{% endblock content %}

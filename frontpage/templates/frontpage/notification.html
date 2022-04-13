@@ -33,14 +33,36 @@
         .nsettings p{
             font-size: 30px;
             color: aquamarine;
+            margin-bottom: 10px;
         }
         .nsettings div{
             border: 4px solid rgba(0, 255, 64, 0.848);
             border-radius: 10px;
             padding: 10px;
             margin: 3px;
-            height: 100px;
-            width: 200px;
+            height: 50px;
+            width: 300px;
+        }
+        .submit {
+                background-color: rgba(33, 249, 213, 0.932);
+                border-radius: 12px;
+                border: 0;
+                box-sizing: border-box;
+                color: rgb(253, 246, 246);
+                cursor: pointer;
+                font-size: 18px;
+                height: 50px;
+                text-align: center;
+                width: 150px;
+                justify-self: center;
+                align-items: center;
+            }
+        .submit:active {
+            background-color: rgb(244, 248, 251);
+            color: rgb(6, 6, 6);
+        }
+        .center{
+            text-align: center;
         }
     </style>
 
@@ -77,6 +99,9 @@
                         <option value="Turn off">Turn off</option>
                     </select>
                 </div>
+            </div>
+            <div class="center">
+                <button type="text" class="submit">Submit Changes</button>
             </div>
     </body>
 </html>

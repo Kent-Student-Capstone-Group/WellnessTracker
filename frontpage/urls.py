@@ -4,10 +4,12 @@ from . import views
 
 app_name= 'frontpage'
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.welcome, name='welcome'),
+    path('index/', views.index, name='index'),
     path('accounts/', include('allauth.urls')),
     path('logout', LogoutView.as_view(), name="logout"),
     path('userInfo_form', views.createUserInfo, name='userInfo'),
+    path('badges/', views.badges, name='badges'),
     path('chat/', views.chat, name='chat'), 
     path('contact/', views.contact, name='contact'), 
     path('dailyreport/', views.dailyReport, name='dailyreport'),

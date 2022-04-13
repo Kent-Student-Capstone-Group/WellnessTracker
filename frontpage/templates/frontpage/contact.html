@@ -3,76 +3,121 @@
 <html>
     <head>
         <title>Contact</title>
-        <a href="welcome.html"><h4>Home</h4></a>
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" type="image/png" href="src\title_logo.png" />
         <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
     <style>
         html{
             font-family: Fredoka;
-            background-color: rgb(205, 255, 248);
+            text-align: center;
         }
         h1{
             color: aqua;
         }
+        .cardlist{
+            display: grid;
+            grid-template-columns: auto auto auto;
+            gap: 10px;
+            margin: 15px;
+        }
         .card {
-                        display: flex;
-                        flex-direction: column;
-                    }
+            border: 4px solid;
+            border-radius: 15px;
+        }
 
-                    .card__cover {
-                        height: 150px;
-                        width: 100%;
-                    }
+        .card__cover {
+            height: 150px;
+            width: 100%;
+        }
 
-                    .card__content {
-                        /* Take available height */
-                        flex: 1;
-                    }
-                    li{
-                        list-style: none;
-                    }
+        .card__content {
+            flex: 1;
+        }
+        li{
+            list-style: none;
+            color: white;
+        }
+        
     </style>
     </head>
     
     <body>
         <h1>Team Healm!! </h1>
-        <p text-bold>We are group of 6 members and our contact details</p>
-        <ul>
-            <li> Brian Scalfano: </li>
-            <li> bscalfan@kent.edu </li>
-        </ul>
-        <ul>
-            <li> Nathan Pochedley: </li>
-            <li> npoched1@kent.edu </li>
-        </ul>
-        <div class="card">
-            <!-- Cover -->
-            <div class="card__cover">
-                <img src="{% static 'frontpage/src/Teja.JPG' %}" width="20%" alt="img">
+        <h2>We are group of 6 members and our contact details</h2>
+        <div class="cardlist">
+            <div class="card">   
+                
+                    <div class="card__cover">
+                        <img src="src/Brian.jpg" width="30%" alt="img">
+                    </div>
+                    <div class="card__content">
+                        <ul>
+                            <li> Brian Scalfano: </li>   
+                        </ul>
+                    </div>
+                    <i> bscalfan@kent.edu </i>               
             </div>
-        
-            <!-- Content -->
-            <div class="card__content">
-                <ul>
-                    <li> Tejasai Bolem: </li>   
-                </ul>
-            </div>
-            <i> tbolem@kent.edu </i>
-        </div>
-        
-        <ul>
-            <li> Nathan Plaster: </li>
-            <li> nplaster@kent.edu </li>
-        </ul>
-        <ul>
-            <li> Patrick Rode: </li>
-            <li> prode@kent.edu </li>
-        </ul>
-        <ul>
-            <li> Dave Lattibeaudiere: </li>
-            <li> dlattibe@kent.edu </li>
-        </ul>
 
+            <div class="card">
+                <div class="card__cover">
+                    <img src="" alt="img">
+                </div>
+                <div class="card__content">
+                    <ul>
+                        <li> Nathan Pochedley: </li>   
+                    </ul>
+                </div>
+                <i> npoched1@kent.edu </i>
+            </div>
+            <div class="card">
+
+                <div class="card__cover">
+                    <img src="src/Teja.JPG" width="50%" alt="img">
+                </div>
+
+                <div class="card__content">
+                    <ul>
+                        <li> Tejasai Bolem: </li>   
+                    </ul>
+                </div>
+                <i> tbolem@kent.edu </i>
+            </div>
+
+            <div class="card">
+                <div class="card__cover">
+                    <img src="" alt="img">
+                </div>
+                <div class="card__content">
+                    <ul>
+                        <li> Nathan Plaster: </li>   
+                    </ul>
+                </div>
+                <i> nplaster@kent.edu </i>
+            </div>
+
+            <div class="card">
+                <div class="card__cover">
+                    <img src="" alt="img">
+                </div>
+                <div class="card__content">
+                    <ul>
+                        <li> Patrick Rode: </li>   
+                    </ul>
+                </div>
+                <i> prode@kent.edu </i>
+            </div>
+
+            <div class="card">
+                <div class="card__cover">
+                    <img src="src/David.jpg" width="30%" alt="img">
+                </div>
+                <div class="card__content">
+                    <ul>
+                        <li> Dave Lattibeaudiere: </li>   
+                    </ul>
+                </div>
+                <i> dlattibe@kent.edu </i> 
+            </div>
+        </div>
     </body>
 </html>
