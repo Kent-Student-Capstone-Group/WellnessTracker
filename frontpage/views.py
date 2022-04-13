@@ -16,7 +16,7 @@ def welcome(request):
         # except UserInfo.DoesNotExist:
         #     return render(request, 'frontpage/index.html')
     else:
-        return render(request, 'frontpage/welcome.html')
+        return redirect('accounts/google/login')
 
 def index(request):
     return render(request, 'frontpage/index.html')

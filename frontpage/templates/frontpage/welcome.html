@@ -93,6 +93,7 @@
                 padding: 60px;
                 border-radius: 8px;
                 display: flex;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
             }
@@ -147,7 +148,6 @@
         </style>
         
     </head>
-{% load socialaccount %}
 {% load static %}
     
     <body>
@@ -169,11 +169,12 @@
         </div>
        
         <div class="content"> 
-                <form>
+                <form method = "post">
+                    {%csrf_token%}
                     <div class="align">     
                     <h3> Welcome to Healm </h3>
-                        <div>
-                            <a class="btn" href="{% provider_login_url 'google' %}"><img src="{% static 'frontpage/src/Google-Icon.jpg' %}" alt="Google logo"> Sign in with Google</a>
+                        <div >
+                            <button style="margin-left:auto; margin-right:auto" type="submit" class="btn" href="{% provider_login_url 'google' %}"><img src="{% static 'frontpage/src/Google-Icon.jpg' %}" alt="Google logo"> Sign in with Google</a>
                         </div> 
                     </div>
                 </form>
