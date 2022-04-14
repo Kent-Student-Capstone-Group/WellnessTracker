@@ -5,7 +5,7 @@
 <h1>Enter Group Info</h1>
 <form method='POST'>
     {% csrf_token %}
-    {{ form.GroupName }}
+    <p>Group Name: </p>{{ form.GroupName }}
     <input type="submit" value="Save" />
 </form>
 {% endblock content %}

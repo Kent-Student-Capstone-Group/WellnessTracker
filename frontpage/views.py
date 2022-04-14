@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.utils import timezone
-from .models import UserGroupJoinTable, UserInfo, Group, Message
-from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendMessage
+import datetime
+from django.contrib.auth import get_user_model
+from .models import UserInfo, UserGroupJoinTable, UserInfo, Group, Message, UserGroupRequest
+from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendMessage, SendGroupJoinRequest
 
 # Create your views here.
 
@@ -55,10 +57,12 @@ def createUserInfo(request):
 
 def chat(request):   
     if (request.user.is_authenticated):
-        messages = Message.objects.filter(recipient=request.user)
+        messages = Message.objects.filter(Recipient=request.user)
         form = SendMessage(request.POST or None)
         if form.is_valid():
-            form.save()
+            newMessage = Message(Sender = request.user, MessageTitle = request.POST.get("MessageTitle"), MessageBody = request.POST.get("MessageBody"))
+            newMessage.Recipient = request.POST.get("Recipient")
+            newMessage.save()
         return render(request, 'frontpage/chat.html', {'messages': messages, 'form': form})
     
     else:
@@ -109,6 +113,10 @@ def makeGroup(request):
                     NewGroup.Owner = request.user
                     NewGroup.GroupName = request.POST.get("GroupName")
                     NewGroup.save()
+                    NewUserGroupJoin = UserGroupJoinTable()
+                    NewUserGroupJoin.Group = NewGroup
+                    NewUserGroupJoin.User = request.user
+                    NewUserGroupJoin.save()
                 #form = MakeGroup(request.POST or None)
                 #form.Owner = request.user
                 #if form.is_valid():
@@ -168,6 +176,38 @@ def upload(request):
 def weekreport(request):   
     return render(request, 'frontpage/weekreport.html')
 
-# def welcome(request):   
-#     return render(request, 'frontpage/welcome.html')
+def searchGroups(request):
+    if(request.method == "POST"):
+        newGroupRequest = UserGroupRequest()
+        newGroupRequest.Group = Group.objects.get(id=request.POST.get("Group"))
+        newGroupRequest.User = request.user
+        newGroupRequest.TimeOfRequest = datetime.datetime.now()
+        newGroupRequest.Status = 'R'
+        newGroupRequest.save()
+        return HttpResponse("Request Sent!")
+    else:
+        try:
+            sendRequest = SendGroupJoinRequest()
+            groups = Group.objects.all()
+            return render(request, 'frontpage/searchGroups.html', {'groups':groups, 'sendRequest':sendRequest})
+        except Group.DoesNotExist:
+            return render(request, 'frontpage/index.html')
 
+def groupView(request, group_id):
+    group_id = int(group_id)
+    if(request.method == "POST"):
+        djangoUser = get_user_model().objects.get(id=request.POST.get("User"))
+        NewUserGroupJoin = UserGroupJoinTable()
+        NewUserGroupJoin.User = djangoUser
+        NewUserGroupJoin.Group = Group.objects.get(id=group_id)
+        NewUserGroupJoin.DateJoined = datetime.datetime.now()
+        NewUserGroupJoin.save()
+        UserGroupRequest.objects.get(User=djangoUser, Group=Group.objects.get(id = group_id)).delete()
+    
+    try:
+        group_sel = Group.objects.get(id = group_id)
+    except Group.DoesNotExist:
+        return redirect('index')
+    groupMembers = UserGroupJoinTable.objects.filter(Group = group_sel)
+    groupRequests = UserGroupRequest.objects.filter(Group = group_sel)
+    return render(request, 'frontpage/groupView.html', {'group':group_sel, 'groupMembers':groupMembers, 'groupRequests':groupRequests})

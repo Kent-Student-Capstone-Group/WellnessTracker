@@ -36,11 +36,11 @@ class Group(models.Model):
         return self.GroupName
 
 class Message(models.Model):
-    Sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='Sender')
-    Recipient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='Recipient')
+    Sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='Sender', null=True)
+    Recipient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='Recipient', null=True)
     TimeSent = models.DateTimeField(default=datetime.datetime.now())
-    MessageTitle = models.CharField(max_length=100)
-    MessageBody = models.CharField(max_length=5000)
+    MessageTitle = models.CharField(max_length=100, null=True)
+    MessageBody = models.CharField(max_length=5000, null=True)
 
     # def __str__(self):
     #     return self.Sender + ': ' + self.MessageTitle
@@ -68,6 +68,8 @@ class UserGroupRequest(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     Group = models.ForeignKey(Group, on_delete=models.CASCADE)
     TimeOfRequest = models.DateTimeField()
+    STATUS_CHOICES = [('R', 'Request'), ('I', 'Invite')]
+    Status = models.CharField(max_length=1, choices=STATUS_CHOICES, null=True)
 
     # def __str__(self):
     #     return self.User.FirstName + self.User.LastName + ":" + self.Group.GroupName
