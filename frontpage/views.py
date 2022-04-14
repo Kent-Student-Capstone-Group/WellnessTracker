@@ -57,7 +57,7 @@ def createUserInfo(request):
 
 def chat(request):   
     if (request.user.is_authenticated):
-        messages = Message.objects.filter(recipient=request.user)
+        messages = Message.objects.filter(Recipient=request.user)
         form = SendMessage(request.POST or None)
         if form.is_valid():
             form.save()
