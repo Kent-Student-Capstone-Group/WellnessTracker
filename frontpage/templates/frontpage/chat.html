@@ -35,6 +35,7 @@
         <ul>
             {% for x in messages %}
             <li>{{ x.Sender }}: {{ x.MessageTitle }}: {{x.TimeSent}}</li>
+            <li>{{ x.MessageBody }}</li>
             {% endfor %}
         </ul>
 

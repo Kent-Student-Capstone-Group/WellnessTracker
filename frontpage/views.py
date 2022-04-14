@@ -60,7 +60,8 @@ def chat(request):
         messages = Message.objects.filter(Recipient=request.user)
         form = SendMessage(request.POST or None)
         if form.is_valid():
-            form.save()
+            newMessage = Message(Sender = request.user, Recipient = request.POST.get("Recipient"), MessageTitle = request.POST.get("MessageTitle"), MessageBody = request.POST.get("MessageBody"))
+            newMessage.save()
         return render(request, 'frontpage/chat.html', {'messages': messages, 'form': form})
     
     else:
