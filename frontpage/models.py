@@ -68,6 +68,8 @@ class UserGroupRequest(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     Group = models.ForeignKey(Group, on_delete=models.CASCADE)
     TimeOfRequest = models.DateTimeField()
+    STATUS_CHOICES = [('R', 'Request'), ('I', 'Invite')]
+    Status = models.CharField(max_length=1, choices=STATUS_CHOICES, null=True)
 
     # def __str__(self):
     #     return self.User.FirstName + self.User.LastName + ":" + self.Group.GroupName
