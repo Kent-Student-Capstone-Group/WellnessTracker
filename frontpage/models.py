@@ -39,8 +39,8 @@ class Message(models.Model):
     Sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='Sender', null=True)
     Recipient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='Recipient', null=True)
     TimeSent = models.DateTimeField(default=datetime.datetime.now())
-    MessageTitle = models.CharField(max_length=100, default='*NO TITLE*')
-    MessageBody = models.CharField(max_length=5000, default=' ')
+    MessageTitle = models.CharField(max_length=100, null=True)
+    MessageBody = models.CharField(max_length=5000, null=True)
 
     # def __str__(self):
     #     return self.Sender + ': ' + self.MessageTitle
