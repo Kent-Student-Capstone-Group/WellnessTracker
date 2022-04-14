@@ -110,11 +110,15 @@
                 align-items: center;
                 background: rgb(252, 254, 254);
                 color: rgb(15, 14, 14);   
-                border-radius: 15px;  
+                border-radius: 10px;
+                margin-left:auto;
+                margin-right:auto;
+                padding: 7px; 
             }
             .btn img{
-                width: 30px;
-                height: 30px;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
             }
             .align{
                 text-align: center;
@@ -174,7 +178,7 @@
                     <div class="align">     
                     <h3> Welcome to Healm </h3>
                         <div >
-                            <button style="margin-left:auto; margin-right:auto" type="submit" class="btn" href="{% provider_login_url 'google' %}"><img src="{% static 'frontpage/src/Google-Icon.jpg' %}" alt="Google logo"> Sign in with Google</a>
+                            <button type="submit" class="btn" href="{% provider_login_url 'google' %}"><img src="{% static 'frontpage/src/Google-Icon.jpg' %}" alt="Google logo"><b> Sign in with Google</b></a>
                         </div> 
                     </div>
                 </form>
