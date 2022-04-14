@@ -10,6 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" type="image/png" href="src\title_logo.png" />
         <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <style>
         *{
@@ -62,6 +63,28 @@
             margin: 10px;
             background-color: rgb(255, 252, 248);
         }
+        .search{
+            float: right;
+        }
+        .search input[type=text] {
+            padding: 6px;
+            margin-top: 8px;
+            font-size: 17px;
+            border: none;
+        }
+        .search button {
+            float: right;
+            padding: 6px 10px;
+            margin-top: 8px;
+            margin-right: 16px;
+            background: #ddd;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+        }
+        .search input[type=text] {
+            border: 1px solid #ccc;  
+        }
     </style>
 
     
@@ -70,7 +93,12 @@
         <div class="newg">
             <a href="#">Join a group</a>
             <a href="{% url 'frontpage:makegroup' %}">Make a New Group</a>
-            <a href="#">Search for a group</a>
+            <div class="search">
+                <form action="/action_page.php">
+                  <input type="text" placeholder="Search for a group" name="search">
+                  <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
         </div>
         <div class="arrange">
             
