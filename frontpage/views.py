@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.utils import timezone
 import datetime
 from django.contrib.auth import get_user_model
-from .models import UserGroupJoinTable, UserInfo, Group, Message, UserGroupRequest
+from .models import User, UserGroupJoinTable, UserInfo, Group, Message, UserGroupRequest
 from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendMessage, SendGroupJoinRequest
 
 # Create your views here.
@@ -60,7 +60,8 @@ def chat(request):
         messages = Message.objects.filter(Recipient=request.user)
         form = SendMessage(request.POST or None)
         if form.is_valid():
-            newMessage = Message(Sender = request.user, Recipient = request.POST.get("Recipient"), MessageTitle = request.POST.get("MessageTitle"), MessageBody = request.POST.get("MessageBody"))
+            newMessage = Message(Sender = request.user, MessageTitle = request.POST.get("MessageTitle"), MessageBody = request.POST.get("MessageBody"))
+            newMessage.Recipient = User.objects.get(pk = request.POST.get("Recipient"))
             newMessage.save()
         return render(request, 'frontpage/chat.html', {'messages': messages, 'form': form})
     

@@ -36,11 +36,11 @@ class Group(models.Model):
         return self.GroupName
 
 class Message(models.Model):
-    Sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='Sender')
-    Recipient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='Recipient')
+    Sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='Sender', null=True)
+    Recipient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='Recipient', null=True)
     TimeSent = models.DateTimeField(default=datetime.datetime.now())
-    MessageTitle = models.CharField(max_length=100)
-    MessageBody = models.CharField(max_length=5000)
+    MessageTitle = models.CharField(max_length=100, default='*NO TITLE*')
+    MessageBody = models.CharField(max_length=5000, default=' ')
 
     # def __str__(self):
     #     return self.Sender + ': ' + self.MessageTitle
