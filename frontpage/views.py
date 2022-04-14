@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.utils import timezone
 import datetime
 from django.contrib.auth import get_user_model
-from .models import User, UserGroupJoinTable, UserInfo, Group, Message, UserGroupRequest
+from .models import UserInfo, UserGroupJoinTable, UserInfo, Group, Message, UserGroupRequest
 from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendMessage, SendGroupJoinRequest
 
 # Create your views here.
