@@ -39,6 +39,9 @@
             border-radius: 15px;
             text-align: center;          
         }
+        .line{
+            border-top: 3px solid grey;
+        }
         .arrange{
             display: flex;
             justify-content: space-between;
@@ -76,7 +79,7 @@
                     <table>
                         {% for ownerGroup in ownerGroups %}
                         <tr>
-                            <td><a href="/groupView/{{ownerGroup.id}}">{{ownerGroup.GroupName}}</a></td>
+                            <td><a href="">{{ownerGroup.GroupName}}</a></td>
                         </tr>
                         {% endfor %}
                     </table>
@@ -91,7 +94,9 @@
                             <button type="submit" value="Submit">Submit</button>
                         <h3>Group goals:</h3>
                             
-                        
+                    <div class="line">
+
+                    </div>
                     </div>
                     <div class="group-stats">
                         <h3>Progress of the members in the groups</h3>
