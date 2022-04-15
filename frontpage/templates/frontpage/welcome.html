@@ -165,8 +165,8 @@
                 <img src="{% static 'frontpage/src/Healm-logos_transparentw.png' %}" class="logo" alt="logo">
                 
                 <ul class="nlinks">
-                    <li><a href="info.html">Information</a></li> 
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="{% url 'frontpage/info.html' %}">Information</a></li> 
+                    <li><a href="{% url 'frontpage/contact.html' %}">Contact</a></li>
                 </ul>
             </nav>
              
