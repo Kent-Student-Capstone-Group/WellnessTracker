@@ -5,6 +5,8 @@ import datetime
 from django.contrib.auth import get_user_model
 from .models import UserInfo, UserGroupJoinTable, UserInfo, Group, Message, UserGroupRequest
 from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendMessage, SendGroupJoinRequest
+from django.contrib import messages
+import time
 
 # Create your views here.
 
@@ -117,18 +119,15 @@ def makeGroup(request):
                     NewUserGroupJoin.Group = NewGroup
                     NewUserGroupJoin.User = request.user
                     NewUserGroupJoin.save()
-                #form = MakeGroup(request.POST or None)
-                #form.Owner = request.user
-                #if form.is_valid():
-                    #form.save()
-                    # Code for adding an item to the usergroupjointable
-                    #NewGroup = Group.objects.get(GroupName = "kremlins")
-                    #NewUserGroupJoin = UserGroupJoinTable(User=request.user, Group = NewGroup)
-                    #NewUserGroupJoin.save()
-                    return redirect('frontpage:index')
+                    messages.success(request, 'Group Succesfully Created')
+                    return redirect('frontpage:makegroup')
+                    
                 else:
+                    #messages.warning(request, 'Group Already Exists')
                     return HttpResponse("Invalid Form")
-            return HttpResponse("Group Already Exists")
+            #return HttpResponse("Group Already Exists")
+            messages.warning(request, 'Group Already Exists')
+            return redirect('frontpage:makegroup')
             # groupAlreadyExists = False
             # for e in userCurrentOwnedGroups:
             #     if e.GroupName == form.GroupName:

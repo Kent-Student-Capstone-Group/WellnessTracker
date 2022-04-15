@@ -89,10 +89,22 @@
 
     </header>
   </div>
+
+  {% include 'frontpage/messages.html' %}
+
     {% block content %}
     {% endblock content%}
 
 </body>
 </html>
+
+
+<script>
+  setTimeout(function(){
+    if($('#msg').length > 0){
+      $('#msg').remove();
+    }
+  }, 2)
+</script>
 
 
