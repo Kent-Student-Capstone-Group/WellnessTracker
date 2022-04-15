@@ -143,7 +143,7 @@ def makeGroup(request):
                     #NewGroup = Group.objects.get(GroupName = "kremlins")
                     #NewUserGroupJoin = UserGroupJoinTable(User=request.user, Group = NewGroup)
                     #NewUserGroupJoin.save()
-                    return redirect('frontpage:index')
+                    return redirect('frontpage:group')
                 else:
                     return HttpResponse("Invalid Form")
             return HttpResponse("Group Already Exists")
