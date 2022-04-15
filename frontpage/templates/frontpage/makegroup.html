@@ -1,11 +1,28 @@
 {% extends 'frontpage/base.html' %}
 
 {% block content %}
-<a href="{% url 'frontpage:group' %}">Back to Groups</a>
-<h1>Enter Group Info</h1>
-<form method='POST'>
-    {% csrf_token %}
-    <p>Group Name: </p>{{ form.GroupName }}
-    <input type="submit" value="Save" />
-</form>
+<html>
+    <head>
+        <title>Make a group</title>
+        <meta charset = "UTF-8">
+            <meta content="width=device-width,initial-scale=1" name="viewport" />
+            <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
+            <link rel="shortcut icon" type="image/png" href="src\title_logo.png" />
+            <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
+        <style>
+            *{
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <a href="{% url 'frontpage:group' %}">Back to Groups</a>
+        <h1>Enter Group Info</h1>
+        <form method='POST'>
+            {% csrf_token %}
+            <p>Group Name: </p>{{ form.GroupName }}
+            <input type="submit" value="Save" />
+        </form>
+    </body>
+</html>
 {% endblock content %}
