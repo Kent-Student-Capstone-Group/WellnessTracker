@@ -32,12 +32,14 @@
             <input type="submit" value="Save" />
         </form>
 
-        <ul>
+        <table>
             {% for x in messages %}
-            <li>{{ x.Sender }}: {{ x.MessageTitle }}: {{x.TimeSent}}</li>
-            <li>{{ x.MessageBody }}</li>
+            <tr>
+                <td>{{ x.Sender }}: {{ x.MessageTitle }}: {{x.TimeSent}}</td>
+                <td>{{ x.MessageBody }}</td>
+            </tr>
             {% endfor %}
-        </ul>
+        </table>
 
         <!-- Prob need some kind of loop to show desired number of emails or make it 20 or something-->
 
