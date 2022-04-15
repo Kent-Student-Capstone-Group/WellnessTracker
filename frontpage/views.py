@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.utils import timezone
 import datetime
 from django.contrib.auth import get_user_model
-from .models import UserInfo, UserGroupJoinTable, UserInfo, Group, Message, UserGroupRequest
+from .models import DailyReport, UserInfo, UserGroupJoinTable, UserInfo, Group, Message, UserGroupRequest
 from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendMessage, SendGroupJoinRequest
 
 # Create your views here.
@@ -76,7 +76,21 @@ def dailyReport(request):
         form = DailyReportForm(request.POST or None)
         form.User = request.user
         if form.is_valid():
-            form.save()
+            newDailyReport = DailyReport()
+            newDailyReport.user = request.user
+            newDailyReport.RatingOfDay = request.POST.get("RatingOfDay")
+            newDailyReport.StepsTaken = request.POST.get("StepsTaken")
+            newDailyReport.HoursSitting = request.POST.get("HoursSitting")
+            newDailyReport.HoursSlept = request.POST.get("HoursSlept")
+            newDailyReport.WorkedOut = request.POST.get("WorkedOut")
+            newDailyReport.LengthOfWorkout = request.POST.get("LengthOfWorkout")
+            newDailyReport.IntensityOfWorkout = request.POST.get("IntensityOfWorkout")
+            newDailyReport.MealsEaten = request.POST.get("MealsEaten")
+            newDailyReport.SnacksEaten = request.POST.get("SnacksEaten")
+            newDailyReport.FoodHealth = request.POST.get("FoodHealth")
+            newDailyReport.CigarettesSmoked = request.POST.get("CigarettesSmoked")
+            newDailyReport.AlcoholicDrinks = request.POST.get("AlcoholicDrinks")
+            newDailyReport.save()
             return redirect('frontpage:index')
         return render(request, 'frontpage/dailyreport.html', {'form': form})
     else:
