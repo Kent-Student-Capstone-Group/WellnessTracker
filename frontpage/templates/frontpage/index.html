@@ -22,18 +22,67 @@
 .login_box a:hover {
     background-color: #ddd;
 }
+body{
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+margin: 0;
+}
+.username{
+    font-size: 35px;
+    font-weight: 800;
+    text-align: center;
+}
+.nlinks{
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px;
+}
+a :visited{
+    color: black;
+}
+.fitbit{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: auto;
+    height: 400px;
+    background-color: rgb(143, 188, 143);
+}
+.fitbit div{
+    width: 45%;
+    margin: 0;
+}
+.fitbit img{
+    float: right;
+    width: 80%;
+}
+.fitbit a{
+    border: 2px solid black;
+    background-color: aquamarine;
+    color: black;
+    border-radius: 10px;
+    text-decoration: none;
+    padding: 7px;
+}
 </style>
 <br>
 <body>
     <!--<h1>Healm!</h1>-->
     {% if user.is_authenticated %}
-        <p>Welcome, {{ user.username }}</p>
-        <a target="_black" href="admin">admin</a>
-        <a href="{% url 'frontpage:logout' %}">Logout</a>
-        <a href="{% url 'frontpage:userInfo' %}">User Info Form</a>
-        <a href="{% url 'frontpage:makegroup' %}">Make Group</a>
-        <a href="{% url 'frontpage:searchGroups' %}">Search Groups</a>
-        <a href="{% url 'frontpage:index' %}">Index</a><br>
+        <div class="username">
+            <p>Welcome, {{ user.username }}</p>
+        </div>
+        <div class="nlinks">
+            <a target="_black" href="admin">admin</a>
+            <a href="{% url 'frontpage:logout' %}">Logout</a>
+            <a href="{% url 'frontpage:userInfo' %}">User Info Form</a>
+            <a href="{% url 'frontpage:makegroup' %}">Make Group</a>
+            <a href="{% url 'frontpage:searchGroups' %}">Search Groups</a>
+            <a href="{% url 'frontpage:index' %}">Index</a><br>
+        </div>
         <!-- {% if info %}
         <p>Date of Birth:{{info.DateOfBirth}}</p>
         <p>Height:{{info.HeightFeet}}'{{info.HeightInches}}"</p>
@@ -52,6 +101,16 @@
               </div>
         </section>
         {% endif %} -->
+        <div class="fitbit">
+            <div>
+                <h1>Lets get starting by connecting your Fitbit!!</h1>
+                <p>Get your Statictics fast and easy</p>
+                <a href="upload.html">Connet now</a>
+            </div>
+            <div>
+                <img src="src/index-excercise.jpg" type="img/jpg" alt="excercise pic">
+            </div>
+        </div>
     {% else %}
         {% if google_login %}
             <p>hello</p>
