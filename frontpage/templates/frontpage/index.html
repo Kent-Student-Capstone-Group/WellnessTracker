@@ -85,7 +85,6 @@
         </div>
         <div class="nlinks">
             <a target="_black" href="admin">admin</a>
-            <a href="{% url 'frontpage:logout' %}">Logout</a>
             <a href="{% url 'frontpage:userInfo' %}">User Info Form</a>
             <a href="{% url 'frontpage:makegroup' %}">Make Group</a>
             <a href="{% url 'frontpage:searchGroups' %}">Search Groups</a>
@@ -113,7 +112,7 @@
             <div>
                 <h1>Lets get starting by connecting your Fitbit!!</h1>
                 <p>Get your Statictics fast and easy</p>
-                <a href="upload.html">Connet now</a>
+                <a href="{% url 'frontpage:upload' %}">Connet now</a>
             </div>
             <div>
                 <img src="{% static 'frontpage/src/index-excercise.jpg' %}" type="img/jpg" alt="excercise pic">
