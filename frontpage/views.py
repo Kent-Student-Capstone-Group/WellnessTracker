@@ -82,6 +82,10 @@ def dailyReport(request):
             newDailyReport.StepsTaken = request.POST.get("StepsTaken")
             newDailyReport.HoursSitting = request.POST.get("HoursSitting")
             newDailyReport.HoursSlept = request.POST.get("HoursSlept")
+            if request.POST.get("WorkedOut") == "true":
+                newDailyReport.WorkedOut = True
+            else:
+                newDailyReport.WorkedOut = False
             newDailyReport.WorkedOut = request.POST.get("WorkedOut")
             newDailyReport.LengthOfWorkout = request.POST.get("LengthOfWorkout")
             newDailyReport.IntensityOfWorkout = request.POST.get("IntensityOfWorkout")
