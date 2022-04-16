@@ -25,19 +25,11 @@
             font-size: 40px;
         }
         .report{
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: auto auto auto;
             margin: 10px;
         }
-        .water{
-            border: 5px solid blue;
-            border-radius: 10px;
-        }
-        .steps{
-            border: 5px solid blue;
-            border-radius: 10px;
-        }
-        .calories{
+        .report div{
             border: 5px solid blue;
             border-radius: 10px;
         }
@@ -60,6 +52,19 @@
             </div>
             <div class="calories">
                 <p>Calories you have burnt each day over the week</p>
+            </div>
+            <div class="ex">
+                <p>Number of time you have Excercised</p>
+                <p>Number of times you missed</p>
+            </div>
+            <div class="sleep">
+                <p>Number of hours you have slept</p>
+            </div>
+            <div class="cigar">
+                <p>Number of times you have smoked</p>
+            </div>
+            <div class="drinks">
+                <p>Number of times you've been drunk</p>
             </div>
         </div>
     </body>

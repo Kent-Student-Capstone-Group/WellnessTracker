@@ -34,18 +34,18 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            
             }
             .username{
                 font-size: 35px;
                 font-weight: 800;
                 text-align: center;
+                margin-bottom: 10px;
             }
             .nlinks{
                 width: 100%;
                 text-align: center;
                 margin: 5px;
-                margin-bottom: 15px;
+                margin-bottom: 20px;
             }
             .nlinks a{
                 text-decoration: none;
@@ -83,6 +83,11 @@
                 text-decoration: none;
                 padding: 7px;
                 font-weight: 700;
+            }
+            .fitbit .connect{
+                float: left;
+                margin: 20px;
+                margin-left: 0;
             }
             </style>
             </head>
@@ -123,8 +128,8 @@
             <div class="fitbit">
                 <div>
                     <h1>Lets get starting by connecting your Fitbit</h1>
-                    <div>
-                        <p>Get your Statictics fast and easy</p>
+                    <p>Get your Statictics fast and easy</p>
+                    <div class="connect">
                         <a href="{% url 'frontpage:upload' %}">Connet now</a>
                     </div>
                 </div>
