@@ -38,23 +38,31 @@
       background-color: transparent;
   }
   .head{
+    display: flex;
+    justify-content: center;
     text-align: center;
+    background-color: #cbddff;
+    width: 19%;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
   }
   .row h1{
     font-size: 45px;
     font-weight: 700;
     padding: 15px;
     margin-bottom: 10px;
-    color: #0b0b0b;
+    color: #0a0a0a;
   }
   .base .row {
       display: inline-block;
   }
-  
-  
-
   .base li{
     font-family: Verdana;
+  }
+  .base .row img{
+    width: 100px;
   }
 </style>
 </head>
@@ -63,16 +71,12 @@
     <header>
         <div class="head">
           <div class="row">
-              <a href="{% url 'frontpage:index' %}"><img src="{% static 'frontpage/src/title_logo.png' %}" height="100"></a>
+              <a href="{% url 'frontpage:index' %}"><img src="src/title_logo.png" ></a>
           </div>
           <div class="row">
               <h1>Healm</h1>
           </div>
         </div>
-        <ul>
-            
-            
-        </ul>
         
         <ul>
             <li><a href="{% url 'frontpage:profile' %}">Profile</a></li>
