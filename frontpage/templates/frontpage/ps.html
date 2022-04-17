@@ -8,7 +8,7 @@
     <meta charset = "UTF-8">
         <meta content="width=device-width,initial-scale=1" name="viewport" />
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
-        <link rel="shortcut icon" type="image/png" href="src\title_logo.png" />
+        <link rel="shortcut icon" type="image/png" href="{% load static %}" />
         <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
     </head>
     <style>
@@ -18,20 +18,27 @@
         }
         h1{
             font-size: 50px;
-            color: blue;
+            text-align: center;
         }
-        
-        .right-portion{
+        .ideal{
+            display: flex;
+            justify-content: space-between;
+            width: auto;
+            height: 500px;
+        }
+        .ideal img{
             float: right;
-            width: 85%;
-            height: 100%;
+            width: 50%;
         }
     </style>
     <body>
-        <section class="right-portion">
-            <h1> These are Statistics retrieved from your smart watch!</h1>
-            
-        </section>
+        <h1> These are Statistics retrieved from your smart watch</h1>
+        <div class="ideal">
+            <p>This is your ideal weight according to height:</p>
+            <div>
+                <img src="src/ps.jpg" type="img/jpg" alt="Pic"/>
+            </div>
+        </div>
     </body>
 </html>
 {% endblock content %}
