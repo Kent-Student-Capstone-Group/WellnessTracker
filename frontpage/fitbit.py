@@ -15,13 +15,13 @@ server.browser_authorize()
 #RETRIEVES ACCESS TOKEN AND REFRESH TOKEN FOR AUTHORIZATION
 ACCESS_TOKEN = str(server.fitbit.client.session.token['access_token'])
 REFRESH_TOKEN=str(server.fitbit.client.session.token['refresh_token'])
-auth2_client = fitbit.Fitbit(CLIENT_ID, CLIENT_SECRET, oauth2=True, access_token=ACCESS_TOKEN,refresh_token=REFRESH_TOKEN)
+auth2_client = fitbit.Fitbit(CLIENT_ID, CLIENT_SECRET, access_token=ACCESS_TOKEN, refresh_token=REFRESH_TOKEN, expires_at=604800, redirect_uri="https://healm-fqgvr.ondigitalocean.app/ps/")
 
 #AUTHORIZATION CODE USED FROM https://towardsdatascience.com/using-the-fitbit-web-api-with-python-f29f119621ea
 
 ### Get today's data
-currentDate = datetime.today()
-currentDayData = auth2_client.intraday_time_series()
+currentDate = datetime.date.today()
+
 
 
 ### Get alltime data
