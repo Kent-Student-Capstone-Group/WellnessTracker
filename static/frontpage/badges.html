@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% extends 'frontpage/base.html' %}
+{% load static %}
+{% block content %}
+<html>
+    <head>
+        <title>My Badges</title>
+        
+        <style>
+                *{
+                    font-family: Fredoka;
+                    margin: 0;
+                }
+                h1{
+                    background-color: red;
+                    color: white;
+                    padding: 20px;
+                    margin-bottom: 10px;
+                    text-align: center;
+                }
+                .badges{
+                    text-align: center;
+                    margin: 50px;
+                }
+                .badges h2{
+                    color: aquamarine;
+                    margin: 20px;
+                }
+                .images{
+                    display: grid;
+                    gap: 50px;
+                    grid-template-columns: auto auto auto auto;
+                    padding: 20px;
+                }
+                .images img{
+                    clip-path: circle(40%);
+                    width: 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>My Badges</h1>
+
+        <div class="badges">
+            <h2>You get Badges everytime you complete your goals or surpass your previous records</h2>
+
+            <div class="images">
+                <div>
+                    <img src="{% static 'frontpage/badges/1000Steps.png' %}" type="img/png" alt="1000 steps badge">
+                    <p>1000 steps</p>
+                </div>
+                <div>
+                    <img src="{% static 'frontpage/badges/1000Steps.png' %}" type="img/png" alt="1000 steps badge">
+                    <p>1000 steps</p>
+                </div>
+                <div>
+                    <img src="{% static 'frontpage/badges/1000Steps.png' %}" type="img/png" alt="1000 steps badge">
+                    <p>1000 steps</p>
+                </div>
+                <div>
+                    <img src="{% static 'frontpage/badges/1000Steps.png' %}" type="img/png" alt="1000 steps badge">
+                    <p>1000 steps</p>
+                </div>
+                <div>
+                    <img src="{% static 'frontpage/badges/1000Steps.png' %}" type="img/png" alt="1000 steps badge">
+                    <p>1000 steps</p>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </body>
+
+</html>
+{% endblock content %}

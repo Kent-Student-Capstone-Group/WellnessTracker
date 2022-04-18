@@ -15,14 +15,35 @@ server.browser_authorize()
 #RETRIEVES ACCESS TOKEN AND REFRESH TOKEN FOR AUTHORIZATION
 ACCESS_TOKEN = str(server.fitbit.client.session.token['access_token'])
 REFRESH_TOKEN=str(server.fitbit.client.session.token['refresh_token'])
-auth2_client = fitbit.Fitbit(CLIENT_ID, CLIENT_SECRET, access_token=ACCESS_TOKEN, refresh_token=REFRESH_TOKEN, expires_at=604800, redirect_uri="https://healm-fqgvr.ondigitalocean.app/ps/")
+auth2_client = fitbit.Fitbit(CLIENT_ID, CLIENT_SECRET, access_token=ACCESS_TOKEN, refresh_token=REFRESH_TOKEN)
+#auth2_client = fitbit.Fitbit(CLIENT_ID, CLIENT_SECRET, access_token=ACCESS_TOKEN, refresh_token=REFRESH_TOKEN, expires_at=604800)
+
 
 #AUTHORIZATION CODE USED FROM https://towardsdatascience.com/using-the-fitbit-web-api-with-python-f29f119621ea
 
+### Help commands
+
+# help(auth2_client.intraday_time_series)
+## Intraday time series is what we use to get the data 
+
+
 ### Get today's data
 currentDate = datetime.date.today()
+currentDayData = auth2_client.intraday_time_series('activities/steps', currentDate, detail_level='1min')
+
+time_list = []
+val_list = []
+
+for i in currentDayData["activities-steps-intraday"]["dataset"]:
+    val_list.append(i['value'])
+    time_list.append(i['time'])
+
+stepdf = pd.DataFrame({'Steps':val_list, 'Time':time_list})
 
 
+#filename = currentDayData['activities-steps-intraday'][0]['dateTime'] +'_intraday'
+
+#stepdf.to_csv(filename + '.csv', index = False)
 
 ### Get alltime data
 

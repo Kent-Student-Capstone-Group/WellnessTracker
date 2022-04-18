@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% extends 'frontpage/base.html' %}
+
+{% block content %}
+<html>
+    <head>
+    <title>Daily Report</title>
+        <meta charset = "UTF-8">
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" type="image/png" href="{% load static %}" />
+        <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
+    <style>
+        *{
+            font-family: Fredoka;
+            margin: 0;
+        }
+        .header{
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-align: center;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .results{
+            background-color: rgb(255, 160, 122);
+            text-align: center;
+        }
+        .results p{
+            font-size: 35px;
+        }
+        .items{
+            background-color: rgb(245, 255, 250);
+            display: grid;
+            grid-template-columns: auto auto auto;
+            border-radius: 2px solid white;
+            padding: 5px;
+            margin: 5px;
+            border-radius: 15px;
+        }
+    </style>
+    </head>
+    
+    <body>
+        <div class="header">
+            <h1>Daily report</h1>
+        </div>
+        <div class="results">
+            <p><b>These are your Statistics for today</b></p>
+            <form method='POST'>
+                {% csrf_token %}
+                <div class="items">
+                    {{ form.as_p }}
+                </div>
+                <input type="submit" value="Save" />
+            </form>
+        </div>
+
+    </body>
+</html>
+{%endblock content%}
