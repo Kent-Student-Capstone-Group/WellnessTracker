@@ -2,8 +2,12 @@
 {% load static %}
 <html>
 <head>
-  <link rel="icon" type="image/png" href="{% static 'frontpage/src/title_logo.ico' %}"/>
+  <meta charset = "UTF-8">
+  <meta content="width=device-width,initial-scale=1" name="viewport" />
+  <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
   <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'frontpage/src/title_logo.ico' %}" />
+
 <style>
   *{
     margin: 0;
@@ -29,8 +33,7 @@
     text-decoration: none;
   }
   
-  .base li a:hover {
-    
+  .base li a:hover {  
     background-color: rgb(11, 11, 11);
     text-decoration: underline rgba(249, 41, 41, 0.707);
   }
@@ -73,9 +76,7 @@
     <header>
         <div class="head">
           <div class="row">
-              <a href="{% url 'frontpage:index' %}">
-                <img src="{% static 'frontpage/src/Healm-logos_transparent.png' %}" type="img/png" alt="OOPS">
-              </a>
+              <a href="{% url 'frontpage:index' %}"><img src="{% static 'frontpage/src/title_logo.png' %}" ></a>
           </div>
           <div class="row">
               <h1>Healm</h1>
@@ -102,18 +103,17 @@
 
     {% block content %}
     {% endblock content%}
-  <script>
-  setTimeout(function(){
-    if($('msg').length > 0){
-      $('msg').remove();
-    }
-  }, 2)
-</script>
 
 </body>
 </html>
 
 
-
+<script>
+  setTimeout(function(){
+    if($('#msg').length > 0){
+      $('#msg').remove();
+    }
+  }, 2)
+</script>
 
 
