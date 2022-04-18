@@ -62,15 +62,16 @@
                 clip-path: circle(40%);
                 width: 10%;
             }
+            a{
+                color: blue;
+            }
             a:hover{
                 color: red;
             }
             a:active{
                 color: rgb(61, 241, 16);
             }
-            a:visited{
-                color: black;
-            }    
+            
             h1{
                 font-size: 50px;
                 color: red;
@@ -98,6 +99,7 @@
                     <li><a href="#">Backup</a></li>
                     <li><a href="#">Delete your data</a></li>
                     <li><a href="#">Badges time cycle</a></li>
+                    <li><a target="_black" href="{% url 'admin:index' %}">Admin</a></li>
                 </ul>
             </div>
         </div>

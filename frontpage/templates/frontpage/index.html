@@ -131,11 +131,7 @@
                 <p>Welcome, {{ user.username }}</p>
             </div>
             <div class="nlinks">
-                <a target="_black" href="{% url 'admin:index' %}">admin</a>
-                <a href="{% url 'frontpage:userInfo' %}">User Info Form</a>
-                <a href="{% url 'frontpage:makegroup' %}">Make Group</a>
-                <a href="{% url 'frontpage:searchGroups' %}">Search Groups</a>
-                <a href="{% url 'frontpage:index' %}">Index</a><br>
+                
             </div>
             <!-- {% if info %}
             <p>Date of Birth:{{info.DateOfBirth}}</p>
@@ -160,7 +156,7 @@
                     <h1>Lets get starting by connecting your Fitbit</h1>
                     <p>Get your Statictics fast and easy</p>
                     <div class="connect">
-                        <a href="{% url 'frontpage:upload' %}">Connet now</a>
+                        <a href="{% url 'frontpage:upload' %}">Connect now</a>
                     </div>
                 </div>
                 <div>
@@ -172,7 +168,7 @@
 
             <div class="result">
                 <div>
-                    <img src="src/ps.jpg" type="img/jpg"/>
+                    <img src="{% static 'frontpage/src/ps.jpg' %}" type="img/jpg"/>
                 </div>
                 <div class="left">
                     <h1>The ideal weight recommended for your height</h1>

@@ -23,8 +23,8 @@ class UserInfo(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     UserSteps = models.IntegerField(blank=1, null=True)
 
-    # def __str__(self):
-    #     return self.FirstName + ' ' + self.LastName
+    def __str__(self):
+        return self.User.username
 
 class Group(models.Model):
     Owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -42,8 +42,8 @@ class Chat(models.Model):
     MessageTitle = models.CharField(max_length=100, null=True)
     MessageBody = models.CharField(max_length=5000, null=True)
 
-    # def __str__(self):
-    #     return self.Sender + ': ' + self.MessageTitle
+    def __str__(self):
+        return self.Sender.username + ' to ' + self.Recipient.username + ': ' + self.MessageTitle
 
 class DailyReport(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
@@ -61,8 +61,8 @@ class DailyReport(models.Model):
     CigarettesSmoked = models.IntegerField(blank=1, null=True)
     AlcoholicDrinks = models.IntegerField(blank=1, null=True)
 
-    # def __str__(self):
-    #     return self.User.FirstName + self.User.LastName + ":" + self.DateAndTime
+    def __str__(self):
+        return self.User.username + ":" + self.DateAndTime
 
 class UserGroupRequest(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -71,16 +71,16 @@ class UserGroupRequest(models.Model):
     STATUS_CHOICES = [('R', 'Request'), ('I', 'Invite')]
     Status = models.CharField(max_length=1, choices=STATUS_CHOICES, null=True)
 
-    # def __str__(self):
-    #     return self.User.FirstName + self.User.LastName + ":" + self.Group.GroupName
+    def __str__(self):
+        return self.User.username + ":" + self.Group.GroupName
 
 class UserGroupJoinTable(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     Group = models.ForeignKey(Group, on_delete=models.CASCADE)
     DateJoined = models.DateTimeField(default=datetime.datetime.now())
 
-    # def __str__(self):
-    #     return self.User.FirstName + self.User.LastName + ":" + self.Group.GroupName
+    def __str__(self):
+        return self.User.username + ":" + self.Group.GroupName
 
 class MetalsTable(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -92,3 +92,6 @@ class MetalsTable(models.Model):
     TeamWork = models.BooleanField(default=False)
     Teamleader = models.BooleanField(default=False)
     ReachedTeamGoal = models.BooleanField(default=False)
+
+    def __str__(self):
+        return "Medals: " + self.User.username
