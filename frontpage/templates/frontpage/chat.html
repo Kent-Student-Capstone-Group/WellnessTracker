@@ -23,6 +23,26 @@
             padding: 20px;
             margin-bottom: 10px;
         }
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+          }
+          
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        th{
+            border-bottom: 3px solid #000000;
+            background-color: #999999;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #dddddd;
+        }
     </style>
     <body>
         <h1>Send Message to your group members</h1>
@@ -33,9 +53,12 @@
         </form>
 
         <table>
-            {% for x in messages %}
             <tr>
-                <td>{{ x.Sender }}: {{ x.MessageTitle }}: {{x.TimeSent}}</td>
+                <th colspan="2">Your Messages</th>
+            </tr>
+            {% for x in chats %}
+            <tr>
+                <td>{{ x.Sender }}:{{ x.MessageTitle }}: {{x.TimeSent}}</td>
                 <td>{{ x.MessageBody }}</td>
             </tr>
             {% endfor %}

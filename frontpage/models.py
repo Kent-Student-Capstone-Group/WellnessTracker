@@ -35,7 +35,7 @@ class Group(models.Model):
     def __str__(self):
         return self.GroupName
 
-class Message(models.Model):
+class Chat(models.Model):
     Sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='Sender', null=True)
     Recipient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='Recipient', null=True)
     TimeSent = models.DateTimeField(default=datetime.datetime.now())

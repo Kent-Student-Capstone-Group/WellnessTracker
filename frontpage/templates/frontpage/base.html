@@ -102,17 +102,18 @@
 
     {% block content %}
     {% endblock content%}
+  <script>
+  setTimeout(function(){
+    if($('msg').length > 0){
+      $('msg').remove();
+    }
+  }, 2)
+</script>
 
 </body>
 </html>
 
 
-<script>
-  setTimeout(function(){
-    if($('#msg').length > 0){
-      $('#msg').remove();
-    }
-  }, 2)
-</script>
+
 
 

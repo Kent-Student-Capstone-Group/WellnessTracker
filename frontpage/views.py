@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.utils import timezone
 import datetime
 from django.contrib.auth import get_user_model
-from .models import DailyReport, UserInfo, UserGroupJoinTable, UserInfo, Group, Message, UserGroupRequest
-from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendMessage, SendGroupJoinRequest
+from .models import DailyReport, UserInfo, UserGroupJoinTable, UserInfo, Group, Chat, UserGroupRequest
+from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendChat, SendGroupJoinRequest
 from django.contrib import messages
 import time
 
@@ -59,13 +59,13 @@ def createUserInfo(request):
 
 def chat(request):   
     if (request.user.is_authenticated):
-        messages = Message.objects.filter(Recipient=request.user)
-        form = SendMessage(request.POST or None)
+        chats = Chat.objects.filter(Recipient=request.user)
+        form = SendChat(request.POST or None)
         if form.is_valid():
-            newMessage = Message(Sender = request.user, MessageTitle = request.POST.get("MessageTitle"), MessageBody = request.POST.get("MessageBody"))
-            newMessage.Recipient = request.POST.get("Recipient")
-            newMessage.save()
-        return render(request, 'frontpage/chat.html', {'messages': messages, 'form': form})
+            newChat = Chat(Sender = request.user, MessageTitle = request.POST.get("MessageTitle"), MessageBody = request.POST.get("MessageBody"))
+            newChat.Recipient = request.POST.get("Recipient")
+            newChat.save()
+        return render(request, 'frontpage/chat.html', {'chats': chats, 'form': form})
     
     else:
         return HttpResponse("Not Authenticated")
