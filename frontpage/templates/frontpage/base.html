@@ -70,6 +70,35 @@
   .base .row img{
     width: 100px;
   }
+  footer{
+    width: auto;
+    height: 150px;
+    font-size: 18px;
+    background-color: rgb(0, 139, 139);
+    font-weight: 700;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  footer ul{
+    list-style: none;
+    line-height: 2em;
+  }
+  footer ul a{
+    text-decoration: none;
+    color: #0a0a0a;
+  }
+  footer ul a:hover{
+    border-bottom: 3px solid red;
+  }
+  .kent img{
+    width: 300px;
+  }
+  .line{
+    border-right: 5px solid rgb(143, 188, 143);
+    border-radius: 5px;
+    height: 90%;
+  }
 </style>
 </head>
 <body>
@@ -106,6 +135,18 @@
     {% endblock content%}
 
 </body>
+<footer>
+  <div class="info">
+    <ul>
+      <li><a href="{% url 'frontpage:info' %}">Information</a></li>
+      <li><a href="{% url 'frontpage:contact' %}">Contact</a></li>
+    </ul>
+  </div>
+  <div class="line"></div>
+  <div class="kent">
+    <img src="src/kent_logo.png" type="img/png" alt="Kent logo"/>
+  </div>
+</footer>
 </html>
 
 
