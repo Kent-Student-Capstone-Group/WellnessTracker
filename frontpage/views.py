@@ -212,19 +212,34 @@ def searchGroups(request):
 
 def groupView(request, group_id):
     group_id = int(group_id)
-    if(request.method == "POST"):
-        djangoUser = get_user_model().objects.get(id=request.POST.get("User"))
-        NewUserGroupJoin = UserGroupJoinTable()
-        NewUserGroupJoin.User = djangoUser
-        NewUserGroupJoin.Group = Group.objects.get(id=group_id)
-        NewUserGroupJoin.DateJoined = datetime.datetime.now()
-        NewUserGroupJoin.save()
-        UserGroupRequest.objects.get(User=djangoUser, Group=Group.objects.get(id = group_id)).delete()
-    
     try:
         group_sel = Group.objects.get(id = group_id)
     except Group.DoesNotExist:
         return redirect('index')
+
     groupMembers = UserGroupJoinTable.objects.filter(Group = group_sel)
-    groupRequests = UserGroupRequest.objects.filter(Group = group_sel)
-    return render(request, 'frontpage/groupView.html', {'group':group_sel, 'groupMembers':groupMembers, 'groupRequests':groupRequests})
+    if group_sel.Owner == request.user:
+        if(request.method == "POST"):
+            djangoUser = get_user_model().objects.get(id=request.POST.get("User"))
+            NewUserGroupJoin = UserGroupJoinTable()
+            NewUserGroupJoin.User = djangoUser
+            NewUserGroupJoin.Group = Group.objects.get(id=group_id)
+            NewUserGroupJoin.DateJoined = datetime.datetime.now()
+            NewUserGroupJoin.save()
+            UserGroupRequest.objects.get(User=djangoUser, Group=Group.objects.get(id = group_id)).delete()
+        
+        groupRequests = UserGroupRequest.objects.filter(Group = group_sel)
+        return render(request, 'frontpage/groupView.html', {'group':group_sel, 'groupMembers':groupMembers, 'groupRequests':groupRequests})
+    try:
+        groupUser = groupMembers.get(User=request.user)
+        return render(request, 'frontpage/groupView.html', {'group':group_sel, 'groupMembers':groupMembers})
+    except :
+        if(request.method == "POST"):
+            newGroupRequest = UserGroupRequest()
+            newGroupRequest.Group = group_sel
+            newGroupRequest.User = request.user
+            newGroupRequest.TimeOfRequest = datetime.datetime.now()
+            newGroupRequest.Status = 'R'
+            newGroupRequest.save()
+            return HttpResponse("Request Sent!")
+        return render(request, 'frontpage/groupView.html', {'group':group_sel})
