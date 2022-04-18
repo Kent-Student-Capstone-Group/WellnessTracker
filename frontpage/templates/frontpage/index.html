@@ -132,7 +132,7 @@
                 <p>Welcome, {{ user.username }}</p>
             </div>
             <div class="nlinks">
-                <a target="_black" href="admin">admin</a>
+                <a target="_black" href="{% url 'admin:index %}">admin</a>
                 <a href="{% url 'frontpage:userInfo' %}">User Info Form</a>
                 <a href="{% url 'frontpage:makegroup' %}">Make Group</a>
                 <a href="{% url 'frontpage:searchGroups' %}">Search Groups</a>
@@ -203,7 +203,7 @@
             {% else %}
             <p>hello</p>
             <a href="{% provider_login_url 'google' %}">Login With Google</a>
-            <a href="admin">admin</a>
+            <a href="{% url 'admin:index' %}">admin</a>
             {% endif %}
 
         {% endif %}
