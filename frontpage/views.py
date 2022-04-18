@@ -108,7 +108,16 @@ def group(request):
     context = {
         'userGroups': UserGroupJoinTable.objects.filter(User = user),
         'ownerGroups': Group.objects.filter(Owner = request.user),
+        'invites': UserGroupRequest.objects.filter(User=request.user, Status='I'),
     }
+    if request.method=="POST":
+            NewUserGroupJoin = UserGroupJoinTable()
+            NewUserGroupJoin.User = request.user
+            NewUserGroupJoin.Group = Group.objects.get(id=request.POST.get("Group"))
+            NewUserGroupJoin.DateJoined = datetime.datetime.now()
+            NewUserGroupJoin.save()
+            UserGroupRequest.objects.get(User=request.user, Group=Group.objects.get(id = request.POST.get("Group"))).delete()
+
     return render(request, 'frontpage/group.html', context)
 
 def groupstat(request):   
@@ -194,15 +203,6 @@ def weekreport(request):
     return render(request, 'frontpage/weekreport.html')
 
 def searchGroups(request):
-    if(request.method == "POST"):
-        newGroupRequest = UserGroupRequest()
-        newGroupRequest.Group = Group.objects.get(id=request.POST.get("Group"))
-        newGroupRequest.User = request.user
-        newGroupRequest.TimeOfRequest = datetime.datetime.now()
-        newGroupRequest.Status = 'R'
-        newGroupRequest.save()
-        return HttpResponse("Request Sent!")
-    else:
         try:
             sendRequest = SendGroupJoinRequest()
             groups = Group.objects.all()
@@ -243,3 +243,26 @@ def groupView(request, group_id):
             newGroupRequest.save()
             return HttpResponse("Request Sent!")
         return render(request, 'frontpage/groupView.html', {'group':group_sel})
+
+
+def addUsers(request, group_id):
+    group_id = int(group_id)
+    allUsers = get_user_model().objects.all()
+    allUsers = allUsers.exclude(id=request.user.id)
+    try:
+        group_sel = Group.objects.get(Owner=request.user, id=group_id)
+    except Group.DoesNotExist:
+        return HttpResponse("OOPS!")
+    if request.method == "POST":
+        djangoUser = get_user_model().objects.get(id=request.POST.get("User"))
+        newGroupRequest = UserGroupRequest()
+        newGroupRequest.Group = group_sel
+        newGroupRequest.User = djangoUser
+        newGroupRequest.TimeOfRequest = datetime.datetime.now()
+        newGroupRequest.Status = 'I'
+        newGroupRequest.save()
+        return HttpResponse("Invite Sent!")
+    return render(request, 'frontpage/addUsers.html', {'allUsers':allUsers})
+
+
+

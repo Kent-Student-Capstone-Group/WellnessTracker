@@ -90,6 +90,10 @@
     
     <body>
         <h1>Groups</h1>
+        <h3>Pending Invites:</h3>
+            {% for invite in invites %}
+                <form method="POST">{% csrf_token %} {{invite.Group.GroupName}}<input type="hidden" name="Group" value="{{invite.Group.id}}"><input type="submit" value="Accept"></form>
+            {% endfor %}
         <div class="newg">
             <a href="#">Join a group</a>
             <a href="{% url 'frontpage:makegroup' %}">Make a New Group</a>
@@ -141,7 +145,7 @@
                     <table>
                         {% for userGroup in userGroups %}
                         <tr>
-                            <td><a href="">{{userGroup.Group.GroupName}}</a></td>
+                            <td><a href="{% url 'frontpage:groupView' userGroup.Group.id %}">{{userGroup.Group.GroupName}}</a></td>
                         </tr>
                         {% endfor %}
                     </table>
