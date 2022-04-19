@@ -2,14 +2,24 @@
 {% load static %}
 <html>
 <head>
+  <meta charset = "UTF-8">
+  <meta content="width=device-width,initial-scale=1" name="viewport" />
+  <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
+  <link rel ="stylesheet" type="text/css" href="{% static 'frontpage/messages.css' %}"/>
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'frontpage/src/title_logo.ico' %}" />
+
 <style>
+  *{
+    margin: 0;
+  }
   .base ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     border: 1px solid #e7e7e7;
-    background-color: #f3f3f3;
+    background: linear-gradient(to top, #99ffcc 0%, #0033cc 100%);
   }
   
   .base li {
@@ -18,57 +28,134 @@
   
   .base li a {
     display: block;
-    color: #666;
+    color: rgb(249, 246, 246);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
   }
   
-  .base li a:hover {
-    background-color: #ddd;
+  .base li a:hover {  
+    background-color: rgb(11, 11, 11);
+    text-decoration: underline rgba(249, 41, 41, 0.707);
   }
-  
+  .base h1{
+      font-family: Verdana;
+      background-color: transparent;
+  }
+  .head{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background-color: #cbddff;
+    width: 99%;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .row h1{
+    font-size: 45px;
+    font-weight: 700;
+    padding: 15px;
+    margin-bottom: 10px;
+    color: #0a0a0a;
+  }
   .base .row {
       display: inline-block;
   }
-  
-  .base h1, li{
-      font-family: Verdana;
+  .base li{
+    font-family: Verdana;
   }
-
+  .base .row img{
+    width: 100px;
+  }
+  footer{
+    width: auto;
+    height: 150px;
+    font-size: 18px;
+    background-color: rgb(0, 139, 139);
+    font-weight: 700;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  footer ul{
+    list-style: none;
+    line-height: 2em;
+  }
+  footer ul a{
+    text-decoration: none;
+    color: #0a0a0a;
+  }
+  footer ul a:hover{
+    border-bottom: 3px solid red;
+  }
+  .kent img{
+    width: 300px;
+  }
+  .line{
+    border-right: 5px solid rgb(143, 188, 143);
+    border-radius: 5px;
+    height: 90%;
+  }
 </style>
 </head>
 <body>
   <div class="base">
     <header>
-        <div class="row">
-            <img src="frontpage/templates/frontpage/src/title_logo.png" height="100">
+        <div class="head">
+          <div class="row">
+              <a href="{% url 'frontpage:index' %}"><img src="{% static 'frontpage/src/title_logo.png' %}" ></a>
+          </div>
+          <div class="row" style="text-align: center">
+              <h1>Healm</h1>
+          </div>
         </div>
-        <div class="row">
-            <h1>Healm</h1>
-        </div>
-        <ul>
-            
-            
-        </ul>
         
         <ul>
             <li><a href="{% url 'frontpage:profile' %}">Profile</a></li>
             <li><a href="{% url 'frontpage:ps' %}">Personal Stats</a></li>
+            <li><a href="{% url 'frontpage:dailyreport' %}">Daily Report</a></li>
+            <li><a href="{% url 'frontpage:upload' %}">Upload</a></li>
             <li><a href="{% url 'frontpage:group' %}">Groups</a></li>
             <li><a href="{% url 'frontpage:chat' %}">Chat</a></li>
             <li><a href="{% url 'frontpage:weekreport' %}">Weekly Report</a></li>
+            <li><a href="{% url 'frontpage:settings' %}">Settings</a></li>
+            <li><a href="{% url 'frontpage:badges' %}">Badges</a></li>
             <li style="float:right"><a href="{% url 'frontpage:logout' %}">Logout</a></li>
         </ul>
 
     </header>
   </div>
 
+  {% include 'frontpage/messages.html' %}
+
     {% block content %}
     {% endblock content%}
 
-
 </body>
+<footer>
+  <div class="info">
+    <ul>
+      <li><a href="{% url 'frontpage:info' %}">Information</a></li>
+      <li><a href="{% url 'frontpage:contact' %}">Contact</a></li>
+    </ul>
+  </div>
+  <div class="line"></div>
+  <div class="kent">
+    <img src="{% static 'frontapge/src/kent_logo.png' %}" type="img/png" alt="Kent logo"/>
+  </div>
+</footer>
 </html>
+
+
+<script>
+  setTimeout(function(){
+    if($('#msg').length > 0){
+      $('#msg').remove();
+    }
+  }, 2)
+</script>
 
 
