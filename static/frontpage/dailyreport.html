@@ -8,31 +8,60 @@
         <meta charset = "UTF-8">
         <meta content="width=device-width,initial-scale=1" name="viewport" />
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
+<<<<<<< HEAD
         <link rel="shortcut icon" type="image/png" href="src\title_logo.png" />
+=======
+        <link rel="shortcut icon" type="image/png" href="{% load static %}" />
+>>>>>>> 87b4ab9be86b94a4e92d57fe56194a9b43d1649c
         <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
     <style>
         *{
             font-family: Fredoka;
             margin: 0;
         }
+<<<<<<< HEAD
         h1{
             font-size: 40px;
             background-color: aqua;
             color: red;
+=======
+        .header{
+            font-weight: 700;
+>>>>>>> 87b4ab9be86b94a4e92d57fe56194a9b43d1649c
             margin-bottom: 10px;
             text-align: center;
             padding: 10px;
             margin-bottom: 10px;
+<<<<<<< HEAD
 
         }
         .right-portion h1{
             background-color: white;
             color: aquamarine;
+=======
+        }
+        .results{
+            background-color: rgb(255, 160, 122);
+            text-align: center;
+        }
+        .results p{
+            font-size: 35px;
+        }
+        .items{
+            background-color: rgb(245, 255, 250);
+            display: grid;
+            grid-template-columns: auto auto auto;
+            border-radius: 2px solid white;
+            padding: 5px;
+            margin: 5px;
+            border-radius: 15px;
+>>>>>>> 87b4ab9be86b94a4e92d57fe56194a9b43d1649c
         }
     </style>
     </head>
     
     <body>
+<<<<<<< HEAD
         <h1>Daily report</h1>
 
         <form method='POST'>
@@ -46,6 +75,20 @@
             <div class="">
                 
             </div>
+=======
+        <div class="header">
+            <h1>Daily report</h1>
+        </div>
+        <div class="results">
+            <p><b>These are your Statistics for today</b></p>
+            <form method='POST'>
+                {% csrf_token %}
+                <div class="items">
+                    {{ form.as_p }}
+                </div>
+                <input type="submit" value="Save" />
+            </form>
+>>>>>>> 87b4ab9be86b94a4e92d57fe56194a9b43d1649c
         </div>
 
     </body>

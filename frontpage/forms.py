@@ -1,5 +1,5 @@
 from django import forms
-from .models import DailyReport, UserInfo, Group, Message, UserGroupJoinTable, UserGroupRequest
+from .models import DailyReport, UserInfo, Group, Chat, UserGroupJoinTable, UserGroupRequest
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -41,9 +41,9 @@ class DailyReportForm(forms.ModelForm):
             'AlcoholicDrinks'
         ]
 
-class SendMessage(forms.ModelForm):
+class SendChat(forms.ModelForm):
     class Meta:
-        model = Message
+        model = Chat
         fields=[
             'Recipient',
             'MessageTitle',

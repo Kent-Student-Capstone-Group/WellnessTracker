@@ -1,27 +1,39 @@
+{% load static %}
+
 <!DOCTYPE html>
 
 <html>
     <head>
         <title>Contact</title>
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
-        <link rel="shortcut icon" type="image/png" href="src\title_logo.png" />
         <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'frontpage/src/title_logo.ico' %}" />
     <style>
-        html{
+        *{
             font-family: Fredoka;
             text-align: center;
+            margin: 0;
         }
-        h1{
-            color: aqua;
+        .head{
+                width: 100%;
+                height: 100px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #D3D3D3;
+                color: black;
+        }
+        .head img{
+            width: 100px;
         }
         .cardlist{
             display: grid;
             grid-template-columns: auto auto auto;
-            gap: 10px;
+            gap: 30px;
             margin: 15px;
         }
         .card {
-            border: 4px solid;
+            border: 4px solid rgb(143, 143, 250);
             border-radius: 15px;
         }
 
@@ -30,8 +42,13 @@
             width: 100%;
         }
 
+        .title{
+            font-size: 18px;
+            padding: 15px;
+        }
         .card__content {
             flex: 1;
+            color: white;
         }
         li{
             list-style: none;
@@ -42,8 +59,17 @@
     </head>
     
     <body>
-        <h1>Team Healm!! </h1>
-        <h2>We are group of 6 members and our contact details</h2>
+        <section>
+            <div class="head">
+                <div>
+                    <img src="{% static 'frontpage\src\Healm-logos_black2.png' %}" type="img/png" alt="Healm logo">
+                </div>
+                <h1>Team Healm</h1>
+            </div>
+        </section>
+        <div class="title">
+            <h2>We are a group of 6 members and our contact details</h2>
+        </div>
         <div class="cardlist">
             <div class="card">   
                 
@@ -118,6 +144,14 @@
                 </div>
                 <i> dlattibe@kent.edu </i> 
             </div>
+        </div>
+        <div class="group">
+            <h2>Group email:</h2>
+            <i>healmteam@protonmail.com </i>
+        </div>
+        <div class="prof">
+            <h2>Dr.Samba Augustine</h2>
+            <i> asamba@kent.edu</i>
         </div>
     </body>
 </html>

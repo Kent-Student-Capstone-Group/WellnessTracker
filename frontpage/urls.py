@@ -27,5 +27,6 @@ urlpatterns = [
     path('weekreport/', views.weekreport, name='weekreport'), 
     path('welcome/', views.welcome, name='welcome'), 
     path('searchGroups/', views.searchGroups, name='searchGroups'),
-    path('groupView/<int:group_id>', views.groupView)
+    path('groupView/<int:group_id>', views.groupView, name='groupView'),
+    path('addUsers/<int:group_id>', views.addUsers, name='addUsers'),
 ]

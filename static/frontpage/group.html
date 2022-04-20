@@ -8,19 +8,153 @@
     <meta charset = "UTF-8">
         <meta content="width=device-width,initial-scale=1" name="viewport" />
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" type="image/png" href="{% load static %}" />
+        <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body>
-        <section>
-            <div class="group">
-                
-            </div>
-        </section>
-        <section>
-            <div class="join-group">
-                
-            </div>
-        </section>
+    <style>
+        *{
+            font-family: Fredoka;
+            text-align: center;
+            margin: 0;
+        }
+        h1{
+            background-color: rgb(0, 255, 145);
+            color: antiquewhite;
+            font-size: 40px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .newg{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: auto;
+            margin: 15px;
+        }
+        .newg a{
+            border: 5px solid rgb(30, 251, 225);
+            color: rgb(17, 18, 18);
+            text-decoration: none;
+            font-size: 30px;
+            border-radius: 15px;
+            text-align: center;          
+        }
+        .line{
+            border-top: 3px solid grey;
+        }
+        .arrange{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .owner{
+            border: 4px solid rgb(20, 247, 20);
+            border-radius: 10px;
+            padding: 5px;
+            margin: 10px;
+            background-color: rgb(248, 246, 244);
+        }
+        .member{
+            border: 4px solid rgb(30, 249, 30);
+            border-radius: 10px;
+            padding: 5px;
+            margin: 10px;
+            background-color: rgb(255, 252, 248);
+        }
+        .search{
+            float: right;
+        }
+        .search input[type=text] {
+            padding: 6px;
+            margin-top: 8px;
+            font-size: 17px;
+            border: none;
+        }
+        .search button {
+            float: right;
+            padding: 6px 10px;
+            margin-top: 8px;
+            margin-right: 16px;
+            background: #ddd;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+        }
+        .search input[type=text] {
+            border: 1px solid #ccc;  
+        }
+    </style>
 
+    
+    <body>
+        <h1>Groups</h1>
+        <h3>Pending Invites:</h3>
+            {% for invite in invites %}
+                <form method="POST">{% csrf_token %} {{invite.Group.GroupName}}<input type="hidden" name="Group" value="{{invite.Group.id}}"><input type="submit" value="Accept"></form>
+            {% endfor %}
+        <div class="newg">
+            <a href="#">Join a group</a>
+            <a href="{% url 'frontpage:searchGroups' %}">Search Groups</a>
+            <a href="{% url 'frontpage:makegroup' %}">Make a New Group</a>
+            <div class="search">
+                <form action="/action_page.php">
+                  <input type="text" placeholder="Search for a group" name="search">
+                  <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="arrange">
+            
+            <div class="owner">
+                    <h3>You are the Owner of these groups:</h3>
+                    <table>
+                        {% for ownerGroup in ownerGroups %}
+                        <tr>
+                            <td><a href="/groupView/{{ownerGroup.id}}">{{ownerGroup.GroupName}}</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <div class="group-goals">
+                        <h3>Set a New Goal:</h3>
+                            <select>
+                                <option value=""></option>
+                                <option value="3000 steps">3000 Steps in a day</option>
+                                <option value="2 hours">2 hours excersizing everyday.</option>
+                                <option value="Custom goal">Custom goal</option>
+                            </select>
+                            <button type="submit" value="Submit">Submit</button>
+                        <h3>Group goals:</h3>
+                            
+                    <div class="line">
+
+                    </div>
+                    </div>
+                    <div class="group-stats">
+                        <h3>Progress of the members in the groups</h3>
+                        <table>
+                            <td>member name</td>
+                            <td>member name</td>
+                            <td>member name</td>
+                            <td>member name</td>
+                        </table>
+                    </div> 
+            </div>
+            <div class="member">
+                    <h3>You are a member of these Groups:</h3>
+                    <table>
+                        {% for userGroup in userGroups %}
+                        <tr>
+                            <td><a href="{% url 'frontpage:groupView' userGroup.Group.id %}">{{userGroup.Group.GroupName}}</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <h3>Other members in the group:</h3>
+            </div> 
+        </div>
+          
+        
     </body>
 </html>
 

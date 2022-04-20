@@ -1,0 +1,7 @@
+{% block content %}
+    {% for user in allUsers %}
+        <div>
+            <form method="POST">{{user.username}}{% csrf_token %}<input type="hidden" name="User" value="{{user.id}}"/> <input type="submit" value="Send Invite" /></p></form>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,55 +1,117 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
     <head>
         <title>Information</title>
 
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
-        <link rel="shortcut icon" type="image/png" href="src\title_logo.png" />
         <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'frontpage/src/title_logo.ico' %}" />
         <style>
-            html, body, h1{
-                text-align: center;
+            *{
                 font-family: Fredoka;
                 margin: 0;
             }
             h1{
-                background-color: rgb(38, 247, 247);
-                color: rgb(247, 66, 21);
                 padding: 15px;
                 margin-bottom: 10px;
             }
+            .head{
+                width: 100%;
+                height: 100px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #D3D3D3;
+                color: black;
+            }
+            .head img{
+                width: 100px;
+            }
             h2{
                 padding: 10px;
-                color: rgb(38, 247, 247);
             }
             .border{
-                border-radius: 25px;
-                border: 5px solid #264ece;
                 padding: 20px;
+                text-align: center;
             }
-            p{
+            .border p{
                 font-size: 20px;
+            }
+            .feature{
+                padding: 10px;
+                font-size: 18px;
+            }
+            .feature ul{
+                list-style-type: circle;
+            }
+            .line{
+                border: 2px solid grey;
+                width: 100%;
+            }
+            .stake{
+                width: auto;
+                height: 300px;
+            }
+            .stake img{
+                width: 20%;
             }
             </style>
     </head>
     <body>
-        <div class="header">
-            <h1>Information on the Project Healm</h1>
-        </div>
-        
-        <h2>The Project - Healm</h2>
-        <p class="border">
-            Our website - "Healm" will allow the user to record their day to day by keeping track of actions and how these actions affect their physical and mental well being over time. 
-            Users will be able to create new actions that repeat over some time interval, 
-            and over each time interval the user will enter relevant data related to that action. 
-            ome data will likely be fixed for any created actions, such as ranking how one feels mentally or physically on a scale of 1-10, and possibly an area for notes that can expand on nuances not able to be expressed through a simple numerical scale. 
-            The ability to create custom data fields may be desirable as well. The goal here is to give users a better understanding of how various actions affect their lives on a day to day,
-            as well as long term, basis in a more concrete and analytical way.
-            Functionality to create groups may be added later, wherein certain actions will be ascribed by the group owner to its
-            members, and the effects of these actions can be analyzed by said owner. This may possibly be of utility to those conducting research, 
-            or even in a less professional setting like a personal trainer keeping track of how effective their exercise regimen is for their clients.
-        </p>
-
-
+        <section>
+            <div class="head">
+                <div>
+                    <img src="{% static 'frontpage\src\Healm-logos_black2.png' %}" type="img/png" alt="Healm logo">
+                </div>
+                <h1>Information on the Project Healm</h1>
+            </div>
+        </section>
+        <div class="line"></div>
+        <section>
+            <div class="border">
+                <p>Our website - "Healm" will allow the user to record their day to day by keeping track of actions and how these actions affect their physical and mental well being over time. 
+                Users will be able to create new actions that repeat over some time interval, 
+                and over each time interval the user will enter relevant data related to that action. 
+                ome data will likely be fixed for any created actions, such as ranking how one feels mentally or physically on a scale of 1-10, and possibly an area for notes that can expand on nuances not able to be expressed through a simple numerical scale. 
+                The ability to create custom data fields may be desirable as well. The goal here is to give users a better understanding of how various actions affect their lives on a day to day,
+                as well as long term, basis in a more concrete and analytical way.
+                Functionality to create groups may be added later, wherein certain actions will be ascribed by the group owner to its
+                members, and the effects of these actions can be analyzed by said owner. This may possibly be of utility to those conducting research, 
+                or even in a less professional setting like a personal trainer keeping track of how effective their exercise regimen is for their clients.
+                </p>
+            </div>
+        </section>
+        <div class="line"></div>
+        <section>
+            <div class="feature">
+                <h1>The Main Features of Healm</h1>
+                <ul>
+                    <li>Upload Data From Smart Watch - User connects their smartwatch to sync health information for the Healm account</li>
+                    <li>Daily Report - User gets daily reports of health information, such as the number of steps taken</li>
+                    <li>View Charts - The user views charts of past input data to see progress over time</li>
+                    <li>Send Message - The user sends a message to another Healm user</li>
+                    <li>View Messages - The user views messages from other Healm users</li>
+                    <li>Create Group - User creates a group of Healm users for collaboration on health goals</li>
+                    <li>Join Group - The user joins a group</li>
+                    <li>View Group - User views the stats of a group that they are a member of</li>
+                    <li>Leave Group - User leaves a group that they are a member of</li>
+                    <li>Set Group Goals - Member of a group sets a goal for all of the members of the group</li>
+                    <li>Send Weekly Recap - Healm sends a weekly recap of a user’s daily reports to the user</li>
+                </ul>
+            </div>
+        </section>
+        <div class="line"></div>
+        <section>
+            <div class="stake">
+                <h1>Our Stakeholder</h1>
+                    <img src="{% static 'frontpage/src/JDK.jpg' %}" type="img/jpg" alt="Dr.Kingley">
+                <div>
+                    <h3>Dr. J.DEREK KINGSLEY, PH.D, FACSM, CSCS, D*, ACSM-EP</h3>
+                    <p>Department of Health sciences</p><br>
+                    <p></p>   
+                </div>
+            </div>
+        </section>
     </body>
 </html>

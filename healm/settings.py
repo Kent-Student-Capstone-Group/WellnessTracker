@@ -21,7 +21,7 @@ import dj_database_url
 #|
 #V
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.getenv("DEBUG", "False") == "True"  # Comment out for local enviornment
+#DEBUG = os.getenv("DEBUG", "False") == "True"  # Comment out for local enviornment
 DEBUG = True # Uncomment for local enviornment
 
 #DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True" # Comment out for local enviornment
@@ -179,6 +179,16 @@ SOCIALACCOUNT_PROVIDERS = {
             'key':''
         }
     }
+}
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'info',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'danger',
 }
 
 LOGIN_REDIRECT_URL = '/'

@@ -1,6 +1,20 @@
 <h1>Group: {{group.GroupName}}</h1>
+<<<<<<< HEAD
 
 <h3>Members:</h3>
+=======
+{% if not groupMembers %}
+    <form method="POST">
+        {% csrf_token %}
+        <p>{{group.GroupName}}<input type="hidden" name="Group" value="{{group.id}}"/> <input type="submit" value="Request to Join" /></p>
+    </form>
+{% endif %}
+
+<h3>Members:</h3>
+{% if user == group.Owner %}
+    <a href="{% url 'frontpage:addUsers' group.id %}">Invite Users</a>
+{% endif %}
+>>>>>>> 87b4ab9be86b94a4e92d57fe56194a9b43d1649c
 {% for member in groupMembers %}
     <p>{{member.User.username}}</p>
 {% endfor %}
@@ -8,7 +22,11 @@
 <h3>Requests:</h3>
 {% for request in groupRequests %}
     <form method="POST">
+<<<<<<< HEAD
         {%csrf_token%}
+=======
+        {% csrf_token %}
+>>>>>>> 87b4ab9be86b94a4e92d57fe56194a9b43d1649c
         <p>{{request.User.username}}<input type="hidden" name="User" value="{{request.User.id}}"/><input type="submit" value="Accept Request"/></p>
     </form>
 {% endfor %}
