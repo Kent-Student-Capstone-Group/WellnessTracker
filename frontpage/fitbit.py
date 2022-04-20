@@ -42,9 +42,9 @@ for i in currentDayData["activities-steps-intraday"]["dataset"]:
 stepdf = pd.DataFrame({'Steps':val_list, 'Time':time_list})
 
 
-#filename = currentDayData['activities-steps-intraday'][0]['dateTime'] +'_intraday'
+filename = str(datetime.date.today()) + '_steps' + '_intraday'
 
-#stepdf.to_csv(filename + '.csv', index = False)
+stepdf.to_csv(filename + '.csv', index = False)
 
 ### Get alltime data
 
