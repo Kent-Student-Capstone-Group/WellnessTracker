@@ -25,7 +25,6 @@
         }
         table {
             font-family: arial, sans-serif;
-            border-collapse: collapse;
             width: 100%;
           }
           
@@ -43,6 +42,20 @@
         tr:nth-child(odd) {
             background-color: #dddddd;
         }
+
+        th:first-of-type {
+            border-top-left-radius: 10px;
+          }
+          th:last-of-type {
+            border-top-right-radius: 10px;
+          }
+          tr:last-of-type td:first-of-type {
+            border-bottom-left-radius: 10px;
+          }
+          tr:last-of-type td:last-of-type {
+            border-bottom-right-radius: 10px;
+          }
+          
     </style>
     <body>
         <h1>Send Message to your group members</h1>
@@ -52,7 +65,7 @@
             <input type="submit" value="Save" />
         </form>
 
-        <table>
+        <table style="width:90%; margin-left:auto; margin-right:auto">
             <tr>
                 <th colspan="2">Your Messages</th>
             </tr>
