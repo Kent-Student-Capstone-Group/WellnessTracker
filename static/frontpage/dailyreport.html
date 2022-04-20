@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% extends 'frontpage/base.html' %}
+
+{% block content %}
+<html>
+    <head>
+    <title>Daily Report</title>
+        <meta charset = "UTF-8">
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" type="image/png" href="src\title_logo.png" />
+        <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
+    <style>
+        *{
+            font-family: Fredoka;
+            margin: 0;
+        }
+        h1{
+            font-size: 40px;
+            background-color: aqua;
+            color: red;
+            margin-bottom: 10px;
+            text-align: center;
+            padding: 10px;
+            margin-bottom: 10px;
+
+        }
+        .right-portion h1{
+            background-color: white;
+            color: aquamarine;
+        }
+    </style>
+    </head>
+    
+    <body>
+        <h1>Daily report</h1>
+
+        <form method='POST'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save" />
+        </form>
+
+        <div class="right-portion">
+            <h1>Here are the results based on your activity over the past week</h1>
+            <div class="">
+                
+            </div>
+        </div>
+
+    </body>
+</html>
+{%endblock content%}
