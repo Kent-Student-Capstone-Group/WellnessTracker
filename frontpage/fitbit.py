@@ -1,8 +1,8 @@
+from email.mime import base
 from django.forms import ClearableFileInput
 import fitbit
 import pandas as pd
 import datetime
-
 import gather_keys_oauth2 as Oauth2
 
 CLIENT_ID = "238FG4"
@@ -16,32 +16,23 @@ server.browser_authorize()
 ACCESS_TOKEN = str(server.fitbit.client.session.token['access_token'])
 REFRESH_TOKEN = str(server.fitbit.client.session.token['refresh_token'])
 auth2_client = fitbit.Fitbit(CLIENT_ID, CLIENT_SECRET, access_token=ACCESS_TOKEN, refresh_token=REFRESH_TOKEN)
-#auth2_client = fitbit.Fitbit(CLIENT_ID, CLIENT_SECRET, access_token=ACCESS_TOKEN, refresh_token=REFRESH_TOKEN, expires_at=604800)
 
 ## AUTHORIZATION CODE USED FROM https://towardsdatascience.com/using-the-fitbit-web-api-with-python-f29f119621ea
 
 ### Get today's data
 currentDate = datetime.date.today()
-#print(currentDate)
 
-
-currentDayData_no_intraday = auth2_client.time_series(resource='activities/steps', user_id= None, base_date= 'today', period= '1d')
-print(currentDayData_no_intraday)
+### This function gets the total number of steps for a certain date
+## That date is currently set to today
+currentDayData = auth2_client.time_series(resource='activities/steps', user_id= None, base_date= 'today', period= '1d')
+print(currentDayData)
 
 ## Pandas dataframe creation
 
-# time_list = []
-# val_list = []
-
-
-# for i in currentDayData["activities-steps-intraday"]["dataset"]:
-#     val_list.append(i['value'])
-#     time_list.append(i['time'])
-
-# stepdf = pd.DataFrame({'Steps':val_list, 'Time':time_list})
-# filename = str(datetime.date.today()) + '_steps' + '_intraday'
+# stepdf = pd.DataFrame(currentDayData['activities-steps'])
+# filename = str(datetime.date.today()) + '_steps'
 # stepdf.to_csv(filename + '.csv', index = False)
-
 
 ### Get alltime data
 
+#alltimeData = auth2_client.time_series(resource='activities/steps', base_date=)
