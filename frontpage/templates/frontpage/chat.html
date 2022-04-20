@@ -61,8 +61,10 @@
         <h1>Send Message to your group members</h1>
         <form method='POST'>
             {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Save" />
+            To: {{ form.Recipient }}<br>
+            Title: {{ form.MessageTitle }}<br>
+            Message: {{ form.MessageBody }}
+            <input type="submit" value="Send" />
         </form>
 
         <table style="width:90%; margin-left:auto; margin-right:auto">
