@@ -40,10 +40,10 @@ class Chat(models.Model):
     Recipient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='Recipient', null=True)
     TimeSent = models.DateTimeField(default=datetime.datetime.now())
     MessageTitle = models.CharField(max_length=100, null=True)
-    MessageBody = models.CharField(max_length=5000, null=True)
+    MessageBody = models.TextField(max_length=5000, null=True)
 
-    def __str__(self):
-        return self.Sender.username + ' to ' + self.Recipient.username + ': ' + self.MessageTitle
+    # def __str__(self):
+    #     return self.Sender.username + ' to ' + self.Recipient.username + ': ' + self.MessageTitle
 
 class DailyReport(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)

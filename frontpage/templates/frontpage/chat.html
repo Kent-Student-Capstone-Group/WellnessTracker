@@ -58,7 +58,7 @@
             </tr>
             {% for x in chats %}
             <tr>
-                <td>{{ x.Sender }}:{{ x.MessageTitle }}: {{x.TimeSent}}</td>
+                <td><i>{{x.TimeSent}}</i> <b>{{ x.Sender }}</b>: {{ x.MessageTitle }} </td>
                 <td>{{ x.MessageBody }}</td>
             </tr>
             {% endfor %}
