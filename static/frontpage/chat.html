@@ -8,9 +8,85 @@
     <meta charset = "UTF-8">
         <meta content="width=device-width,initial-scale=1" name="viewport" />
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" type="image/png" href="{% load static %}" />
+        <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
     </head>
-    <body>
+    <style>
+        *{
+            font-family: Fredoka;
+            text-align: center;
+            margin: 0;
+        }
+        h1{
+            background-color: red;
+            color: white;
+            padding: 20px;
+            margin-bottom: 10px;
+        }
+        table {
+            font-family: arial, sans-serif;
+            width: 100%;
+          }
+          
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        th{
+            border-bottom: 3px solid #000000;
+            background-color: #999999;
+        }
 
+        tr:nth-child(odd) {
+            background-color: #dddddd;
+        }
+
+        th:first-of-type {
+            border-top-left-radius: 10px;
+          }
+          th:last-of-type {
+            border-top-right-radius: 10px;
+          }
+          tr:last-of-type td:first-of-type {
+            border-bottom-left-radius: 10px;
+          }
+          tr:last-of-type td:last-of-type {
+            border-bottom-right-radius: 10px;
+          }
+          
+    </style>
+    <body>
+        <h1>Send Message to your group members</h1>
+        <form method='POST'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save" />
+        </form>
+
+        <table style="width:90%; margin-left:auto; margin-right:auto">
+            <tr>
+                <th colspan="2">Your Messages</th>
+            </tr>
+            {% for x in chats %}
+            <tr>
+                <td><i>{{x.TimeSent}}</i> <b>{{ x.Sender }}</b>: {{ x.MessageTitle }} </td>
+                <td>{{ x.MessageBody }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <!-- Prob need some kind of loop to show desired number of emails or make it 20 or something-->
+
+
+          <div class="groups-chat">
+            
+          </div>
+          <div class="">
+
+          </div>
+          
     </body>
 </html>
 {%endblock content%}

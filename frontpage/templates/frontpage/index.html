@@ -107,6 +107,10 @@
             .result .left{
                 text-align: center;
                 padding-right: 50px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
             }
             .result .left h1{
                 font-weight: 700;
@@ -139,17 +143,7 @@
             <p>Weight:{{info.Weight}}</p>
             <p>Gender:{{info.Gender}}</p>
 
-            <section class="goals">
-                <div>
-                <h1>Goals:</h1>
-                    <select>
-                    <option value=""></option>
-                    <option value="1000 steps">1000 steps in a day</option>
-                    <option value="10000 steps">10000 steps in a day</option>
-                    <option value="new">Create your own Goals</option>
-                    </select>
-                </div>
-            </section>
+            
             {% endif %} -->
             <div class="fitbit">
                 <div>
@@ -166,27 +160,41 @@
 
             <div class="line"></div>
 
+            <div class="statistics">
+                <h1>These are the statictics retrived from your smart watch</h1>
+                
+            </div>
+            <div class="line"></div>
+            <section class="goals">
+                <div>
+                <h1>Goals:</h1>
+                    <select>
+                    <option value=""></option>
+                    <option value="1000 steps">1000 steps in a day</option>
+                    <option value="10000 steps">10000 steps in a day</option>
+                    <option value="new">Create your own Goals</option>
+                    </select>
+                </div>
+            </section>
+            <div class="line"></div>
             <div class="result">
                 <div>
                     <img src="{% static 'frontpage/src/ps.jpg' %}" type="img/jpg"/>
                 </div>
                 <div class="left">
-                    <h1>The ideal weight recommended for your height</h1>
+                    <h1>You can check your ideal weight recommended for your height</h1>
+                    
+                    <p>You can check link below made by Rush.edu for information regarding it.</p>
                     <br>
-                        <div>
-                            <p>According to Rush.</p>
-                            <p>You can check link below made by Rush.edu</p>
+                        <div>                  
                             <a href="https://www.rush.edu/how-much-should-i-weigh">Learn more</a>
                         </div>
                 </div>
             </div>
 
-            <div class="line"></div>
+            
 
-            <div class="statistics">
-                <h1>These are the statictics retrived from your smart watch</h1>
-                
-            </div>
+            
 
         {% else %}
             {% if google_login %}

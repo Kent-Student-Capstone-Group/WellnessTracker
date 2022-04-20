@@ -9,22 +9,19 @@
         <style>
                 *{
                     font-family: Fredoka;
-                    margin: 0;
+                    margin: 0;                    
                 }
-                h1{
-                    background-color: red;
-                    color: white;
-                    padding: 20px;
-                    margin-bottom: 10px;
-                    text-align: center;
-                }
+
                 .badges{
                     text-align: center;
                     margin: 50px;
+                    
                 }
                 .badges h2{
-                    color: aquamarine;
+                    font-family: Fredoka;
+                    color: rgb(23, 24, 24);
                     margin: 20px;
+                    font-weight: 700;
                 }
                 .images{
                     display: grid;
@@ -35,35 +32,38 @@
                 .images img{
                     clip-path: circle(40%);
                     width: 50%;
-            }
+                }
+                .images p{
+                    font-size: 18px;
+                    font-weight: 700;
+
+                }
         </style>
     </head>
     <body>
-        <h1>My Badges</h1>
-
         <div class="badges">
             <h2>You get Badges everytime you complete your goals or surpass your previous records</h2>
 
             <div class="images">
                 <div>
-                    <img src="{% static 'frontpage/badges/1000Steps.png' %}" type="img/png" alt="1000 steps badge">
+                    <img src="{% static 'frontpage/Badges/Welcome to Healm.png' %}" type="img/png" alt="Welcome to Healm">
+                    <p>Welcome to Healm</p>
+                </div>
+                <div>
+                    <img src="{% static 'frontpage/Badges/1000Steps.png' %}" type="img/png" alt="1000 steps badge">
                     <p>1000 steps</p>
                 </div>
                 <div>
-                    <img src="{% static 'frontpage/badges/1000Steps.png' %}" type="img/png" alt="1000 steps badge">
-                    <p>1000 steps</p>
+                    <img src="{% static 'frontpage/Badges/3000Steps.png' %}" type="img/png" alt="3000 steps badge">
+                    <p>3000 steps</p>
                 </div>
                 <div>
-                    <img src="{% static 'frontpage/badges/1000Steps.png' %}" type="img/png" alt="1000 steps badge">
-                    <p>1000 steps</p>
+                    <img src="{% static 'frontpage/Badges/Member of a group.png' %}" type="img/png" alt="Member of a group">
+                    <p>You joined a group</p>
                 </div>
                 <div>
-                    <img src="{% static 'frontpage/badges/1000Steps.png' %}" type="img/png" alt="1000 steps badge">
-                    <p>1000 steps</p>
-                </div>
-                <div>
-                    <img src="{% static 'frontpage/badges/1000Steps.png' %}" type="img/png" alt="1000 steps badge">
-                    <p>1000 steps</p>
+                    <img src="{% static 'frontpage/Badges/golden boot.png' %}" type="img/png" alt="Golden boot">
+                    <p>Golden Boot - Completed 10000 steps</p>
                 </div>
             </div>
 

@@ -8,6 +8,7 @@
   <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
   <link rel ="stylesheet" type="text/css" href="{% static 'frontpage/messages.css' %}"/>
   <link rel="shortcut icon" type="image/x-icon" href="{% static 'frontpage/src/title_logo.ico' %}" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <style>
   *{
@@ -20,6 +21,7 @@
     overflow: hidden;
     border: 1px solid #e7e7e7;
     background: linear-gradient(to top, #99ffcc 0%, #0033cc 100%);
+    font-size: 18px;
   }
   
   .base li {
@@ -39,7 +41,7 @@
     text-decoration: underline rgba(249, 41, 41, 0.707);
   }
   .base h1{
-      font-family: Verdana;
+      font-family: Fredoka;
       background-color: transparent;
   }
   .head{
@@ -81,9 +83,11 @@
     background-color: #cbddff /*rgb(0, 139, 139)*/;
     font-weight: 700;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    
+    justify-content: center;
+    align-items: center; 
+  }
+  footer div{
+    margin: 40px;
   }
   footer ul{
     list-style: none;
@@ -118,15 +122,15 @@
         </header>
         
         <ul>
+            <li><a href="{% url 'frontpage:index' %}">Home</a></li>
             <li><a href="{% url 'frontpage:profile' %}">Profile</a></li>
             <li><a href="{% url 'frontpage:ps' %}">Personal Stats</a></li>
-            <li><a href="{% url 'frontpage:dailyreport' %}">Daily Report</a></li>
-            <li><a href="{% url 'frontpage:upload' %}">Upload</a></li>
             <li><a href="{% url 'frontpage:group' %}">Groups</a></li>
             <li><a href="{% url 'frontpage:chat' %}">Chat</a></li>
-            <li><a href="{% url 'frontpage:weekreport' %}">Weekly Report</a></li>
-            <li><a href="{% url 'frontpage:settings' %}">Settings</a></li>
+            <li><a href="{% url 'frontpage:dailyreport' %}">Daily Report</a></li>
+            <li><a href="{% url 'frontpage:weekreport' %}">Weekly Report</a></li>            
             <li><a href="{% url 'frontpage:badges' %}">Badges</a></li>
+            <li><a href="{% url 'frontpage:settings' %}">Settings</a></li>
             <li style="float:right"><a href="{% url 'frontpage:logout' %}">Logout</a></li>
         </ul>
   </div>
