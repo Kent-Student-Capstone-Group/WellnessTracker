@@ -8,7 +8,7 @@
         <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" type="image/png" href="{% load static %}" />
         <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
-        <title>Profile Edit</title>
+        <title>Edit Profile</title>
         <style>
             *{
                 font-family: Fredoka;
@@ -17,11 +17,13 @@
             }
             h1{
                 font-size: 40px;
-                color: rgb(20, 20, 20);
+                color: rgb(16, 15, 15);
                 text-align: center;
                 padding: 20px;
                 font-weight: bolder;
                 text-decoration: none;
+                font-family: Fredoka;
+
             }
             body .form1{
                 text-align: center;
@@ -33,12 +35,12 @@
                 align-items: stretch;
                 text-align: center;
                 line-height: 2.5em;
-                background: linear-gradient(to bottom right, #33ccff 0%, #ffff99 100%);
+                background: #85dcb8;
                 border-radius: 20px;
                 box-sizing: border-box;
                 height: 600px;
                 width: auto;
-                margin: 20px;
+                margin: 10px;
             }
             .logo{
                 width: 140px;
@@ -46,28 +48,48 @@
             .dp{
                 width: 30%;
                 line-height: 3em;
-                border: 5px solid rgb(118, 253, 81);
-                background-color: rgb(253, 251, 248);
+                border: 5px solid #17252a;
+                background-color: #41b3a3;
                 border-radius: 15px;
-                padding-top: 40px;
-                padding-bottom: 30px;
+                padding: 10px;
+                box-sizing: border-box;
+                height: 70%;
+                
             }
             .dp img{
                 clip-path: circle(40%);
-                width: 20%;
+                width: 40%;
+            }
+            .dp div{
+                margin-bottom: 15px;
             }
             .details{
-                border: 5px solid rgb(118, 253, 81);
-                background-color: rgb(251, 250, 248);
+                border: 5px solid #17252a;
+                background-color: #41b3a3;
                 border-radius: 15px;
                 padding: 10px;
                 padding-bottom: 30px;
+                box-sizing: border-box;
+                width: 30%;
+                height: 70%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
             }
-            .info{
-                border: 5px solid rgb(118, 253, 81);
-                background-color: rgb(250, 249, 247);
+            .information{
+                border: 5px solid #17252a;
+                background-color: #41b3a3;
                 border-radius: 15px;
                 padding: 10px;
+                box-sizing: border-box;
+                width: 30%;
+                height: auto;
+                height: 70%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
             }
             .form1 input {
                 background-color: #f0f1fb;
@@ -76,7 +98,7 @@
                 box-sizing: border-box;
                 color: rgb(0, 0, 0);
                 font-size: 18px;
-                height: 100%;
+                
                 outline: 0;
                 padding: 4px 20px 0;
                 width: 100%;
@@ -86,7 +108,7 @@
                 list-style: none;
             }
             .submit {
-                background-color: rgba(33, 249, 213, 0.932);
+                background-color: #4ddbc4;
                 border-radius: 12px;
                 border: 0;
                 box-sizing: border-box;
@@ -98,6 +120,8 @@
                 width: 100px;
                 justify-self: center;
                 align-items: center;
+                margin-top: 10px;
+                font-weight: 600;
             }
             .form1 label{
                 font-weight: 700 ;
@@ -109,21 +133,30 @@
             }
             .center{
                 text-align: center;
+                margin-bottom: 25px;
             }
-
+            h3{
+                font-family: Fredoka;
+                font-weight: 600;
+            }
             </style>
     </head>
 
     <body>
-        <h1>Edit your Profile:</h1>
+        <h1>Edit your profile:</h1>
+        <div>
+            <a href="{% url 'frontpage:userInfo' %}">User Info Form</a>
+        </div>
         <div class="form1">
 
             <div class="dp">
                 <div>
-                    <img src="..\frontpage\src\id.png" type="img/png" width=7% alt="DP"/>
+                    <img src="{% static 'frontpage/src/id.png'%}" type="img/png" alt="DP"/>
                 </div>
-                <h3>Profile Picture</h3>
-                <label><input id="image" type="file" name="profile_photo" placeholder="Photo" required="" capture></label>
+                <div>
+                    <h3>Profile Picture</h3>
+                    <label><input id="image" type="file" name="profile_photo" placeholder="Photo" required="" capture></label>
+                </div>
             </div>
             <div class="details">
                 <div>
@@ -149,11 +182,10 @@
                 </div>
                 
             </div>
-            <div class="info">
+            <div class="information">
             <div>
                 <label>Height:</label><input type="number" class="form-control" placeholder="in feet" value="">
-                <div>
-                    <label></label><input type="number" class="form-control" placeholder="in inches" value="">
+                <div></label><input type="number" class="form-control" placeholder="in inches" value="">
                 </div>
             </div>
             <div>
