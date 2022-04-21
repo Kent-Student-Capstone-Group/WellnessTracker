@@ -18,26 +18,32 @@
             margin: 0;
         }
         h1{
-            background-color: aqua;
-            color: red;
-            margin-bottom: 10px;
-            padding: 10px;
-            font-size: 40px;
+            font-family: Fredoka;
+            font-weight: 600;
         }
+        
         .report{
             display: grid;
             grid-template-columns: auto auto auto;
+            row-gap: 15px;
+            column-gap: 25px;
             margin: 10px;
+            width: 100%;
+            height: auto;
         }
         .report div{
-            border: 5px solid blue;
+            border: 3px solid #659dbd;
             border-radius: 10px;
+        }
+        .lines{
+            border-bottom: 5px solid grey;
+            width: 100%;
         }
     </style>
     
     <body>
-        <h1>Weekly report</h1>
-        <h2>Your performance over the past week</h2>
+        <h1>Your performance over the past week</h1>
+        <div class="lines"></div>
         <div class="report">
 
             
