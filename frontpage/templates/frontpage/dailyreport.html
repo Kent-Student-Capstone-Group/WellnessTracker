@@ -43,6 +43,9 @@
         <div class="header">
             <h1>Daily report</h1>
         </div>
+        {% if alreadySubmittedToday %}
+        <p>You have already submitted today!</p>
+        {% else %}
         <div class="results">
             <p><b>These are your Statistics for today</b></p>
             <form method='POST'>
@@ -63,6 +66,7 @@
                 <input type="submit" value="Save" />
             </form>
         </div>
+        {% endif %}
 
     </body>
 </html>
