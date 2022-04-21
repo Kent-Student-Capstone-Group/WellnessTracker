@@ -25,6 +25,9 @@
     margin-left: auto;
     margin-right: auto;
   }
+  header a{
+    font-size: 25px;
+  }
   .row h1{
     font-size: 45px;
     font-weight: 700;
@@ -84,16 +87,16 @@
           </div>
         </header>
           <div class="w3-bar w3-teal">
-              <a href="{% url 'frontpage:index' %}" class="w3-bar-item w3-button">Home</a>
-              <a href="{% url 'frontpage:profile' %}" class="w3-bar-item w3-button">Profile</a>
-              <a href="{% url 'frontpage:ps' %}" class="w3-bar-item w3-button">Personal Stats</a>
-              <a href="{% url 'frontpage:group' %}" class="w3-bar-item w3-button">Groups</a>
-              <a href="{% url 'frontpage:chat' %}" class="w3-bar-item w3-button">Chat</a>
-              <a href="{% url 'frontpage:dailyreport' %}" class="w3-bar-item w3-button">Daily Report</a>
-              <a href="{% url 'frontpage:weekreport' %}" class="w3-bar-item w3-button">Weekly Report</a>           
-              <a href="{% url 'frontpage:badges' %}" class="w3-bar-item w3-button">Badges</a>
-              <a href="{% url 'frontpage:settings' %}" class="w3-bar-item w3-button">Settings</a>
-              <a style="float:right" href="{% url 'frontpage:logout' %}" class="w3-bar-item w3-button">Logout</a>
+              <a href="{% url 'frontpage:index' %}" class="w3-bar-item w3-button w3-padding-10"><b>Home</b></a>
+              <a href="{% url 'frontpage:profile' %}" class="w3-bar-item w3-button"><b>Profile</b></a>
+              <a href="{% url 'frontpage:ps' %}" class="w3-bar-item w3-button"><b>Personal Stats</b></a>
+              <a href="{% url 'frontpage:group' %}" class="w3-bar-item w3-button"><b>Groups</b></a>
+              <a href="{% url 'frontpage:chat' %}" class="w3-bar-item w3-button"><b>Chat</b></a>
+              <a href="{% url 'frontpage:dailyreport' %}" class="w3-bar-item w3-button"><b>Daily Report</b></a>
+              <a href="{% url 'frontpage:weekreport' %}" class="w3-bar-item w3-button"><b>Weekly Report</b></a>           
+              <a href="{% url 'frontpage:badges' %}" class="w3-bar-item w3-button"><b>Badges</b></a>
+              <a href="{% url 'frontpage:settings' %}" class="w3-bar-item w3-button"><b>Settings</b></a>
+              <a style="float:right" href="{% url 'frontpage:logout' %}" class="w3-bar-item w3-button"><b>Logout</b></a>
           </div>
   </div>
 

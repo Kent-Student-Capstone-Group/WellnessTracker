@@ -15,6 +15,9 @@
             <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
             <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
             <style>
+            *{
+                font-family: Fredoka;
+            }
             .class{
             display: flex;
             flex-direction: column;
@@ -22,7 +25,6 @@
             align-items: center;
             }
             .username{
-                font-size: 30px;
                 font-weight: 800;
                 text-align: center;
                 text-transform: uppercase;
@@ -65,11 +67,18 @@
                 width: 100%;
             }
             h1{
-                font-weight: 700;
+                font-weight: 600;
                 color: black;
+                font-family: Fredoka;
             }
             .result .left{
                 text-align: center;
+            }
+            p{
+                font-size: 20px;
+            }
+            .username p{
+                font-size: 30px;
             }
             </style>
             </head>
@@ -94,8 +103,8 @@
             {% endif %} -->
             <div class="fitbit">
                 <div>
-                    <h1>Lets get starting by connecting your Fitbit</h1>
-                    <p>Get your Statictics fast and easy</p>
+                    <h1>Lets get you started by connecting your Fitbit</h1>
+                    <p>Get your Statictics now</p>
                     <p>Fast and easy</p><br>
                     <div class="connect">
                         <button class="w3-button w3-cyan w3-border w3-round-large w3-left"><a href="{% url 'frontpage:upload' %}">Connect now</a></button>  
@@ -130,7 +139,7 @@
                     <img src="{% static 'frontpage/src/ps.jpg' %}" type="img/jpg"/>
                 </div>
                 <div class="left">
-                        <h1>You can check your ideal weight recommended for your height</h1>                        
+                        <h1>You can check your Ideal weight recommended for your height</h1>                        
                         <p>You can check link below made by Rush.edu for information regarding it.</p>
                         <br>
                     <div>  
