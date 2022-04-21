@@ -77,10 +77,10 @@ def contact(request):
 def dailyReport(request):
     if (request.user.is_authenticated):
         form = DailyReportForm(request.POST or None)
-        form.User = request.user
+        # form.User = request.user
         if form.is_valid():
             newDailyReport = DailyReport()
-            newDailyReport.user = request.user
+            newDailyReport.User = request.user
             newDailyReport.RatingOfDay = request.POST.get("RatingOfDay")
             newDailyReport.StepsTaken = request.POST.get("StepsTaken")
             newDailyReport.HoursSitting = request.POST.get("HoursSitting")

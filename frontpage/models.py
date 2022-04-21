@@ -52,7 +52,6 @@ class DailyReport(models.Model):
     StepsTaken = models.IntegerField(blank=1, null=True)
     HoursSitting = models.FloatField(blank=1, null=True)
     HoursSlept = models.FloatField(blank=1, null=True)
-    WorkedOut = models.BooleanField(blank=1, default = None, null=True)
     LengthOfWorkout = models.FloatField(blank=1, null=True)
     IntensityOfWorkout = models.IntegerField(blank=1, null=True)
     MealsEaten = models.IntegerField(blank=1, null=True)
@@ -62,7 +61,7 @@ class DailyReport(models.Model):
     AlcoholicDrinks = models.IntegerField(blank=1, null=True)
 
     def __str__(self):
-        return self.User.username + ":" + self.DateAndTime
+        return self.User.username + ": " + self.DateAndTime.strftime("%m/%d/%Y, %H:%M:%S")
 
 class UserGroupRequest(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
