@@ -14,37 +14,46 @@
         *{
             font-family: Fredoka;
             margin: 0;
-        }
-        .header{
-            font-weight: 700;
-            margin-bottom: 10px;
             text-align: center;
-            padding: 10px;
-            margin-bottom: 10px;
+        }
+        h1{
+            font-weight: 700;
+            font-family: Fredoka;
         }
         .results{
-            background-color: rgb(255, 160, 122);
             text-align: center;
+            margin-bottom: 15px;
         }
         .results p{
-            font-size: 35px;
+            font-size: 25px;
         }
         .items{
-            background-color: rgb(245, 255, 250);
+            
+            background-color: #85dcb8;
             border-radius: 2px solid white;
-            padding: 5px;
+            padding-top: 20px;
             margin: 5px;
             border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .items p{
+            padding-top: 20px;
+            border: 3px solid #17252a;
+            border-radius: 5px;
+            width: 90%;
+            padding: 5px;
+            color: #4d1300;
         }
     </style>
     </head>
     
     <body>
-        <div class="header">
-            <h1>Daily report</h1>
-        </div>
+        <h1>These are your Statistics for today</h1>
         <div class="results">
-            <p><b>These are your Statistics for today</b></p>
+           
             <form method='POST'>
                 {% csrf_token %}
                 <div class="items">
@@ -60,7 +69,7 @@
                     <p>How many cigarettes did you smoke? {{ form.CigarettesSmoked }}</p><br>
                     <p>How many alcoholic beverages did you consume? {{ form.AlcoholicDrinks }}</p><br>
                 </div>
-                <input type="submit" value="Save" />
+                <b><input class="w3-button w3-blue w3-border w3-round-large w3-center" type="submit" value="Save" /></b>
             </form>
         </div>
 
