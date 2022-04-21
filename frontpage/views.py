@@ -77,6 +77,9 @@ def contact(request):
 def dailyReport(request):
     if (request.user.is_authenticated):
         form = DailyReportForm(request.POST or None)
+        TodayReports = DailyReport.objects.filter(DateAndTime=datetime.date.today())
+        alreadySubmittedToday = len(TodayReports) > 0
+        
         # form.User = request.user
         if form.is_valid():
             newDailyReport = DailyReport()
@@ -85,11 +88,6 @@ def dailyReport(request):
             newDailyReport.StepsTaken = request.POST.get("StepsTaken")
             newDailyReport.HoursSitting = request.POST.get("HoursSitting")
             newDailyReport.HoursSlept = request.POST.get("HoursSlept")
-            if request.POST.get("WorkedOut") == "true":
-                newDailyReport.WorkedOut = True
-            else:
-                newDailyReport.WorkedOut = False
-            newDailyReport.WorkedOut = request.POST.get("WorkedOut")
             newDailyReport.LengthOfWorkout = request.POST.get("LengthOfWorkout")
             newDailyReport.IntensityOfWorkout = request.POST.get("IntensityOfWorkout")
             newDailyReport.MealsEaten = request.POST.get("MealsEaten")
@@ -98,8 +96,15 @@ def dailyReport(request):
             newDailyReport.CigarettesSmoked = request.POST.get("CigarettesSmoked")
             newDailyReport.AlcoholicDrinks = request.POST.get("AlcoholicDrinks")
             newDailyReport.save()
+            try:
+                userInfo = UserInfo.objects.get(User = request.user)
+                userInfo.UserSteps = userInfo.UserSteps + int(newDailyReport.StepsTaken)
+                userInfo.save()
+            except:
+                print("No user info")
+            
             return redirect('frontpage:index')
-        return render(request, 'frontpage/dailyreport.html', {'form': form})
+        return render(request, 'frontpage/dailyreport.html', {'form': form, 'alreadySubmittedToday': alreadySubmittedToday})
     else:
         return HttpResponse("Not Authenticated")
     

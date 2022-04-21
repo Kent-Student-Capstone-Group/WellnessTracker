@@ -21,7 +21,7 @@ class UserInfo(models.Model):
     Gender = models.CharField(max_length=20, blank=1, null=True)
     #IsActive = models.BooleanField(default=True, blank=1)
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    UserSteps = models.IntegerField(blank=1, null=True)
+    UserSteps = models.IntegerField(blank=1, default=0, null=True)
 
     def __str__(self):
         return self.User.username

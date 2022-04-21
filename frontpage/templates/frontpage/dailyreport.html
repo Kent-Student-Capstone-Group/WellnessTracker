@@ -52,6 +52,9 @@
     
     <body>
         <h1>These are your Statistics for today</h1>
+        {% if alreadySubmittedToday %}
+        <p>You have already submitted today!</p>
+        {% else %}
         <div class="results">
            
             <form method='POST'>
@@ -72,6 +75,7 @@
                 <b><input class="w3-button w3-blue w3-border w3-round-large w3-center" type="submit" value="Save" /></b>
             </form>
         </div>
+        {% endif %}
 
     </body>
 </html>
