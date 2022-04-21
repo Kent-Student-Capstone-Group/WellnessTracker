@@ -29,4 +29,6 @@ urlpatterns = [
     path('searchGroups/', views.searchGroups, name='searchGroups'),
     path('groupView/<int:group_id>', views.groupView, name='groupView'),
     path('addUsers/<int:group_id>', views.addUsers, name='addUsers'),
+    path('profileEdit/', views.profileEdit, name='profileEdit'),
+    path('notifications', views.notifications, name='notifications'),
 ]

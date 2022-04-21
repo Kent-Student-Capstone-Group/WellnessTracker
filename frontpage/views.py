@@ -265,5 +265,9 @@ def addUsers(request, group_id):
         return HttpResponse("Invite Sent!")
     return render(request, 'frontpage/addUsers.html', {'allUsers':allUsers})
 
+def notifications(request):
+    return render(request, 'frontpage/notification.html')
 
+def profileEdit(request):
+    return render(request, 'frontpage/profileedit.html')
 
