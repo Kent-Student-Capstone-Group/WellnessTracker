@@ -13,7 +13,6 @@
             }
             .bd{
                 font-family: Fredoka;
-                min-height: calc(100vh - 299px);
                 border: none;
                 border-radius: 15px;
                 background-color: #b3ffb3;
@@ -40,6 +39,7 @@
         </style>
     </head>
     <body>
+        <div style="min-height: calc(100vh - 299px);">
         <div class="bd">
             <div>
                 <h1>Group: {{group.GroupName}}</h1>
@@ -83,6 +83,7 @@
             </div>
             <div class="lines"></div>
         </div>
+    </div>
     </body>
 </html>
 {% endblock content %}
