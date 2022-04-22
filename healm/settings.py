@@ -17,18 +17,11 @@ import sys
 import dj_database_url
 
 
-#| #### Comment/Uncomment These For Local Environment ####
-#|
-#V
+# DEBUG and DEVELOPMENT_MODE now default to True if enviornment variables are not set
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = os.getenv("DEBUG", "True") == "True"  # Comment out for local enviornment
-DEBUG = True # Uncomment for local enviornment
+DEBUG = os.getenv("DEBUG", "True") == "True"  
 
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "True") == "True" # Comment out for local enviornment
-#DEVELOPMENT_MODE = True # Uncomment for local environment
-#^
-#|
-#| #### Comment/Uncomment These For Local Environment ####
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "True") == "True" 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
