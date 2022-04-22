@@ -21,11 +21,11 @@ import dj_database_url
 #|
 #V
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = os.getenv("DEBUG", "False") == "True"  # Comment out for local enviornment
-DEBUG = True # Uncomment for local enviornment
+DEBUG = os.getenv("DEBUG", "True") == "True"  # Comment out for local enviornment
+#DEBUG = True # Uncomment for local enviornment
 
-#DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True" # Comment out for local enviornment
-DEVELOPMENT_MODE = True # Uncomment for local environment
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "True") == "True" # Comment out for local enviornment
+#DEVELOPMENT_MODE = True # Uncomment for local environment
 #^
 #|
 #| #### Comment/Uncomment These For Local Environment ####
@@ -208,7 +208,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters':{
         'simple': {
-            'format': '[{levelname}] [{asctime}] {message}',
+            'format': '[{asctime}] [{levelname}] {message}',
             'style': '{',
         },
     },
