@@ -22,6 +22,8 @@
                 padding: 20px;
                 font-weight: bolder;
                 text-decoration: none;
+                font-family: Fredoka;
+
             }
             body .form1{
                 text-align: center;
@@ -33,7 +35,7 @@
                 align-items: stretch;
                 text-align: center;
                 line-height: 2.5em;
-                background: linear-gradient(to bottom right, #33ccff 0%, #ffff99 100%);
+                background: #85dcb8;
                 border-radius: 20px;
                 box-sizing: border-box;
                 height: 600px;
@@ -46,8 +48,8 @@
             .dp{
                 width: 30%;
                 line-height: 3em;
-                border: 5px solid rgb(118, 253, 81);
-                background-color: rgb(253, 251, 248);
+                border: 5px solid #17252a;
+                background-color: #41b3a3;
                 border-radius: 15px;
                 padding: 10px;
                 box-sizing: border-box;
@@ -62,8 +64,8 @@
                 margin-bottom: 15px;
             }
             .details{
-                border: 5px solid rgb(118, 253, 81);
-                background-color: rgb(251, 250, 248);
+                border: 5px solid #17252a;
+                background-color: #41b3a3;
                 border-radius: 15px;
                 padding: 10px;
                 padding-bottom: 30px;
@@ -75,9 +77,9 @@
                 justify-content: space-evenly;
                 align-items: center;
             }
-            .info{
-                border: 5px solid rgb(118, 253, 81);
-                background-color: rgb(250, 249, 247);
+            .information{
+                border: 5px solid #17252a;
+                background-color: #41b3a3;
                 border-radius: 15px;
                 padding: 10px;
                 box-sizing: border-box;
@@ -106,7 +108,7 @@
                 list-style: none;
             }
             .submit {
-                background-color: rgba(79, 139, 252, 0.932);
+                background-color: #4ddbc4;
                 border-radius: 12px;
                 border: 0;
                 box-sizing: border-box;
@@ -119,6 +121,7 @@
                 justify-self: center;
                 align-items: center;
                 margin-top: 10px;
+                font-weight: 600;
             }
             .form1 label{
                 font-weight: 700 ;
@@ -132,13 +135,20 @@
                 text-align: center;
                 margin-bottom: 25px;
             }
-
+            h3{
+                font-family: Fredoka;
+                font-weight: 600;
+            }
             </style>
     </head>
 
     <body>
         <h1>Welcome to your profile Setup:</h1>
-        <a href="{% url 'frontpage:userInfo' %}">User Info Form</a>
+        <div>
+            <a href="{% url 'frontpage:userInfo' %}">User Info Form</a>
+        </div>
+        <form method="POST">
+            {% csrf_token %}
         <div class="form1">
 
             <div class="dp">
@@ -147,24 +157,36 @@
                 </div>
                 <div>
                     <h3>Profile Picture</h3>
-                    <label><input id="image" type="file" name="profile_photo" placeholder="Photo" required="" capture></label>
+                    <label><input id="image" type="file" name="profile_photo" placeholder="Photo" capture></label>
                 </div>
             </div>
             <div class="details">
                 <div>
-                    <label>First Name:</label><input type="text" class="form-control" placeholder="First name" value="">
+                    <label>First Name:</label><input type="text" class="form-control" placeholder="First name" name="firstname" value="{{user.first_name}}">
                 </div>
                 <div>
-                    <label>Last name:</label><input type="text" class="form-control" value="" placeholder="Last name">
+                    <label>Last name:</label><input type="text" class="form-control" value="{{user.last_name}}" name="lastname" placeholder="Last name">
                 </div>
                 <div>
-                    <label>Date of birth:</label><input type="date" class="form-control" value="">
+                    <label>Date of birth:</label><input type="date" class="form-control" value="{{info_sel.DateOfBirth}}" name="dob">
                 </div>
-                <div>
+                
+                
+            </div>
+            <div class="information">
+            <div>
+                <label>Height:</label><input type="number" class="form-control" placeholder="in feet" name="heightfeet" value="{{info_sel.HeightFeet}}">
+                <div></label><input type="number" class="form-control" placeholder="in inches" name="heightinches" value="{{info_sel.HeightInches}}">
+                </div>
+            </div>
+            <div>
+                <label>Weight:</label><input type="number" class="form-control" placeholder="in lbs" name="weight" value="{{info_sel.Weight}}">
+            </div>
+            <div>
                     <label>Gender:</label>
                         <div>
                             <select name="gender">
-                                <option value=""></option>
+                                <option value="{{info_sel.Gender}}"></option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                                 <option value="other">Other</option>
@@ -172,25 +194,13 @@
                             </select>
                         </div>
                 </div>
-                
-            </div>
-            <div class="info">
-            <div>
-                <label>Height:</label><input type="number" class="form-control" placeholder="in feet" value="">
-                <div></label><input type="number" class="form-control" placeholder="in inches" value="">
-                </div>
-            </div>
-            <div>
-                <label>Weight:</label><input type="number" class="form-control" placeholder="in lbs" value="">
-            </div>
-            <div>
-                <label>Mobile Number:</label><input type="tel" class="form-control" placeholder="(+1) Phone number" value="">
-            </div>
             </div>
             </div> 
             <div class="center">
-                <button type="text" class="submit">Submit</button>
+                <button type="submit" class="submit">Submit</button>
             </div>
+        </div>
+        </form>
     </body>
 </html>
 

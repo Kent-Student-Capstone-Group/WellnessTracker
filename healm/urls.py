@@ -26,3 +26,8 @@ urlpatterns = [
     path('', include('frontpage.urls')),
     path('accounts/', include('allauth.urls')),
 ]
+
+handler404 = 'frontpage.views.custom404'
+handler500 = 'frontpage.views.custom500'
+handler403 = 'frontpage.views.custom403'
+handler400 = 'frontpage.views.custom400'

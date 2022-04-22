@@ -3,56 +3,31 @@
 <html>
 <head>
   <meta charset = "UTF-8">
-  <meta content="width=device-width,initial-scale=1" name="viewport" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'frontpage/scrollbar.css' %}"/>
   <link rel ="stylesheet" type="text/css" href="{% static 'frontpage/messages.css' %}"/>
   <link rel="shortcut icon" type="image/x-icon" href="{% static 'frontpage/src/title_logo.ico' %}" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <style>
   *{
     margin: 0;
-  }
-  .base ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    border: 1px solid #e7e7e7;
-    background: linear-gradient(to top, #99ffcc 0%, #0033cc 100%);
-  }
-  
-  .base li {
-    float: left;
-  }
-  
-  .base li a {
-    display: block;
-    color: rgb(249, 246, 246);
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  
-  .base li a:hover {  
-    background-color: rgb(11, 11, 11);
-    text-decoration: underline rgba(249, 41, 41, 0.707);
-  }
-  .base h1{
-      font-family: Verdana;
-      background-color: transparent;
+    font-family: Fredoka;
   }
   .head{
     display: flex;
     justify-content: center;
     text-align: center;
     align-items: center;
-    background-color: #cbddff;
+    background-color: #41B3A3;
     width: auto;
     height: 100px;
-    border-radius: 15px;
     margin-left: auto;
     margin-right: auto;
+  }
+  header a{
+    font-size: 25px;
   }
   .row h1{
     font-size: 45px;
@@ -60,12 +35,6 @@
     padding: 15px;
     margin-bottom: 10px;
     color: #0a0a0a;
-  }
-  .base .row {
-      display: inline-block;
-  }
-  .base li{
-    font-family: Verdana;
   }
   .base .row img{
     width: 100px;
@@ -78,12 +47,14 @@
     width: 100%;
     height: 150px;
     font-size: 18px;
-    background-color: #cbddff /*rgb(0, 139, 139)*/;
+    background-color: #97CAEF;
     font-weight: 700;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    
+    justify-content: center;
+    align-items: center; 
+  }
+  footer div{
+    margin: 40px;
   }
   footer ul{
     list-style: none;
@@ -100,7 +71,7 @@
     width: 300px;
   }
   .line{
-    border-right: 5px solid rgb(143, 188, 143);
+    border-right: 5px solid #55BCC9;
     border-radius: 5px;
     height: 90%;
   }
@@ -116,19 +87,18 @@
               <img src="{% static 'frontpage/src/header_logo.png' %}" type="img/png" alt="header_logo">
           </div>
         </header>
-        
-        <ul>
-            <li><a href="{% url 'frontpage:profile' %}">Profile</a></li>
-            <li><a href="{% url 'frontpage:ps' %}">Personal Stats</a></li>
-            <li><a href="{% url 'frontpage:dailyreport' %}">Daily Report</a></li>
-            <li><a href="{% url 'frontpage:upload' %}">Upload</a></li>
-            <li><a href="{% url 'frontpage:group' %}">Groups</a></li>
-            <li><a href="{% url 'frontpage:chat' %}">Chat</a></li>
-            <li><a href="{% url 'frontpage:weekreport' %}">Weekly Report</a></li>
-            <li><a href="{% url 'frontpage:settings' %}">Settings</a></li>
-            <li><a href="{% url 'frontpage:badges' %}">Badges</a></li>
-            <li style="float:right"><a href="{% url 'frontpage:logout' %}">Logout</a></li>
-        </ul>
+          <div class="w3-bar w3-teal">
+              <a href="{% url 'frontpage:index' %}" class="w3-bar-item w3-button w3-padding-10"><b>Home</b></a>
+              <a href="{% url 'frontpage:profile' %}" class="w3-bar-item w3-button"><b>Profile</b></a>
+              <a href="{% url 'frontpage:ps' %}" class="w3-bar-item w3-button"><b>Personal Stats</b></a>
+              <a href="{% url 'frontpage:group' %}" class="w3-bar-item w3-button"><b>Groups</b></a>
+              <a href="{% url 'frontpage:chat' %}" class="w3-bar-item w3-button"><b>Chat</b></a>
+              <a href="{% url 'frontpage:dailyreport' %}" class="w3-bar-item w3-button"><b>Daily Report</b></a>
+              <a href="{% url 'frontpage:weekreport' %}" class="w3-bar-item w3-button"><b>Weekly Report</b></a>           
+              <a href="{% url 'frontpage:badges' %}" class="w3-bar-item w3-button"><b>Badges</b></a>
+              <a href="{% url 'frontpage:settings' %}" class="w3-bar-item w3-button"><b>Settings</b></a>
+              <a style="float:right" href="{% url 'frontpage:logout' %}" class="w3-bar-item w3-button"><b>Logout</b></a>
+          </div>
   </div>
 
   {% include 'frontpage/messages.html' %}

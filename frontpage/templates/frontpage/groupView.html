@@ -1,23 +1,96 @@
-<h1>Group: {{group.GroupName}}</h1>
-{% if not groupMembers %}
-    <form method="POST">
-        {% csrf_token %}
-        <p>{{group.GroupName}}<input type="hidden" name="Group" value="{{group.id}}"/> <input type="submit" value="Request to Join" /></p>
-    </form>
-{% endif %}
+{% extends 'frontpage/base.html' %}
+{% load static %}
+{% block content %}
+<html>
+    <head>
+        <title>View Groups</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
+        <style>
+            *{
+                
+                text-align: center;
+            }
+            .bd{
+                font-family: Fredoka;
+                border: none;
+                border-radius: 15px;
+                background-color: #b3ffb3;
+            }
+            .lines{
+                width: 90%;
+                border-bottom: 4px solid gray;
+                border-radius: 5px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 15px;
+                margin-top: 15px;
+            }
+            h1{
+                border: none;
+                background-color: #4dceaa;
+                border-radius: 15px;
+                width: 50%;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 5px;
+                margin-bottom: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="min-height: calc(100vh - 299px);">
+        <div class="bd">
+            <div>
+                <h1>Group: {{group.GroupName}}</h1>
+                {% if not groupMembers %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <p><input type="hidden" name="Group" value="{{group.id}}"/> <input type="submit" value="Request to Join" /></p>
+                    </form>
+                {% endif %}
+            </div>
 
-<h3>Members:</h3>
-{% if user == group.Owner %}
-    <a href="{% url 'frontpage:addUsers' group.id %}">Invite Users</a>
-{% endif %}
-{% for member in groupMembers %}
-    <p>{{member.User.username}}</p>
-{% endfor %}
+            <div class="lines"></div>
+            {% if user == group.Owner %}
+            <div class="invite">
+                <h1>You can invite others to join your group:</h1>
+                
+                <form method="POST" action="{% url 'frontpage:groupView' group.id %}">
+                    {% csrf_token %}
+                    <p>Enter the emails of users you would like to invite, separated by commas.</p>
+                    <input style="width:450px" type="email" name="emails" multiple><input type="submit" value="submit">
+                </form>
+               
+                
+            </div>
 
-<h3>Requests:</h3>
-{% for request in groupRequests %}
-    <form method="POST">
-        {% csrf_token %}
-        <p>{{request.User.username}}<input type="hidden" name="User" value="{{request.User.id}}"/><input type="submit" value="Accept Request"/></p>
-    </form>
-{% endfor %}
+            <div class="lines"></div>
+            {% endif %}
+            {% if groupMembers %}
+            <div>
+                <h1>Members:</h1>
+                    {% for member in groupMembers %}
+                        <p>{{member.User.username}}</p>
+                    {% endfor %}
+            </div>
+
+            <div class="lines"></div>
+            {% endif %}
+            {% if user == group.Owner %}
+            <div>
+                <h1>Requests:</h1>
+                {% for request in groupRequests %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <p>{{request.User.username}}<input type="hidden" name="User" value="{{request.User.id}}"/><input type="submit" value="Accept Request"/></p>
+                    </form>
+                {% endfor %}
+            </div>
+            <div class="lines"></div>
+            {% endif %}
+        </div>
+    </div>
+    </body>
+</html>
+{% endblock content %}

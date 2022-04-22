@@ -18,7 +18,9 @@
         *{
             font-family: Fredoka;
             margin: 0;
+            text-align: center;
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
         h1{
             font-size: 40px;
@@ -39,28 +41,48 @@
             background-color: white;
             color: aquamarine;
 =======
+=======
+        h1{
+            font-weight: 700;
+            font-family: Fredoka;
+>>>>>>> abf8f91d9db71316ec51405a877a12f8cb16fd95
         }
         .results{
-            background-color: rgb(255, 160, 122);
             text-align: center;
+            margin-bottom: 15px;
         }
         .results p{
-            font-size: 35px;
+            font-size: 25px;
         }
         .items{
-            background-color: rgb(245, 255, 250);
-            display: grid;
-            grid-template-columns: auto auto auto;
+            
+            background-color: #85dcb8;
             border-radius: 2px solid white;
-            padding: 5px;
+            padding-top: 20px;
             margin: 5px;
             border-radius: 15px;
+<<<<<<< HEAD
 >>>>>>> 87b4ab9be86b94a4e92d57fe56194a9b43d1649c
+=======
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .items p{
+            padding-top: 20px;
+            border: 3px solid #17252a;
+            border-radius: 5px;
+            width: 90%;
+            padding: 5px;
+            color: #4d1300;
+>>>>>>> abf8f91d9db71316ec51405a877a12f8cb16fd95
         }
     </style>
     </head>
     
     <body>
+<<<<<<< HEAD
 <<<<<<< HEAD
         <h1>Daily report</h1>
 
@@ -79,17 +101,34 @@
         <div class="header">
             <h1>Daily report</h1>
         </div>
+=======
+        <h1>These are your Statistics for today</h1>
+        {% if alreadySubmittedToday %}
+        <p>You have already submitted today!</p>
+        {% else %}
+>>>>>>> abf8f91d9db71316ec51405a877a12f8cb16fd95
         <div class="results">
-            <p><b>These are your Statistics for today</b></p>
+           
             <form method='POST'>
                 {% csrf_token %}
                 <div class="items">
-                    {{ form.as_p }}
+                    <p>How would you rate your day (0-5)? {{ form.RatingOfDay }}</p><br>
+                    <p>How many steps did you take? {{ form.StepsTaken }}</p><br>
+                    <p>How many hours did you spend sitting? {{ form.HoursSitting }}</p><br>
+                    <p>How many hours did you sleep? {{ form.HoursSlept }}</p><br>
+                    <p>How many hours did you work out (0 for did not work out)? {{ form.LengthOfWorkout }}</p><br>
+                    <p>How intense was your workout (0-5)? {{ form.IntensityOfWorkout }}</p><br>
+                    <p>How many meals did you eat? {{ form.MealsEaten }}</p><br>
+                    <p>How many snacks did you eat? {{ form.SnacksEaten }}</p><br>
+                    <p>How healthy was your food intake (0-5)? {{ form.FoodHealth }}</p><br>
+                    <p>How many cigarettes did you smoke? {{ form.CigarettesSmoked }}</p><br>
+                    <p>How many alcoholic beverages did you consume? {{ form.AlcoholicDrinks }}</p><br>
                 </div>
-                <input type="submit" value="Save" />
+                <b><input class="w3-button w3-blue w3-border w3-round-large w3-center" type="submit" value="Save" /></b>
             </form>
 >>>>>>> 87b4ab9be86b94a4e92d57fe56194a9b43d1649c
         </div>
+        {% endif %}
 
     </body>
 </html>

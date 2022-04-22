@@ -111,9 +111,11 @@
                 background: rgb(252, 254, 254);
                 color: rgb(15, 14, 14);   
                 border-radius: 10px;
+                width: 185px;
                 margin-left:auto;
                 margin-right:auto;
                 padding: 7px; 
+                font-size: 16px;
             }
             .btn img{
                 width: 20px;
@@ -177,7 +179,7 @@
                     <div class="align">     
                     <h3> Welcome to Healm </h3>
                         <div >
-                            <button type="submit" class="btn" href="{% provider_login_url 'google' %}"><img src="{% static 'frontpage/src/Google-Icon.jpg' %}" alt="Google logo"><b> Sign in with Google</b></a>
+                            <button type="submit" class="btn" href="{% provider_login_url 'google' %}"><img src="{% static 'frontpage/src/Google-Icon.jpg' %}" alt="Google logo"><b> Sign in with Google</b></button>
                         </div> 
                     </div>
                 </form>

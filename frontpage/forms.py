@@ -31,7 +31,6 @@ class DailyReportForm(forms.ModelForm):
             'StepsTaken',
             'HoursSitting',
             'HoursSlept',
-            'WorkedOut',
             'LengthOfWorkout',
             'IntensityOfWorkout',
             'MealsEaten',

@@ -17,18 +17,11 @@ import sys
 import dj_database_url
 
 
-#| #### Comment/Uncomment These For Local Environment ####
-#|
-#V
+# DEBUG and DEVELOPMENT_MODE now default to True if enviornment variables are not set
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = os.getenv("DEBUG", "False") == "True"  # Comment out for local enviornment
-DEBUG = True # Uncomment for local enviornment
+DEBUG = os.getenv("DEBUG", "True") == "True"  
 
-#DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True" # Comment out for local enviornment
-DEVELOPMENT_MODE = True # Uncomment for local environment
-#^
-#|
-#| #### Comment/Uncomment These For Local Environment ####
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "True") == "True" 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -193,3 +186,54 @@ MESSAGE_TAGS = {
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# ADMINS = [('healmteam', 'healmteam@protonmail.com')]
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'healmteam@gmail.com'
+# EMAIL_HOST_PASSWORD = 'b00@UV$wCOAJeZgW'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters':{
+        'simple': {
+            'format': '[{asctime}] [{levelname}] {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'WARNING',
+            'class': 'logging.FileHandler',
+            'filename': 'error.log',
+            'formatter':'simple',
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
+            'level' : 'INFO',
+            'formatter':'simple',
+        },
+        # 'mail_admins': {
+        #     'level': 'CRITICAL',
+        #     'class': 'django.utils.log.AdminEmailHandler',
+        #     'formatter':'simple',
+        # },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+

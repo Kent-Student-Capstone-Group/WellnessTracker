@@ -12,33 +12,30 @@
         <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
     </head>
     <style>
-        *{
+        body{
             font-family: Fredoka;
             margin: 0;
         }
         h1{
             font-size: 50px;
             text-align: center;
+            font-family: Fredoka;
         }
-        .ideal{
-            display: flex;
-            justify-content: space-between;
-            width: auto;
-            height: 500px;
+        p{
+            text-align: center;
+            font-size: 25px;
         }
-        .ideal img{
-            float: right;
-            width: 50%;
-        }
+
     </style>
     <body>
+    <div style="min-height: calc(100vh - 299px);">
         <h1> These are Statistics retrieved from your smart watch</h1>
-        <div class="ideal">
-            <p>This is your ideal weight according to height:</p>
-            <div>
-                <img src="src/ps.jpg" type="img/jpg" alt="Pic"/>
-            </div>
+
+        <div>
+            <p>Your current Statistics</p>
+            
         </div>
+    </div>
     </body>
 </html>
 {% endblock content %}

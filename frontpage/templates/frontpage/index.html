@@ -13,21 +13,10 @@
             <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
             <link rel="shortcut icon" type="image/png" href="{% load static %}" />
             <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
-                    
+            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
             <style>
-            .login_box{
-                border-style: double;
-                padding: 20px;
-            }
-            .login_box a {
-                display: block;
-                color: #666;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-            }
-            .login_box a:hover {
-                background-color: #ddd;
+            *{
+                font-family: Fredoka;
             }
             .class{
             display: flex;
@@ -36,28 +25,10 @@
             align-items: center;
             }
             .username{
-                font-size: 35px;
                 font-weight: 800;
                 text-align: center;
+                text-transform: uppercase;
                 margin-bottom: 10px;
-            }
-            .nlinks{
-                width: 100%;
-                text-align: center;
-                margin: 5px;
-                margin-bottom: 20px;
-            }
-            .nlinks a{
-                text-decoration: none;
-                border: none;
-                background-color: #ddd;
-                color: #666;
-                border-radius: 5px;
-                margin: 5px;
-                padding: 5px;
-            }
-            a :visited{
-                color: black;
             }
             .fitbit{
                 display: flex;
@@ -65,7 +36,9 @@
                 align-items: center;
                 width: auto;
                 height: 400px;
-                background-color: rgb(143, 188, 143);
+                background-color: #8EE4AF;
+                font-weight: 700;
+                color: white;
             }
             .fitbit div{
                 width: 45%;
@@ -75,50 +48,37 @@
                 float: right;
                 width: 80%;
             }
-            .fitbit a{
-                border: 2px solid black;
-                background-color: aquamarine;
-                color: black;
-                border-radius: 10px;
-                text-decoration: none;
-                padding: 7px;
-                font-weight: 700;
-            }
-            .fitbit .connect{
-                float: left;
-                margin: 20px;
-                margin-left: 0;
-            }
+
             .result{
-                background-color: #E6E6FA;
+                background-color: #feac82;
                 padding: 10px;
                 width: auto;
                 height: 400px;
+                color: white;
+                font-weight: 800;
             }
             .result img{
                 float: left;
                 width: 40%;
                 padding-left: 25px;
             }
-            .line{
-                border-bottom: 4px solid rgb(118, 115, 115);
+            .lines{
+                border-bottom: 4px solid rgb(83, 215, 174);
                 width: 100%;
+            }
+            h1{
+                font-weight: 600;
+                color: black;
+                font-family: Fredoka;
             }
             .result .left{
                 text-align: center;
-                padding-right: 50px;
             }
-            .result .left h1{
-                font-weight: 700;
+            p{
+                font-size: 20px;
             }
-            .result .left a{
-                border: 2px solid black;
-                background-color: rgb(25, 245, 171);
-                color: black;
-                border-radius: 10px;
-                text-decoration: none;
-                padding: 7px;
-                font-weight: 700;
+            .username p{
+                font-size: 30px;
             }
             </style>
             </head>
@@ -128,7 +88,7 @@
         {% if user.is_authenticated %}
         <div class="class">
             <div class="username">
-                <p>Welcome, {{ user.username }}</p>
+                <p>Welcome,  {{ user.username }}</p>
             </div>
             <div class="nlinks">
                 
@@ -139,6 +99,29 @@
             <p>Weight:{{info.Weight}}</p>
             <p>Gender:{{info.Gender}}</p>
 
+            
+            {% endif %} -->
+            <div class="fitbit">
+                <div>
+                    <h1>Lets get you started by connecting your Fitbit</h1>
+                    <p>Get your Statictics now</p>
+                    <p>Fast and easy</p><br>
+                    <div class="connect">
+                        <button class="w3-button w3-cyan w3-border w3-round-large w3-left"><a href="">Connect now</a></button>  
+                    </div>
+                </div>
+                <div>
+                    <img style="max-width:70%" src="{% static 'frontpage/src/index-excercise.jpg' %}" type="img/jpg" alt="excercise pic">
+                </div>
+            </div>
+
+            <div class="lines"></div>
+
+            <div class="statistics">
+                <h1>These are the statictics retrieved from your smart watch</h1>
+                
+            </div>
+            <div class="lines"></div>
             <section class="goals">
                 <div>
                 <h1>Goals:</h1>
@@ -150,43 +133,24 @@
                     </select>
                 </div>
             </section>
-            {% endif %} -->
-            <div class="fitbit">
-                <div>
-                    <h1>Lets get starting by connecting your Fitbit</h1>
-                    <p>Get your Statictics fast and easy</p>
-                    <div class="connect">
-                        <a href="{% url 'frontpage:upload' %}">Connect now</a>
-                    </div>
-                </div>
-                <div>
-                    <img src="{% static 'frontpage/src/index-excercise.jpg' %}" type="img/jpg" alt="excercise pic">
-                </div>
-            </div>
-
-            <div class="line"></div>
-
+            <div class="lines"></div>
             <div class="result">
                 <div>
                     <img src="{% static 'frontpage/src/ps.jpg' %}" type="img/jpg"/>
                 </div>
                 <div class="left">
-                    <h1>The ideal weight recommended for your height</h1>
-                    <br>
-                        <div>
-                            <p>According to Rush.</p>
-                            <p>You can check link below made by Rush.edu</p>
-                            <a href="https://www.rush.edu/how-much-should-i-weigh">Learn more</a>
-                        </div>
+                        <h1>You can check your Ideal weight recommended for your height</h1>                        
+                        <p>You can check link below made by Rush.edu for information regarding it.</p>
+                        <br>
+                    <div>  
+                        <button class="w3-button w3-cyan w3-border w3-round-large w3-center"><a href="https://www.rush.edu/how-much-should-i-weigh">Learn more</a></button>                                       
+                    </div>
                 </div>
             </div>
+            <div class="lines"></div>
+            
 
-            <div class="line"></div>
-
-            <div class="statistics">
-                <h1>These are the statictics retrived from your smart watch</h1>
-                
-            </div>
+            
 
             <div class="UserStats">
                 <h1> Your daily custom stats are: </h1>
