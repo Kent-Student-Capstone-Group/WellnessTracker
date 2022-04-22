@@ -14,7 +14,7 @@ class UserInfo(models.Model):
     #LastName = models.CharField(max_length=100)
     #Email = models.CharField(max_length=100)
     #Password = models.CharField(max_length=100)
-    DateOfBirth = models.DateTimeField(blank=True, null=True)
+    DateOfBirth = models.DateField(blank=True, null=True)
     HeightFeet = models.IntegerField(blank=1, null=True)
     HeightInches = models.IntegerField(blank=1, null=True)
     Weight = models.FloatField(blank=1, null=True)
@@ -38,7 +38,7 @@ class Group(models.Model):
 class Chat(models.Model):
     Sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='Sender', null=True)
     Recipient = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='Recipient', null=True)
-    TimeSent = models.DateTimeField(default=datetime.datetime.now())
+    TimeSent = models.DateTimeField(auto_now=True)
     MessageTitle = models.CharField(max_length=100, null=True)
     MessageBody = models.TextField(max_length=5000, null=True)
 
@@ -47,7 +47,7 @@ class Chat(models.Model):
 
 class DailyReport(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
-    DateAndTime = models.DateTimeField(default=datetime.datetime.now(), null=True)
+    DateAndTime = models.DateTimeField(auto_now=True, null=True)
     RatingOfDay = models.IntegerField(blank=1, null=True)
     StepsTaken = models.IntegerField(blank=1, null=True)
     HoursSitting = models.FloatField(blank=1, null=True)
@@ -76,7 +76,7 @@ class UserGroupRequest(models.Model):
 class UserGroupJoinTable(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     Group = models.ForeignKey(Group, on_delete=models.CASCADE)
-    DateJoined = models.DateTimeField(default=datetime.datetime.now())
+    DateJoined = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.User.username + ":" + self.Group.GroupName

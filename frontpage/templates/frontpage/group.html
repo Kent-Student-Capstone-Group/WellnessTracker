@@ -135,8 +135,8 @@
             <a href="{% url 'frontpage:makegroup' %}">Make a New Group</a>
 
             <div class="search">
-                <form action="/action_page.php">
-                  <input type="text" placeholder="Search for a group" name="search">
+                <form action="{% url 'frontpage:group' %}" method="GET">
+                  <input type="text" placeholder="Search for a group" name="groupSearch">
                   <button type="submit"><i class="fa fa-search"></i></button>
                 </form>
             </div>
