@@ -328,7 +328,9 @@ def groupView(request, group_id):
                     newGroupRequest.Status = 'R'
                     newGroupRequest.save()
                     messages.success(request, "Request Sent")
-                    return render(request, 'frontpage/groupView.html', 'group':group_sel)
+                    return render(request, 'frontpage/groupView.html', {'group':group_sel})
+                else:
+                    messages.warning(request, "Request Pending")
             return render(request, 'frontpage/groupView.html', {'group':group_sel})
     else:
         return redirect('frontpage:welcome')
