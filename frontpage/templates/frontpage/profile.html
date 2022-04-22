@@ -145,8 +145,10 @@
     <body>
         <h1>Welcome to your profile Setup:</h1>
         <div>
-            <a href="{% url 'frontpage:userInfo' %}">User Info Form</a>
+            <a hidden = true href="{% url 'frontpage:userInfo' %}">User Info Form</a>
         </div>
+        <form method="POST">
+            {% csrf_token %}
         <div class="form1">
 
             <div class="dp">
@@ -155,24 +157,36 @@
                 </div>
                 <div>
                     <h3>Profile Picture</h3>
-                    <label><input id="image" type="file" name="profile_photo" placeholder="Photo" required="" capture></label>
+                    <label><input id="image" type="file" name="profile_photo" placeholder="Photo" capture></label>
                 </div>
             </div>
             <div class="details">
                 <div>
-                    <label>First Name:</label><input type="text" class="form-control" placeholder="First name" value="">
+                    <label>First Name:</label><input type="text" class="form-control" placeholder="First name" name="firstname" value="{{user.first_name}}">
                 </div>
                 <div>
-                    <label>Last name:</label><input type="text" class="form-control" value="" placeholder="Last name">
+                    <label>Last name:</label><input type="text" class="form-control" value="{{user.last_name}}" name="lastname" placeholder="Last name">
                 </div>
                 <div>
-                    <label>Date of birth:</label><input type="date" class="form-control" value="">
+                    <label>Date of birth:</label><input type="date" class="form-control" value="{{info_sel.DateOfBirth}}" name="dob">
                 </div>
-                <div>
+                
+                
+            </div>
+            <div class="information">
+            <div>
+                <label>Height:</label><input type="number" class="form-control" placeholder="in feet" name="heightfeet" value="{{info_sel.HeightFeet}}">
+                <div></label><input type="number" class="form-control" placeholder="in inches" name="heightinches" value="{{info_sel.HeightInches}}">
+                </div>
+            </div>
+            <div>
+                <label>Weight:</label><input type="number" class="form-control" placeholder="in lbs" name="weight" value="{{info_sel.Weight}}">
+            </div>
+            <div>
                     <label>Gender:</label>
                         <div>
                             <select name="gender">
-                                <option value=""></option>
+                                <option value="{{info_sel.Gender}}"></option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                                 <option value="other">Other</option>
@@ -180,25 +194,13 @@
                             </select>
                         </div>
                 </div>
-                
-            </div>
-            <div class="information">
-            <div>
-                <label>Height:</label><input type="number" class="form-control" placeholder="in feet" value="">
-                <div></label><input type="number" class="form-control" placeholder="in inches" value="">
-                </div>
-            </div>
-            <div>
-                <label>Weight:</label><input type="number" class="form-control" placeholder="in lbs" value="">
-            </div>
-            <div>
-                <label>Mobile Number:</label><input type="tel" class="form-control" placeholder="(+1) Phone number" value="">
-            </div>
             </div>
             </div> 
             <div class="center">
-                <button type="text" class="submit">Submit</button>
+                <button type="submit" class="submit">Submit</button>
             </div>
+        </div>
+        </form>
     </body>
 </html>
 

@@ -46,45 +46,38 @@
                 {% if not groupMembers %}
                     <form method="POST">
                         {% csrf_token %}
-                        <p>{{group.GroupName}}<input type="hidden" name="Group" value="{{group.id}}"/> <input type="submit" value="Request to Join" /></p>
+                        <p><input type="hidden" name="Group" value="{{group.id}}"/> <input type="submit" value="Request to Join" /></p>
                     </form>
                 {% endif %}
             </div>
 
-<h3>Members:</h3>
-{% if user == group.Owner %}
-    <form method="POST" action="{% url 'frontpage:groupView' group.id %}">
-        {% csrf_token %}
-        <p>Enter the emails of users you would like to invite, separated by commas.</p>
-        <input style="width:450px" type="email" name="emails" multiple><input type="button" value="submit">
-    </form>
-    {% if emails %}
-        <p>{{emails}}</p>
-    {% endif %}
-{% endif %}
-{% for member in groupMembers %}
-    <p>{{member.User.username}}</p>
-{% endfor %}
             <div class="lines"></div>
+            {% if user == group.Owner %}
             <div class="invite">
                 <h1>You can invite others to join your group:</h1>
-                {% if user == group.Owner %}
-                    <a href="{% url 'frontpage:addUsers' group.id %}">Invite Users</a>
-                {% endif %}
+                
+                <form method="POST" action="{% url 'frontpage:groupView' group.id %}">
+                    {% csrf_token %}
+                    <p>Enter the emails of users you would like to invite, separated by commas.</p>
+                    <input style="width:450px" type="email" name="emails" multiple><input type="submit" value="submit">
+                </form>
+               
+                
             </div>
 
             <div class="lines"></div>
-
+            {% endif %}
+            {% if groupMembers %}
             <div>
                 <h1>Members:</h1>
-                    <h2>Other members in the group</h2>
                     {% for member in groupMembers %}
                         <p>{{member.User.username}}</p>
                     {% endfor %}
             </div>
 
             <div class="lines"></div>
-
+            {% endif %}
+            {% if user == group.Owner %}
             <div>
                 <h1>Requests:</h1>
                 {% for request in groupRequests %}
@@ -95,6 +88,7 @@
                 {% endfor %}
             </div>
             <div class="lines"></div>
+            {% endif %}
         </div>
     </body>
 </html>
