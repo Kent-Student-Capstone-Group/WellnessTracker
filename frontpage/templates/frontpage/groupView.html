@@ -1,3 +1,7 @@
+{% extends 'frontpage/base.html' %}
+{% load static %}
+{% block content %}
+<div style="min-height: calc(100vh - 299px);">
 <h1>Group: {{group.GroupName}}</h1>
 {% if not groupMembers %}
     <form method="POST">
@@ -21,3 +25,5 @@
         <p>{{request.User.username}}<input type="hidden" name="User" value="{{request.User.id}}"/><input type="submit" value="Accept Request"/></p>
     </form>
 {% endfor %}
+</div>
+{% endblock content %}
