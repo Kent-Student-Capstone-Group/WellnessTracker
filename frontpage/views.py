@@ -20,18 +20,13 @@ def welcome(request):
         # except UserInfo.DoesNotExist:
         #     return render(request, 'frontpage/index.html')
     else:
-        return redirect('accounts/google/login')
+        return redirect('/accounts/google/login')
 
 def index(request):
-    return render(request, 'frontpage/index.html')
-    # if(request.user.is_authenticated):
-    #     try:
-    #         info = UserInfo.objects.get(User=request.user)
-    #         return render(request, 'frontpage/index.html', {'info':info})
-    #     except UserInfo.DoesNotExist:
-    #         return render(request, 'frontpage/index.html')
-    # else:
-    #     return render(request, 'frontpage/index.html')
+    if(request.user.is_authenticated):
+        return render(request, 'frontpage/index.html')
+    else:
+        return redirect('/accounts/google/login')
 
 def badges(request):
     if (request.user.is_authenticated):
@@ -110,21 +105,24 @@ def dailyReport(request):
     
 
 def group(request):  
-    user = request.user
-    context = {
-        'userGroups': UserGroupJoinTable.objects.filter(User = user),
-        'ownerGroups': Group.objects.filter(Owner = request.user),
-        'invites': UserGroupRequest.objects.filter(User=request.user, Status='I'),
-    }
-    if request.method=="POST":
-            NewUserGroupJoin = UserGroupJoinTable()
-            NewUserGroupJoin.User = request.user
-            NewUserGroupJoin.Group = Group.objects.get(id=request.POST.get("Group"))
-            NewUserGroupJoin.DateJoined = datetime.datetime.now()
-            NewUserGroupJoin.save()
-            UserGroupRequest.objects.get(User=request.user, Group=Group.objects.get(id = request.POST.get("Group"))).delete()
+    if request.user.is_authenticated:
+        user = request.user
+        context = {
+            'userGroups': UserGroupJoinTable.objects.filter(User = user),
+            'ownerGroups': Group.objects.filter(Owner = request.user),
+            'invites': UserGroupRequest.objects.filter(User=request.user, Status='I'),
+        }
+        if request.method=="POST":
+                NewUserGroupJoin = UserGroupJoinTable()
+                NewUserGroupJoin.User = request.user
+                NewUserGroupJoin.Group = Group.objects.get(id=request.POST.get("Group"))
+                NewUserGroupJoin.DateJoined = datetime.datetime.now()
+                NewUserGroupJoin.save()
+                UserGroupRequest.objects.get(User=request.user, Group=Group.objects.get(id = request.POST.get("Group"))).delete()
 
-    return render(request, 'frontpage/group.html', context)
+        return render(request, 'frontpage/group.html', context)
+    else:
+        return redirect('/accounts/google/login')
 
 def groupstat(request):   
     return render(request, 'frontpage/groupstat.html')
@@ -276,3 +274,14 @@ def notifications(request):
 def profileEdit(request):
     return render(request, 'frontpage/profileedit.html')
 
+def custom404(request, exception):
+    return render(request, 'errorHandlers/404.html')
+
+def custom500(request):
+    return render(request, 'errorHandlers/500.html')
+
+def custom403(request, exception):
+    return render(request, 'errorHandlers/403.html')
+
+def custom400(request, exception):
+    return render(request, 'errorHandlers/400.html')
