@@ -194,18 +194,40 @@ MESSAGE_TAGS = {
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+ADMINS = [('healmteam', 'healmteam@protonmail.com')]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'healmteam@gmail.com'
+EMAIL_HOST_PASSWORD = 'b00@UV$wCOAJeZgW'
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters':{
+        'simple': {
+            'format': '[{levelname}] [{asctime}] {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
         'file': {
-            'level': 'DEBUG',
+            'level': 'WARNING',
             'class': 'logging.FileHandler',
             'filename': 'error.log',
+            'formatter':'simple',
         },
         'console': {
             'class': 'logging.StreamHandler',
             'level' : 'INFO',
+            'formatter':'simple',
+        },
+        'mail_admins': {
+            'level': 'CRITICAL',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'formatter':'simple',
         },
     },
     'root': {
@@ -215,8 +237,10 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['file'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             'propagate': True,
         },
     },
 }
+
+
