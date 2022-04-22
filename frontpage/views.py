@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.utils import timezone
 import datetime
 from django.contrib.auth import get_user_model
-from .models import DailyReport, UserInfo, UserGroupJoinTable, UserInfo, Group, Chat, UserGroupRequest
+from .models import DailyReport, UserInfo, UserGroupJoinTable, UserInfo, Group, Chat, UserGroupRequest, FitBitData, UserCustomData 
 from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendChat, SendGroupJoinRequest
 from django.contrib import messages
 import time
@@ -23,15 +23,14 @@ def welcome(request):
         return redirect('accounts/google/login')
 
 def index(request):
-    return render(request, 'frontpage/index.html')
-    # if(request.user.is_authenticated):
-    #     try:
-    #         info = UserInfo.objects.get(User=request.user)
-    #         return render(request, 'frontpage/index.html', {'info':info})
-    #     except UserInfo.DoesNotExist:
-    #         return render(request, 'frontpage/index.html')
-    # else:
-    #     return render(request, 'frontpage/index.html')
+
+   if(request.user.is_authenticated):
+
+        UserData = UserCustomData.objects.filter(User = request.user)
+        return render(request, 'frontpage/index.html', {'Current_stats': UserData})
+    else:
+        return redirect('frontpage:welcome')
+
 
 def badges(request):
     if (request.user.is_authenticated):

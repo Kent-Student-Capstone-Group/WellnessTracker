@@ -95,3 +95,20 @@ class MetalsTable(models.Model):
 
     def __str__(self):
         return "Medals: " + self.User.username
+
+
+class FitBitData(models.Model):
+    User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    StepsTaken = models.IntegerField(blank=1, null=True)
+    HeartRate = models.IntegerField(blank=1, null=True)
+    HoursSlept = models.FloatField(blank=1, null=True)
+    ActiveHours = models.FloatField(blank=1, null=True)
+    #Activity types ??
+    def __str__(self):
+         return '%s %s' % (self.StepsTaken, self.HeartRate, self.HoursSlept)
+
+class UserCustomData(models.Model):
+    User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "Medals: " + self.User.username
