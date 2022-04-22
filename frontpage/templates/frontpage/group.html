@@ -18,50 +18,67 @@
             text-align: center;
             margin: 0;
         }
-        h1{
-            background-color: rgb(0, 255, 145);
-            color: antiquewhite;
-            font-size: 40px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
         .newg{
             display: flex;
-            justify-content: space-between;
+            justify-content: space-evenly;
             align-items: center;
-            width: auto;
-            margin: 15px;
+            width: 80%;
+            background-color: #8EE4AF;
+            padding: 10px;
+            border-radius: 10px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .newg a{
-            border: 5px solid rgb(30, 251, 225);
-            color: rgb(17, 18, 18);
+            background-color: #189382;
+            border: 3px solid #5ab9ea;
+            color: white;
             text-decoration: none;
-            font-size: 30px;
-            border-radius: 15px;
+            padding: 5px;
+            font-size: 20px;
+            border-radius: 10px;
             text-align: center;          
         }
-        .line{
+        .lines{
             border-top: 3px solid grey;
         }
         .arrange{
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
             align-items: center;
         }
-        
         .owner{
-            border: 4px solid rgb(20, 247, 20);
+            border: 4px solid #41b3a3;
+            background-color: white;
             border-radius: 10px;
             padding: 5px;
             margin: 10px;
-            background-color: rgb(248, 246, 244);
+            width: 95%;
+            margin-left: auto;
+            margin-right: auto;
         }
         .member{
-            border: 4px solid rgb(30, 249, 30);
+            border: 4px solid #41b3a3;
+            background-color: white;
             border-radius: 10px;
+            width: 95%;
+            margin-left: auto;
+            margin-right: auto;
             padding: 5px;
             margin: 10px;
-            background-color: rgb(255, 252, 248);
+            
+        }
+        .arrange h1{
+            background-color: #5ab9ea;
+            color: white;
+            border-radius: 10px;
+            padding: 5px;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            text-decoration: underline;
+            margin-bottom: 15px;
         }
         .search{
             float: right;
@@ -71,33 +88,52 @@
             margin-top: 8px;
             font-size: 17px;
             border: none;
+            border-radius: 10px;
         }
         .search button {
             float: right;
             padding: 6px 10px;
             margin-top: 8px;
-            margin-right: 16px;
-            background: #ddd;
+            background: rgb(15, 174, 247);
+            border-radius: 30%;
             font-size: 17px;
             border: none;
             cursor: pointer;
         }
         .search input[type=text] {
-            border: 1px solid #ccc;  
+            border: 2px solid rgb(11, 11, 11);  
+        }
+        .invite{
+            border: 4px solid #41b3a3;
+            background-color: #1affb2;
+            color: aliceblue;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            width: 95%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .invite h3{
+            font-weight: 700;
+            color: black;
+            padding: 10px;
         }
     </style>
 
     
     <body>
         <h1>Groups</h1>
-        <h3>Pending Invites:</h3>
-            {% for invite in invites %}
-                <form method="POST">{% csrf_token %} {{invite.Group.GroupName}}<input type="hidden" name="Group" value="{{invite.Group.id}}"><input type="submit" value="Accept"></form>
-            {% endfor %}
+        <div class="invite">
+            <h3>Pending Invites:</h3>
+                {% for invite in invites %}
+                    <form method="POST">{% csrf_token %} {{invite.Group.GroupName}}<input type="hidden" name="Group" value="{{invite.Group.id}}"><input type="submit" value="Accept"></form>
+                {% endfor %}
+        </div>
         <div class="newg">
             <a href="#">Join a group</a>
             <a href="{% url 'frontpage:searchGroups' %}">Search Groups</a>
             <a href="{% url 'frontpage:makegroup' %}">Make a New Group</a>
+
             <div class="search">
                 <form action="/action_page.php">
                   <input type="text" placeholder="Search for a group" name="search">
@@ -108,7 +144,7 @@
         <div class="arrange">
             
             <div class="owner">
-                    <h3>You are the Owner of these groups:</h3>
+                    <h1>You are the Owner of these groups:</h1>
                     <table>
                         {% for ownerGroup in ownerGroups %}
                         <tr>
@@ -116,41 +152,38 @@
                         </tr>
                         {% endfor %}
                     </table>
-                    <div class="group-goals">
-                        <h3>Set a New Goal:</h3>
-                            <select>
-                                <option value=""></option>
-                                <option value="3000 steps">3000 Steps in a day</option>
-                                <option value="2 hours">2 hours excersizing everyday.</option>
-                                <option value="Custom goal">Custom goal</option>
-                            </select>
-                            <button type="submit" value="Submit">Submit</button>
-                        <h3>Group goals:</h3>
+                    
+            <div class="group-goals">
+                <h3>Set a New Goal:</h3>
+                    <select>
+                        <option value=""></option>
+                        <option value="3000 steps">3000 Steps in a day</option>
+                        <option value="2 hours">2 hours excersizing everyday.</option>
+                        <option value="Custom goal">Custom goal</option>
+                    </select>
+                    <button type="submit" value="Submit">Submit</button>
+                    <h3>Group goals:</h3>
                             
-                    <div class="line">
-
-                    </div>
-                    </div>
-                    <div class="group-stats">
-                        <h3>Progress of the members in the groups</h3>
-                        <table>
-                            <td>member name</td>
-                            <td>member name</td>
-                            <td>member name</td>
-                            <td>member name</td>
-                        </table>
-                    </div> 
+                <div class="lines"></div>
             </div>
-            <div class="member">
-                    <h3>You are a member of these Groups:</h3>
+
+                <div class="group-stats">
+                    <h3>Progress of the members in the groups</h3>
                     <table>
-                        {% for userGroup in userGroups %}
-                        <tr>
-                            <td><a href="{% url 'frontpage:groupView' userGroup.Group.id %}">{{userGroup.Group.GroupName}}</a></td>
-                        </tr>
-                        {% endfor %}
                     </table>
-                    <h3>Other members in the group:</h3>
+                </div> 
+            </div>
+
+            <div class="member">
+                <h1>You are a member of these Groups:</h1>
+                <table>
+                    {% for userGroup in userGroups %}
+                    <tr>
+                        <td><a href="{% url 'frontpage:groupView' userGroup.Group.id %}">{{userGroup.Group.GroupName}}</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <h3>Other members in the group:</h3>
             </div> 
         </div>
           
