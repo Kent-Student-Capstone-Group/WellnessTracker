@@ -48,6 +48,7 @@
             width: 50%;
             margin-left: auto;
             margin-right: auto;
+            margin-bottom: 10px;
             color: white;
         }
         th{
@@ -71,16 +72,22 @@
         tr:last-of-type td:last-of-type {
             border-bottom-right-radius: 10px;
           }
-          table{
+        form{
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            line-height: 2em;
+          }
+        table{
             width:90%;
             margin-left:auto;
             margin-right:auto;
             margin-bottom: 20px;
-          }
+        }
           
     </style>
     <body>
-        <h1>Send Messages to your group members</h1>
+        <h1><b>Send Messages to your group members</b></h1>
         <div class="message-box">
             <p>Message Box</p>
             <form method='POST'>
@@ -88,6 +95,7 @@
                 To: {{ form.Recipient }}
                 Title: {{ form.MessageTitle }}<br>
                 Message:<br> {{ form.MessageBody }}
+                <br>
                 <b><input class="w3-button w3-teal w3-border w3-round-large w3-center" type="submit" value="Send"/></b>
                 
             </form>
