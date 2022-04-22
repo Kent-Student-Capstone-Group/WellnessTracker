@@ -3,3 +3,5 @@ db.sqlite3
 frontpage/migrations/
 healm/settings.py
 *.csv
+error.log
+db.json
