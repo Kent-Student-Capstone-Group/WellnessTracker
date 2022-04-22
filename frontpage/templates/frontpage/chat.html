@@ -18,9 +18,8 @@
             margin: 0;
         }
         h1{
-            background-color: red;
-            color: white;
-            padding: 20px;
+            color: rgb(16, 16, 16);
+            padding: 10px;
             margin-bottom: 10px;
         }
         table {
@@ -29,14 +28,31 @@
         }
           
         td, th {
-            border: 1px solid #dddddd;
+            border: 2px solid #17252a;
             text-align: left;
             padding: 8px;
         }
-        
+        .message-box{
+            background-color: #c8eff9;
+            border: 3px solid #17252a;
+            text-align: center;
+            margin: 15px;
+            border-radius: 15px;
+        }
+        .message-box p{
+            font-size: 25px;
+            padding: 5px;
+            border: none;
+            border-radius: 15px;
+            background-color: #55bdca;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            color: white;
+        }
         th{
-            border-bottom: 3px solid #000000;
-            background-color: #999999;
+            border-bottom: 3px solid #17252a;
+            background-color: #41b3a3;
         }
 
         tr:nth-child(odd) {
@@ -45,29 +61,38 @@
 
         th:first-of-type {
             border-top-left-radius: 10px;
-          }
-          th:last-of-type {
+        }
+        th:last-of-type {
             border-top-right-radius: 10px;
-          }
-          tr:last-of-type td:first-of-type {
+        }
+        tr:last-of-type td:first-of-type {
             border-bottom-left-radius: 10px;
-          }
-          tr:last-of-type td:last-of-type {
+        }
+        tr:last-of-type td:last-of-type {
             border-bottom-right-radius: 10px;
+          }
+          table{
+            width:90%;
+            margin-left:auto;
+            margin-right:auto;
+            margin-bottom: 20px;
           }
           
     </style>
     <body>
-        <h1>Send Message to your group members</h1>
-        <form method='POST'>
-            {% csrf_token %}
-            To: {{ form.Recipient }}<br>
-            Title: {{ form.MessageTitle }}<br>
-            Message: {{ form.MessageBody }}
-            <input type="submit" value="Send" />
-        </form>
-
-        <table style="width:90%; margin-left:auto; margin-right:auto">
+        <h1>Send Messages to your group members</h1>
+        <div class="message-box">
+            <p>Message Box</p>
+            <form method='POST'>
+                {% csrf_token %}
+                To: {{ form.Recipient }}
+                Title: {{ form.MessageTitle }}<br>
+                Message:<br> {{ form.MessageBody }}
+                <b><input class="w3-button w3-teal w3-border w3-round-large w3-center" type="submit" value="Send"/></b>
+                
+            </form>
+        </div>
+        <table>
             <tr>
                 <th colspan="2">Your Messages</th>
             </tr>
@@ -80,14 +105,6 @@
         </table>
 
         <!-- Prob need some kind of loop to show desired number of emails or make it 20 or something-->
-
-
-          <div class="groups-chat">
-            
-          </div>
-          <div class="">
-
-          </div>
           
     </body>
 </html>
