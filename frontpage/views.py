@@ -119,8 +119,15 @@ def group(request):
                 NewUserGroupJoin.DateJoined = datetime.datetime.now()
                 NewUserGroupJoin.save()
                 UserGroupRequest.objects.get(User=request.user, Group=Group.objects.get(id = request.POST.get("Group"))).delete()
-
-        return render(request, 'frontpage/group.html', context)
+        elif request.GET.get("groupSearch"):
+            try:
+                groupSearch = request.GET.get("groupSearch")
+                matchGroups = Group.objects.filter(GroupName__icontains=groupSearch)
+                return render(request, 'frontpage/searchGroups.html', {'groupSearch':groupSearch,'matchGroups':matchGroups})
+            except Group.DoesNotExist:
+                return render(request, 'frontpage/searchGroups.html', {'groupSearch':groupSearch})
+        else:
+            return render(request, 'frontpage/group.html', context)
     else:
         return redirect('/accounts/google/login')
 
@@ -215,38 +222,59 @@ def searchGroups(request):
             return render(request, 'frontpage/index.html')
 
 def groupView(request, group_id):
-    group_id = int(group_id)
-    try:
-        group_sel = Group.objects.get(id = group_id)
-    except Group.DoesNotExist:
-        return redirect('index')
+    if request.user.is_authenticated:
+        group_id = int(group_id)
+        try:
+            group_sel = Group.objects.get(id = group_id)
+        except Group.DoesNotExist:
+            return redirect("frontpage:index")
 
-    groupMembers = UserGroupJoinTable.objects.filter(Group = group_sel)
-    if group_sel.Owner == request.user:
-        if(request.method == "POST"):
-            djangoUser = get_user_model().objects.get(id=request.POST.get("User"))
-            NewUserGroupJoin = UserGroupJoinTable()
-            NewUserGroupJoin.User = djangoUser
-            NewUserGroupJoin.Group = Group.objects.get(id=group_id)
-            NewUserGroupJoin.DateJoined = datetime.datetime.now()
-            NewUserGroupJoin.save()
-            UserGroupRequest.objects.get(User=djangoUser, Group=Group.objects.get(id = group_id)).delete()
-        
-        groupRequests = UserGroupRequest.objects.filter(Group = group_sel)
-        return render(request, 'frontpage/groupView.html', {'group':group_sel, 'groupMembers':groupMembers, 'groupRequests':groupRequests})
-    try:
-        groupUser = groupMembers.get(User=request.user)
-        return render(request, 'frontpage/groupView.html', {'group':group_sel, 'groupMembers':groupMembers})
-    except :
-        if(request.method == "POST"):
-            newGroupRequest = UserGroupRequest()
-            newGroupRequest.Group = group_sel
-            newGroupRequest.User = request.user
-            newGroupRequest.TimeOfRequest = datetime.datetime.now()
-            newGroupRequest.Status = 'R'
-            newGroupRequest.save()
-            return HttpResponse("Request Sent!")
-        return render(request, 'frontpage/groupView.html', {'group':group_sel})
+        groupMembers = UserGroupJoinTable.objects.filter(Group = group_sel)
+        if group_sel.Owner == request.user:
+            groupRequests = UserGroupRequest.objects.filter(Group = group_sel, Status='R')
+            if(request.method == "POST"):
+                if request.POST.get("User"):
+                    djangoUser = get_user_model().objects.get(id=request.POST.get("User"))
+                    NewUserGroupJoin = UserGroupJoinTable()
+                    NewUserGroupJoin.User = djangoUser
+                    NewUserGroupJoin.Group = Group.objects.get(id=group_id)
+                    NewUserGroupJoin.DateJoined = datetime.datetime.now()
+                    NewUserGroupJoin.save()
+                    UserGroupRequest.objects.get(User=djangoUser, Group=Group.objects.get(id = group_id)).delete()
+                if request.POST.get("emails"):
+                    emails = str(request.POST.get("emails"))
+                    emails = emails.replace(' ', '')
+                    emails = emails.split(',')
+                    for email in emails:
+                        try:
+                            djangoUser = get_user_model().objects.get(email=email)
+                            if djangoUser != request.user and not UserGroupRequest.objects.filter(Group=group_sel, User=djangoUser).exists():
+                                newGroupRequest = UserGroupRequest()
+                                newGroupRequest.Group = group_sel
+                                newGroupRequest.User = djangoUser
+                                newGroupRequest.TimeOfRequest = datetime.datetime.now()
+                                newGroupRequest.Status = 'I'
+                                newGroupRequest.save()
+                        except:
+                            pass
+
+                    return render(request, 'frontpage/groupView.html', {'group':group_sel, 'groupMembers':groupMembers, 'groupRequests':groupRequests, 'emails':emails})
+            return render(request, 'frontpage/groupView.html', {'group':group_sel, 'groupMembers':groupMembers, 'groupRequests':groupRequests})
+        try:
+            groupUser = groupMembers.get(User=request.user)
+            return render(request, 'frontpage/groupView.html', {'group':group_sel, 'groupMembers':groupMembers})
+        except :
+            if(request.method == "POST"):
+                newGroupRequest = UserGroupRequest()
+                newGroupRequest.Group = group_sel
+                newGroupRequest.User = request.user
+                newGroupRequest.TimeOfRequest = datetime.datetime.now()
+                newGroupRequest.Status = 'R'
+                newGroupRequest.save()
+                return HttpResponse("Request Sent!")
+            return render(request, 'frontpage/groupView.html', {'group':group_sel})
+    else:
+        return redirect('frontpage:index')
 
 
 def addUsers(request, group_id):

@@ -12,7 +12,14 @@
 
 <h3>Members:</h3>
 {% if user == group.Owner %}
-    <a href="{% url 'frontpage:addUsers' group.id %}">Invite Users</a>
+    <form method="POST" action="{% url 'frontpage:groupView' group.id %}">
+        {% csrf_token %}
+        <p>Enter the emails of users you would like to invite, separated by commas.</p>
+        <input style="width:450px" type="email" name="emails" multiple><input type="button" value="submit">
+    </form>
+    {% if emails %}
+        <p>{{emails}}</p>
+    {% endif %}
 {% endif %}
 {% for member in groupMembers %}
     <p>{{member.User.username}}</p>
