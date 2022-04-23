@@ -98,6 +98,7 @@ class MetalsTable(models.Model):
 
 class FitBitData(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    DateAndTime = models.DateTimeField(auto_now=True, null=True)
     StepsTaken = models.IntegerField(blank=1, null=True)
     HeartRate = models.IntegerField(blank=1, null=True)
     HoursSlept = models.FloatField(blank=1, null=True)

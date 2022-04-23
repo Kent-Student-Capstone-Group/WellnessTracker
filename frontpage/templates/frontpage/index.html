@@ -152,9 +152,30 @@
 
             
 
-            <div class="UserStats">
+            <div class="UserStats">  <!-- How do we label the custom values? -->
                 <h1> Your daily custom stats are: </h1>
+                {% for x in Current_stats %}
+                    {%if x is not null%}
+                        x
+                    {%endif%}
+                {%endfor%}
             </div>
+
+            <table>   <!-- Will prob need another view to display this data on another page -->
+                <tr>
+                    <th colspan="2">Your daily Fitbit stats are:</th>
+                </tr>
+                {% for x in Fit_Bit_Info %}
+                <tr>
+                    {%if x is not null%}
+                        <td><i><p> Steps Taken</p>{{x.StepsTaken}}</i> <br>
+                        <p> Heart Rate</p>{{ x.HeartRate }}<br> 
+                        <p> Hours Slept</p>{{ x.HoursSlept }}<br>
+                        <p> Active hours</p>{{ x.ActiveHours }} </td>
+                    {%endif%}
+                </tr>
+                {% endfor %}
+            </table>
 
         {% else %}
             {% if google_login %}
