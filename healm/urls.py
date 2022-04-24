@@ -19,6 +19,7 @@ from django.urls import include, path
 #from fitapp import include, path
 
 #from frontpage import fitbit, views
+from frontpage import views
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView
 
