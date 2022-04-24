@@ -13,7 +13,7 @@ import time
 
 def welcome(request):
     if(request.user.is_authenticated):
-        return render(request, 'frontpage/index.html')
+        return redirect('frontpage:index')
         # try:
         #     info = UserInfo.objects.get(User=request.user)
         #     return render(request, 'frontpage/index.html', {'info':info})
@@ -25,10 +25,12 @@ def welcome(request):
 def index(request):
 
    if(request.user.is_authenticated):
-
-        UserData = UserCustomData.objects.filter(User = request.user)
+        end_date = datetime.datetime.now() + datetime.timedelta(days=1)
+        start_date = datetime.datetime.now() + datetime.timedelta(days=-31)
+        chartData = DailyReport.objects.filter(User=request.user, DateAndTime__range=(start_date,end_date)).order_by('DateAndTime')
+        #UserData = UserCustomData.objects.filter(User = request.user)
         #FitBitToday = FitBitData.object.filter(DateAndTime.date.today() == datetime.date.today())   # Will likely move to another view
-        return render(request, 'frontpage/index.html', {'Current_stats': UserData})
+        return render(request, 'frontpage/index.html', {'chartData': chartData})
    else:
         return redirect('frontpage:welcome')
 
@@ -86,6 +88,7 @@ def dailyReport(request):
         if form.is_valid():
             newDailyReport = DailyReport()
             newDailyReport.User = request.user
+            newDailyReport.DateAndTime = datetime.datetime.now()
             newDailyReport.RatingOfDay = request.POST.get("RatingOfDay")
             newDailyReport.StepsTaken = request.POST.get("StepsTaken")
             newDailyReport.HoursSitting = request.POST.get("HoursSitting")

@@ -1,5 +1,7 @@
 {% extends 'frontpage/base.html' %}
 
+
+
 {% block content %}
 
 {% load socialaccount %}
@@ -81,7 +83,51 @@
                 font-size: 30px;
             }
             </style>
-            </head>
+        <script type="text/javascript">
+            // $(document).ready(
+            //     function(){
+            //         $('#jqtest').html("JQuery installed successfully!");
+            //     }
+            // );
+            // $(document).ready(function(){
+            //     $("button").click(function(){
+            //         $("p").toggle();
+            //     });
+            // });
+            $(document).ready(function(){
+                const ctx = document.getElementById('myChart');
+                const myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [{%for data in chartData %}"{{data.DateAndTime}}",{%endfor%}],
+                        datasets: [{
+                            label: 'Steps Taken',
+                            data: [{%for data in chartData %}{{data.StepsTaken}},{%endfor%}],
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgb(75, 192, 192)',
+                            ],
+                            borderWidth: 1,
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            },
+                        plugins: {
+                            filler: {
+                                propagate:true
+                            }
+                        }
+                        }
+                    }
+                });
+            });
+        </script>
+    </head>
             <br>
 <body>
     
@@ -89,18 +135,13 @@
         <div class="class">
             <div class="username">
                 <p>Welcome,  {{ user.username }}</p>
+                <!-- <button>Button</button>
+                <p id="jqtest"></p> -->
             </div>
             <div class="nlinks">
                 
             </div>
-            <!-- {% if info %}
-            <p>Date of Birth:{{info.DateOfBirth}}</p>
-            <p>Height:{{info.HeightFeet}}'{{info.HeightInches}}"</p>
-            <p>Weight:{{info.Weight}}</p>
-            <p>Gender:{{info.Gender}}</p>
 
-            
-            {% endif %} -->
             <div class="fitbit">
                 <div>
                     <h1>Lets get you started by connecting your Fitbit</h1>
@@ -119,7 +160,8 @@
 
             <div class="statistics">
                 <h1>These are the statictics retrieved from your smart watch</h1>
-                
+                <p>hello</p>
+                <canvas id="myChart" width="400" height="200"></canvas>
             </div>
             <div class="lines"></div>
             <section class="goals">

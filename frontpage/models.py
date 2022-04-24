@@ -47,7 +47,7 @@ class Chat(models.Model):
 
 class DailyReport(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
-    DateAndTime = models.DateTimeField(auto_now=True, null=True)
+    DateAndTime = models.DateTimeField(null=True)
     RatingOfDay = models.IntegerField(blank=1, null=True)
     StepsTaken = models.IntegerField(blank=1, null=True)
     HoursSitting = models.FloatField(blank=1, null=True)
