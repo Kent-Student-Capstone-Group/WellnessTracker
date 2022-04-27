@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'fitapp',
 ]
 
 MIDDLEWARE = [
@@ -237,3 +238,5 @@ LOGGING = {
 }
 
 
+FITAPP_CONSUMER_KEY = '238FG4'
+FITAPP_CONSUMER_SECRET= 'c7a44bea786fec9db0cf0b2cd2e0956d'
