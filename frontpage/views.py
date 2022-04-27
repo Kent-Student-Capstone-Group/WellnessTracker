@@ -27,8 +27,8 @@ def index(request):
    if(request.user.is_authenticated):
 
         UserData = UserCustomData.objects.filter(User = request.user)
-       # FitBitToday = FitBitData.object.filter(DateAndTime.date.today() == datetime.date.today())   # Will likely move to another view
-        return render(request, 'frontpage/index.html', {'Current_stats': UserData}, {'Fit_Bit_Info': FitBitToday})
+        #FitBitToday = FitBitData.object.filter(DateAndTime.date.today() == datetime.date.today())   # Will likely move to another view
+        return render(request, 'frontpage/index.html', {'Current_stats': UserData})
    else:
         return redirect('frontpage:welcome')
 
