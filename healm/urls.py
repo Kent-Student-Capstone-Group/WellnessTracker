@@ -16,9 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path 
 
-from fitapp import include, path
+#from fitapp import include, path
 
-from frontpage import fitbit, views
+#from frontpage import fitbit, views
+from frontpage import views
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView
 
@@ -27,7 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('frontpage.urls')),
     path('accounts/', include('allauth.urls')),
-    path('fitbit/', include('fitapp.urls')),
+    #path('fitbit/', include('fitapp.urls')),
 ]
 
 handler404 = 'frontpage.views.custom404'
