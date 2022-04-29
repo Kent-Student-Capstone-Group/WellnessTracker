@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import UserInfo, Group, Chat, DailyReport, UserGroupRequest, UserGroupJoinTable
+from .models import UserInfo, Group, Chat, DailyReport, UserGroupRequest, UserGroupJoinTable, UserCustomData, UserCustomField, CustomGoal
 
 # Register your models here.
 
@@ -9,3 +9,6 @@ admin.site.register(Chat)
 admin.site.register(DailyReport)
 admin.site.register(UserGroupRequest)
 admin.site.register(UserGroupJoinTable)
+admin.site.register(UserCustomData)
+admin.site.register(UserCustomField)
+admin.site.register(CustomGoal)

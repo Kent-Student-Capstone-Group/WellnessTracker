@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.utils import timezone
 import datetime
 from django.contrib.auth import get_user_model
-from .models import DailyReport, UserInfo, UserGroupJoinTable, UserInfo, Group, Chat, UserGroupRequest, FitBitData, UserCustomData 
+from .models import DailyReport, UserInfo, UserGroupJoinTable, UserInfo, Group, Chat, UserGroupRequest, FitBitData, UserCustomData, UserCustomField, UserCustomData, CustomGoal
 from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendChat, SendGroupJoinRequest
 from django.contrib import messages
 import time
@@ -23,15 +23,71 @@ def welcome(request):
         return redirect('/accounts/google/login')
 
 def index(request):
+    if(request.user.is_authenticated):
+        customFields = UserCustomField.objects.filter(User=request.user) 
+        goals = CustomGoal.objects.filter(User=request.user)
+        
+        goalStats = {}
+        for goal in goals:
+            goalData = UserCustomData.objects.filter(Field=goal.Field, Date__range=(goal.StartDate,goal.EndDate))
+            goalSum = 0
+            for data in goalData:
+                goalSum += data.Value
+            goalCompletion = (goalSum/goal.Value) * 100
+            if goal.EndDate > datetime.date.today():
+                dailyAvg = goalSum / int((goal.EndDate - datetime.date.today()).days)
+            else:
+                dailyAvg = goalSum/ int((goal.EndDate - goal.StartDate).days)
+            requiredAvg = goal.Value / int((goal.EndDate - goal.StartDate).days)
+            #goalDetails = {'goalSum':goalSum, 'goalCompletion':goalCompletion, 'dailyAvg':dailyAvg, 'requiredAvg':requiredAvg}#[goalSum, goalCompletion, dailyAvg, requiredAvg]
+            goalStats[str(goal.id)+"goalSum"] = goalSum
+            goalStats[str(goal.id)+"goalCompletion"] = round(goalCompletion,2)
+            goalStats[str(goal.id)+"dailyAvg"] = round(dailyAvg, 2)
+            goalStats[str(goal.id)+"requiredAvg"] = round(requiredAvg,2)
+            
 
-   if(request.user.is_authenticated):
-        end_date = datetime.datetime.now() + datetime.timedelta(days=1)
-        start_date = datetime.datetime.now() + datetime.timedelta(days=-31)
+
+        
+        if not request.GET.get('end_date'):
+            end_date = datetime.datetime.now() + datetime.timedelta(days=1)
+        else:
+            end_date = datetime.datetime.strptime(request.GET.get('end_date'), '%Y-%m-%d') + datetime.timedelta(hours=23, minutes=59, seconds=59)
+        if not request.GET.get('start_date'):
+            start_date = datetime.datetime.now() + datetime.timedelta(days=-31)
+        else:
+            start_date = datetime.datetime.strptime(request.GET.get('start_date'), '%Y-%m-%d')
+            
         chartData = DailyReport.objects.filter(User=request.user, DateAndTime__range=(start_date,end_date)).order_by('DateAndTime')
+        customChartData = UserCustomData.objects.filter(Field__User=request.user, Date__range=(start_date.date(),end_date.date())).order_by('Date')
+
+        if request.POST.get('form') == 'goalForm':
+            newCustomGoal = CustomGoal()
+            newCustomGoal.User=request.user
+            newCustomGoal.StartDate = request.POST.get('start_date')
+            newCustomGoal.EndDate = request.POST.get('end_date')
+            if newCustomGoal.StartDate >= newCustomGoal.EndDate:
+                messages.error(request, "Start date must be less than end date")
+                return redirect('frontpage:index')
+            newCustomGoal.Field = UserCustomField.objects.get(User=request.user, Title=request.POST.get('field'))
+            newCustomGoal.Value = request.POST.get('value')
+            try:
+                newCustomGoal.save()
+                messages.success(request, "Goal added!")
+            except:
+                messages.warning(request, "The form was incorrect.")
+            return redirect('frontpage:index')
+
         #UserData = UserCustomData.objects.filter(User = request.user)
         #FitBitToday = FitBitData.object.filter(DateAndTime.date.today() == datetime.date.today())   # Will likely move to another view
-        return render(request, 'frontpage/index.html', {'chartData': chartData})
-   else:
+        #context = {'chartData': chartData, 'customFields':customFields, 'goals':goals}
+        context = {}
+        context['chartData'] = chartData
+        context['customFields'] = customFields
+        context['goals'] = goals
+        context['goalStats'] = goalStats
+        context['customChartData'] = customChartData
+        return render(request, 'frontpage/index.html', context)
+    else:
         return redirect('frontpage:welcome')
 
 
@@ -56,6 +112,8 @@ def createUserInfo(request):
             form.save()
             messages.success(request, "Info Submitted")
             return redirect('frontpage:index')
+        else:
+            messages.warning(request, "Invalid Form")
         return render(request, 'frontpage/userInfo_form.html', {'upload_form':form})
     else:
         return redirect('frontpage:welcome')
@@ -67,8 +125,11 @@ def chat(request):
         if form.is_valid():
             newChat = Chat(Sender = request.user, MessageTitle = request.POST.get("MessageTitle"), MessageBody = request.POST.get("MessageBody"))
             newChat.Recipient = get_user_model().objects.get(id=request.POST.get("Recipient"))
-            newChat.save()
-            messages.success(request, "Message Sent")
+            try:
+                newChat.save()
+                messages.success(request, "Message Sent")
+            except:
+                messages.warning(request, "Could not Send Message")
             return render(request, 'frontpage/index.html')
         return render(request, 'frontpage/chat.html', {'chats': chats, 'form': form})
     
@@ -80,6 +141,18 @@ def contact(request):
 
 def dailyReport(request):
     if (request.user.is_authenticated):
+
+        if request.POST.get('form') == 'field-form':
+            newUserCustomField = UserCustomField()
+            newUserCustomField.User = request.user
+            newUserCustomField.Title = request.POST.get('title')
+            try:
+                newUserCustomField.save()
+            except:
+                messages.error(request, "A field by that name already exists")
+            return redirect('frontpage:dailyreport')
+
+        customFields = UserCustomField.objects.filter(User=request.user)
         form = DailyReportForm(request.POST or None)
         TodayReports = DailyReport.objects.filter(DateAndTime=datetime.date.today())
         alreadySubmittedToday = len(TodayReports) > 0
@@ -100,17 +173,34 @@ def dailyReport(request):
             newDailyReport.FoodHealth = request.POST.get("FoodHealth")
             newDailyReport.CigarettesSmoked = request.POST.get("CigarettesSmoked")
             newDailyReport.AlcoholicDrinks = request.POST.get("AlcoholicDrinks")
-            newDailyReport.save()
+            try:
+                newDailyReport.save()
+            except:
+                messages.warning(request, "All fields must be filled correctly.")
+                return redirect('frontpage:dailyReport')
+
+            for field in customFields:
+                newUserCustomData = UserCustomData()
+                newUserCustomData.Field = field
+                nameStr = str(field.Title) + "-" + str(field.id)
+                newUserCustomData.Value = request.POST.get(nameStr)
+                newUserCustomData.Date = datetime.date.today()
+                try:
+                    newUserCustomData.save()
+                except:
+                    messages.warning(request, "All fields must be filled correctly.")
+
+
             messages.success(request, "Daily Report Submitted")
             try:
                 userInfo = UserInfo.objects.get(User = request.user)
                 userInfo.UserSteps = userInfo.UserSteps + int(newDailyReport.StepsTaken)
                 userInfo.save()
             except:
-                print("No user info")
+                messages.warning(request,"No user info")
             
             return redirect('frontpage:index')
-        return render(request, 'frontpage/dailyreport.html', {'form': form, 'alreadySubmittedToday': alreadySubmittedToday})
+        return render(request, 'frontpage/dailyreport.html', {'form': form, 'alreadySubmittedToday': alreadySubmittedToday, 'customFields':customFields})
     else:
         return redirect('frontpage:welcome')
     
@@ -128,10 +218,15 @@ def group(request):
                 NewUserGroupJoin.User = request.user
                 NewUserGroupJoin.Group = Group.objects.get(id=request.POST.get("Group"))
                 NewUserGroupJoin.DateJoined = datetime.datetime.now()
-                NewUserGroupJoin.save()
-                UserGroupRequest.objects.get(User=request.user, Group=Group.objects.get(id = request.POST.get("Group"))).delete()
-                messages.success(request, 'Group Succesfully Joined')
-                return redirect('frontpage:group')
+                try:
+                    NewUserGroupJoin.save()
+                    UserGroupRequest.objects.get(User=request.user, Group=Group.objects.get(id = request.POST.get("Group"))).delete()
+                    messages.success(request, 'Group Succesfully Joined')
+                    return redirect('frontpage:group')
+                except:
+                    messages.warning(request, "Could not join group.")
+                    return redirect('frontpage:group')
+                
         elif request.GET.get("groupSearch"):
             try:
                 groupSearch = request.GET.get("groupSearch")
@@ -168,12 +263,16 @@ def makeGroup(request):
                     NewGroup = Group()
                     NewGroup.Owner = request.user
                     NewGroup.GroupName = request.POST.get("GroupName")
-                    NewGroup.save()
+
                     NewUserGroupJoin = UserGroupJoinTable()
                     NewUserGroupJoin.Group = NewGroup
                     NewUserGroupJoin.User = request.user
-                    NewUserGroupJoin.save()
-                    messages.success(request, 'Group Succesfully Created')
+                    try:
+                        NewGroup.save()
+                        NewUserGroupJoin.save()
+                        messages.success(request, 'Group Succesfully Created')
+                    except:
+                        messages.warning(request, 'Could not create group')
                     return redirect('frontpage:makegroup')
                     
                 else:
@@ -182,19 +281,6 @@ def makeGroup(request):
             #return HttpResponse("Group Already Exists")
             messages.warning(request, 'Group Already Exists')
             return redirect('frontpage:makegroup')
-            # groupAlreadyExists = False
-            # for e in userCurrentOwnedGroups:
-            #     if e.GroupName == form.GroupName:
-            #         groupAlreadyExists = True
-
-            # if groupAlreadyExists:
-            #     if form.is_valid():
-            #         form.save()
-            #         return redirect('frontpage:index')
-            #     context = {
-            #         'form': form
-            #     }
-            #     return render(request, 'frontpage/makegroup.html', context)
         else:
             form = MakeGroup()
             return render(request, 'frontpage/makegroup.html', {'form':form})
@@ -202,12 +288,6 @@ def makeGroup(request):
     else:
         return redirect('frontpage:welcome')
 
-# There's a duplicate of this below, just plural -patrick
-# def notification(request):   
-#     if request.user.is_authenticated:
-#         return render(request, 'frontpage/notification.html')
-#     else:
-#         return redirect('frontpage:welcome')
 
 def profile(request):   
     if request.user.is_authenticated:
@@ -224,14 +304,18 @@ def profile(request):
             info_sel = UserInfo.objects.get(User=request.user)
             request.user.first_name = request.POST.get('firstname')
             request.user.last_name = request.POST.get('lastname')
-            request.user.save()
+            
             info_sel.DateOfBirth = request.POST.get('dob')
             info_sel.HeightFeet = request.POST.get('heightfeet')
             info_sel.HeightInches = request.POST.get('heightinches')
             info_sel.Weight = request.POST.get('weight')
             info_sel.Gender = request.POST.get('gender')
-            info_sel.save()
-            messages.success(request,"Info Submitted")
+            try:
+                request.user.save()
+                info_sel.save()
+                messages.success(request,"Info Submitted")
+            except:
+                messages.warning(request, "Please ensure the form is filled out correctly.")
 
         return render(request, 'frontpage/profile.html', {'info_sel':info_sel})
     else:
@@ -301,9 +385,12 @@ def groupView(request, group_id):
                     NewUserGroupJoin.User = djangoUser
                     NewUserGroupJoin.Group = Group.objects.get(id=group_id)
                     NewUserGroupJoin.DateJoined = datetime.datetime.now()
-                    NewUserGroupJoin.save()
-                    UserGroupRequest.objects.get(User=djangoUser, Group=Group.objects.get(id = group_id)).delete()
-                    messages.success(request, "User Added to Group")
+                    try:
+                        NewUserGroupJoin.save()
+                        UserGroupRequest.objects.get(User=djangoUser, Group=Group.objects.get(id = group_id)).delete()
+                        messages.success(request, "User Added to Group")
+                    except:
+                        messages.warning(request, "Could not add user to Group")
                 if request.POST.get("emails"):
                     emails = str(request.POST.get("emails"))
                     emails = emails.replace(' ', '')

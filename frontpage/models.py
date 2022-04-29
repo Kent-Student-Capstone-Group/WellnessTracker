@@ -107,8 +107,30 @@ class FitBitData(models.Model):
     def __str__(self):
          return '%s %s' % (self.StepsTaken, self.HeartRate, self.HoursSlept)
 
-class UserCustomData(models.Model):
+class UserCustomField(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    Title = models.CharField(max_length=100, blank=1, null=True)
+
+    class Meta:
+        unique_together = ['User', 'Title']
 
     def __str__(self):
-        return "Medals: " + self.User.username
+        return '%s %s' % (self.User.username, self.Title)
+
+class UserCustomData(models.Model):
+    Field = models.ForeignKey(UserCustomField, on_delete=models.CASCADE)
+    Value = models.IntegerField(blank=1, null=True)
+    Date = models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        return '%s %s %s' % (self.Field.User.username, self.Field.Title , self.Date)
+
+class CustomGoal(models.Model):
+    User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    Field = models.ForeignKey(UserCustomField, on_delete=models.CASCADE)
+    Value = models.IntegerField(blank=1, null=True)
+    EndDate = models.DateField(blank=True, null=True)
+    StartDate = models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        return '%s %s %s' % (self.Field.User.username, self.Field.Title , self.StartDate)

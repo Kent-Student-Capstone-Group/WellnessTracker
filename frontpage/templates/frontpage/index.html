@@ -82,25 +82,63 @@
             .username p{
                 font-size: 30px;
             }
+            
+            table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+            }
+
+            td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            }
+
+            tr:nth-child(even) {
+            background-color: #dddddd;
+            }
             </style>
         <script type="text/javascript">
-            // $(document).ready(
-            //     function(){
-            //         $('#jqtest').html("JQuery installed successfully!");
-            //     }
-            // );
-            // $(document).ready(function(){
-            //     $("button").click(function(){
-            //         $("p").toggle();
-            //     });
-            // });
+
+            {% for key, value in goalStats.items %}
+            $(document).ready(
+                function(){
+                    $('#{{key}}').html('{{value}}');
+                }
+            );
+            {% endfor %}
+
+            $(document).ready(
+                function(){
+                    $('#add-goal').click(
+                        function(){
+                            $('#goal-form').toggle();
+                        }
+                    );
+                }
+            );
+
+            $(document).ready(
+                function(){
+                    $('#switchChart').click(
+                        function(){
+                            $('#myChart').toggle();
+                            $('#myChart2').toggle();
+                        }
+                    );
+                    $("#myChart2").hide();
+                }
+            );
+
             $(document).ready(function(){
                 const ctx = document.getElementById('myChart');
                 const myChart = new Chart(ctx, {
                     type: 'line',
                     data: {
                         labels: [{%for data in chartData %}"{{data.DateAndTime}}",{%endfor%}],
-                        datasets: [{
+                        datasets: [
+                            {
                             label: 'Steps Taken',
                             data: [{%for data in chartData %}{{data.StepsTaken}},{%endfor%}],
                             backgroundColor: [
@@ -110,7 +148,79 @@
                                 'rgb(75, 192, 192)',
                             ],
                             borderWidth: 1,
-                        }]
+                            },
+                            {
+                            label: 'Rating of Day',
+                            data: [{%for data in chartData %}{{data.RatingOfDay}},{%endfor%}],
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgb(75, 192, 192)',
+                            ],
+                            borderWidth: 1,
+                            },
+                            {
+                            label: 'Hours Sitting',
+                            data: [{%for data in chartData %}{{data.HoursSitting}},{%endfor%}],
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgb(75, 192, 192)',
+                            ],
+                            borderWidth: 1,
+                            },
+                            {
+                            label: 'Hours Slept',
+                            data: [{%for data in chartData %}{{data.HoursSlept}},{%endfor%}],
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgb(75, 192, 192)',
+                            ],
+                            borderWidth: 1,
+                            },
+
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            },
+                        plugins: {
+                            filler: {
+                                propagate:true
+                            }
+                        }
+                        }
+                    }
+                });
+            });
+            $(document).ready(function(){
+                const ctx = document.getElementById('myChart2');
+                const myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [{%for data in customChartData %}"{{data.Date}}",{%endfor%}],
+                        datasets: [
+                            {% for field in customFields %}
+                            {
+                            label: '{{field.Title}}',
+                            data: [{%for data in customChartData %}{% if data.Field == field %}{{data.Value}},{% endif %}{%endfor%}],
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgb(75, 192, 192)',
+                            ],
+                            borderWidth: 1,
+                            },
+                            {% endfor %}
+
+                        ]
                     },
                     options: {
                         scales: {
@@ -131,12 +241,9 @@
             <br>
 <body>
     
-        {% if user.is_authenticated %}
         <div class="class">
             <div class="username">
                 <p>Welcome,  {{ user.username }}</p>
-                <!-- <button>Button</button>
-                <p id="jqtest"></p> -->
             </div>
             <div class="nlinks">
                 
@@ -159,26 +266,63 @@
             <div class="lines"></div>
 
             <div class="statistics">
-                <h1>These are the statictics retrieved from your smart watch</h1>
-                <p>hello</p>
-                <canvas id="myChart" width="400" height="200"></canvas>
+                <h1 style="padding-left:20%">Here's a breakdown of your progress.</h1>
+                <p style="padding-left:5%">Choose a date range: <form style='padding-left:5%'method="GET" action="{% url 'frontpage:index' %}">Start:<input type='date' name="start_date"/>  End:<input type="date" name="end_date"/><input type='submit' value="submit"></form><span style="margin-left:10%;margin-top:5px;padding:5px;" class="w3-button w3-blue w3-giant w3-round" title="Add a Goal" id="switchChart">Switch Chart</span></p>
+                
+                <canvas id="myChart" width="1200" height="500"></canvas>
+                <canvas id="myChart2" width="1200" height="500"></canvas>
             </div>
             <div class="lines"></div>
             <section class="goals">
                 <div>
-                <h1>Goals:</h1>
-                    <select>
-                    <option value=""></option>
-                    <option value="1000 steps">1000 steps in a day</option>
-                    <option value="10000 steps">10000 steps in a day</option>
-                    <option value="new">Create your own Goals</option>
-                    </select>
+                <h1 style="float:center">Goals:</h1>
                 </div>
             </section>
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Goal Value</th>
+                    <th>Current Value</th>
+                    <th>Daily Average</th>
+                    <th>Target Average</th>
+                    <th>% Completion</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                </tr>
+                {%for goal in goals %}
+                <tr>
+                    <td>{{goal.Field.Title}}</td>
+                    <td>{{goal.Value}}</td>
+                    <td id="{{goal.id}}goalSum"></td>
+                    <td id="{{goal.id}}dailyAvg"></td>
+                    <td id="{{goal.id}}requiredAvg"></td>
+                    <td id="{{goal.id}}goalCompletion"></td>
+                    <td>{{goal.StartDate}}</td>
+                    <td>{{goal.EndDate}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            
+            <p>Add Goal</p>
+            <span style="padding:0px;margin-bottom:5px;" class="material-icons w3-button w3-cyan w3-giant w3-round" title="Add a Goal" id="add-goal">add</span>
+            <form style="margin-bottom:5px;" hidden method="POST" id="goal-form">
+                {% csrf_token %}
+                <select name='field'>
+                    {% for field in customFields %}
+                    <option value="{{field.Title}}">{{field.Title}}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="value">
+                <input type="date" name="start_date">
+                <input type="date" name="end_date">
+                <input type="hidden" name="form" value="goalForm">
+                <input type='submit' value='submit'>
+            </form> 
+            
             <div class="lines"></div>
             <div class="result">
                 <div>
-                    <img src="{% static 'frontpage/src/ps.jpg' %}" type="img/jpg"/>
+                    <img style="max-width:32%;" src="{% static 'frontpage/src/ps.jpg' %}" type="img/jpg"/>
                 </div>
                 <div class="left">
                         <h1>You can check your Ideal weight recommended for your height</h1>                        
@@ -219,20 +363,6 @@
                 {% endfor %}   -->
             </table>
 
-        {% else %}
-            {% if google_login %}
-                <p>hello</p>
-                <a href="{% provider_login_url 'google' %}">Login With Google</a>
-            <div class = "login_box">
-                <a href="{% provider_login_url 'google' %}">Login With Google</a>
-            </div>
-            {% else %}
-            <p>hello</p>
-            <a href="{% provider_login_url 'google' %}">Login With Google</a>
-            <a href="{% url 'admin:index' %}">admin</a>
-            {% endif %}
-
-        {% endif %}
     </div>
 </body>
 

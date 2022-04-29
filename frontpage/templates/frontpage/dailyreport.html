@@ -48,6 +48,31 @@
             color: #4d1300;
         }
     </style>
+
+        <script type="text/javascript">
+
+            $(document).ready(
+                function(){
+                    $('#add-field').click(
+                        function(){
+                            $('#field-form').toggle();
+                        }
+                    );
+                }
+            );
+
+            $(document).ready(
+                function(){
+                    $('#dataFormSubmit').click(
+                        function(){
+                            $('#dataForm').submit();
+                        }
+                    );
+                }
+            );
+
+        </script>
+
     </head>
     
     <body>
@@ -57,7 +82,7 @@
         {% else %}
         <div class="results">
            
-            <form method='POST'>
+            <form id="dataForm" method='POST'>
                 {% csrf_token %}
                 <div class="items">
                     <p>How would you rate your day (0-5)? {{ form.RatingOfDay }}</p><br>
@@ -72,8 +97,27 @@
                     <p>How many cigarettes did you smoke? {{ form.CigarettesSmoked }}</p><br>
                     <p>How many alcoholic beverages did you consume? {{ form.AlcoholicDrinks }}</p><br>
                 </div>
-                <b><input class="w3-button w3-blue w3-border w3-round-large w3-center" type="submit" value="Save" /></b>
-            </form>
+                <div class="items">
+                    <h2>Custom Fields</h2>
+                    {% for field in customFields %}
+                        <p>{{field.Title}}:<input type="number" name="{{field.Title}}-{{field.id}}"></p><br>
+                    {% endfor %}
+                    </form>
+                    Add Field
+                    <span style="padding:0px;" class="material-icons w3-button w3-cyan w3-giant w3-round" title="Add a Custom Field" id="add-field">add</span>
+                    <form hidden id="field-form" method="POST">
+                        {% csrf_token %}
+                        <input type='text' name="title" placeholder="Enter Field Title" >
+                        <input type='hidden' name="form" value='field-form'>
+                        <input type='submit' value='submit'>
+                    </form> 
+                    <div style="padding:5px"></div>
+                    
+
+                </div>
+                <b><button id="dataFormSubmit" class="w3-button w3-blue w3-border w3-round-large w3-center" >Save</button></b>
+            
+            
         </div>
         {% endif %}
 
