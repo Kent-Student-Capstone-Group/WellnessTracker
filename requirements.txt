@@ -7,7 +7,7 @@ defusedxml==0.7.1
 dj-database-url==0.5.0
 Django==3.2
 django-allauth==0.49.0
-git+https://github.com/SoylentGrnIzPpl/fitapp.git
+django-fitbit==0.3.0
 gunicorn==20.1.0
 idna==3.3
 oauthlib==3.2.0
