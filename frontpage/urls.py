@@ -35,5 +35,6 @@ urlpatterns = [
     path('profileEdit/', views.profileEdit, name='profileEdit'),
     path('notifications', views.notifications, name='notifications'),
     path('fitbitConnect', views.fitbit, name='fitbitConnect'),
-    path('fitbitlogin', fitapp.login, name='fitbitLogin')
+    path('fitbitlogin', fitapp.login, name='fitbitLogin'),
+    path('fitbitComplete', fitapp.complete, name='fitbitComplete'),
 ]
