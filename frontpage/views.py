@@ -7,6 +7,7 @@ from .models import DailyReport, UserInfo, UserGroupJoinTable, UserInfo, Group, 
 from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendChat, SendGroupJoinRequest
 from django.contrib import messages
 import time
+import fitapp
 
 # Create your views here.
 
@@ -465,7 +466,14 @@ def profileEdit(request):
     else:
         return redirect('frontpage:welcome')
 
-
+def fitbit(request):
+    if request.user.is_authenticated:
+        if fitapp.utils.is_integrated():
+            FitBitData.StepsTaken = fitapp.views.get_data(request, 'activities', 'steps')
+        else:
+            fitapp.views.login()
+    else:
+        return redirect('frontpage:welcome')
 
 # These are custom error views -pat
 def custom404(request, exception):

@@ -15,6 +15,7 @@ from pathlib import Path
 import os
 import sys
 import dj_database_url
+import fitapp
 
 
 # DEBUG and DEVELOPMENT_MODE now default to True if enviornment variables are not set
@@ -56,7 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'fitapp',
+    'fitapp',
 ]
 
 MIDDLEWARE = [
@@ -237,4 +238,6 @@ LOGGING = {
     },
 }
 
-
+# uncomment these if needed
+#FITAPP_CONSUMER_KEY = '238FG4'
+#FITAPP_CONSUMER_SECRET = '3cc4f6f0e58d4aa98995e3a63f4513c1'
