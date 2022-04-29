@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path 
+from django.urls import include, path, re_path
 
 #from frontpage import fitbit, views
 from frontpage import views
@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('frontpage.urls')),
     path('accounts/', include('allauth.urls')),
+    re_path(r'^fitbit/', include('fitapp.urls')),
 ]
 
 handler404 = 'frontpage.views.custom404'

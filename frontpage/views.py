@@ -468,11 +468,11 @@ def profileEdit(request):
 
 def fitbit(request):
     if request.user.is_authenticated:
-        if fitapp.utils.is_integrated():
+        if fitapp.utils.is_integrated(request.user):
             FitBitData.StepsTaken = fitapp.views.get_data(request, 'activities', 'steps')
             FitBitData.HeartRate = fitapp.views.get_data(request, 'activities', 'heart')
         else:
-            fitapp.views.login()
+            return redirect('frontpage:fitbitLogin')
     else:
         return redirect('frontpage:welcome')
 
