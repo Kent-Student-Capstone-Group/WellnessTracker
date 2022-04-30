@@ -31,7 +31,8 @@ def welcome(request):
 def index(request):
     # string = "string"
     # string = string.encode("ascii")
-    #base64.b64encode(string)
+    # string = 'test'.encode() + string
+    # base64.b64encode(string)
     if(request.user.is_authenticated):
         customFields = UserCustomField.objects.filter(User=request.user) 
         goals = CustomGoal.objects.filter(User=request.user)
@@ -506,7 +507,7 @@ def fitbitCallback(request):
     BodyURLEncoded = urllib.parse.urlencode(BodyText)
     encodedString = ClientID + ":" + ClientSecret
     encodedString = encodedString.encode()
-    headers={'Authorization' : 'Basic ' + base64.b64encode(encodedString), 'Content-Type' : 'application/x-www-form-urlencoded'}
+    headers={'Authorization' : 'Basic '.encode() + base64.b64encode(encodedString), 'Content-Type' : 'application/x-www-form-urlencoded'}
     req = urllib.request.Request(TokenURL, BodyURLEncoded, headers )
     response = urllib.urlopen(req)
     # req.add_header('Authorization', 'Basic ' + base64.base64encode(ClientID + ":" + ClientSecret))
