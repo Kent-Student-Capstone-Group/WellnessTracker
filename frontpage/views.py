@@ -9,8 +9,8 @@ from django.contrib import messages
 import time
 import fitapp
 from django.conf import settings
-import requests
-import urllib2
+#import requests
+#import urllib2
 import urllib
 
 # Create your views here.
@@ -488,16 +488,26 @@ def fitbitCustom(request):
     return redirect(authURL)
 
 def fitbitCallback(request):
+    ClientID = "238FG4"
+    ClientSecret = "3cc4f6f0e58d4aa98995e3a63f4513c1"
+    TokenURL = "https://api.fitbit.com/oauth2/token"
     code = request.GET['code']
-    # post_data = {
-    #     'code' : code,
-    #     'redirect_uri' : 'https://healm-fqgvr.ondigitalocean.app/fitbitCallback',
-    #     'client_id' : '238FG4',
-    #     'grant_type' : 'authorization_code'
-    # }
-    # response = requests.post('', data=post_data)
-    # content = response.content
-    return render(request, 'frontpage/fitbit.html', {'code':code})
+    BodyText = {
+        'code' : code,
+        'redirect_uri' : 'https://healm-fqgvr.ondigitalocean.app/fitbitCallback',
+        'client_id' : ClientID,
+        'grant_type' : 'authorization_code'
+    }
+    BodyURLEncoded = urllib.parse.urlencode(BodyText)
+    headers={'Authorization' : 'Basic ' + base64.base64encode(ClientID + ":" + ClientSecret), 'Content-Type' : 'application/x-www-form-urlencoded'}
+    req = urllib.request.Request(TokenURL, BodyURLEncoded, headers )
+    response = urllib.urlopen(req)
+    # req.add_header('Authorization', 'Basic ' + base64.base64encode(ClientID + ":" + ClientSecret))
+    # req.add_header('Content-Type', 'application/x-www-form-urlencoded')
+    #response = requests.post(TokenURL, data=BodyURLEncoded, headers={'Authorization' : 'Basic ' + base64.base64encode(ClientID + ":" + ClientSecret), 'Content-Type' : 'application/x-www-form-urlencoded'})
+    #content = response.content
+    test = response.read()
+    return render(request, 'frontpage/fitbit.html', {'code':code, 'test':test})
 
 
 # These are custom error views -pat
