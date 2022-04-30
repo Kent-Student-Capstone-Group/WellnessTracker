@@ -174,7 +174,6 @@ SOCIALACCOUNT_PROVIDERS = {
             'key':''
         }
     },
-    'fitbit':{}
 }
 
 from django.contrib.messages import constants as messages

@@ -542,13 +542,17 @@ def fitbitCallback(request):
     # req.add_header('Content-Type', 'application/x-www-form-urlencoded')
     #response = requests.post(TokenURL, data=BodyURLEncoded, headers={'Authorization' : 'Basic ' + base64.base64encode(ClientID + ":" + ClientSecret), 'Content-Type' : 'application/x-www-form-urlencoded'})
     #content = response.content
-    test = response.content
+    test = response
     fullResponse = response.read()
     ResponseJSON = json.loads(fullResponse)
     newFitBitToken = FitBitToken()
     newFitBitToken.User = request.user
     newFitBitToken.AccessToken = str(ResponseJSON['access_token'])
     newFitBitToken.RefreshToken = str(ResponseJSON['refresh_token'])
+    newFitBitToken.ID = str(ResponseJSON['user_id'])
+    newFitBitToken.Expiration = int(ResponseJSON['expires_in'])
+    newFitBitToken.Scope = str(ResponseJSON['scope'])
+    newFitBitToken.Type = str(ResponseJSON['token_type'])
     newFitBitToken.save()
     return render(request, 'frontpage/fitbit.html', {'code':code, 'test':test})
 

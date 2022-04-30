@@ -137,6 +137,10 @@ class CustomGoal(models.Model):
 
 class FitBitToken(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    ID = models.TextField()
     AccessToken = models.TextField()
     RefreshToken = models.TextField()
-    Expiration = models.DateTimeField(blank=True, null=True)
+    Expiration = models.IntegerField()
+    Type = models.TextField()
+    Scope = models.TextField()
+    
