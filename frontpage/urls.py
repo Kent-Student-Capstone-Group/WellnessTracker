@@ -38,4 +38,5 @@ urlpatterns = [
     path('fitbitlogin', fitapp.login, name='fitbitLogin'),
     path('fitbitComplete', fitapp.complete, name='fitbitComplete'),
     path('fitbitCustom', views.fitbitCustom, name='fitbitCustom'),
+    path('fitbitCallback', views.fitbitCallback, name='fitbitCallback')
 ]

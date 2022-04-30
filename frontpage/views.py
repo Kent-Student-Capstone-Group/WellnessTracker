@@ -9,6 +9,9 @@ from django.contrib import messages
 import time
 import fitapp
 from django.conf import settings
+import requests
+import urllib2
+import urllib
 
 # Create your views here.
 
@@ -486,6 +489,14 @@ def fitbitCustom(request):
 
 def fitbitCallback(request):
     code = request.GET['code']
+    # post_data = {
+    #     'code' : code,
+    #     'redirect_uri' : 'https://healm-fqgvr.ondigitalocean.app/fitbitCallback',
+    #     'client_id' : '238FG4',
+    #     'grant_type' : 'authorization_code'
+    # }
+    # response = requests.post('', data=post_data)
+    # content = response.content
     return render(request, 'frontpage/fitbit.html', {'code':code})
 
 
