@@ -29,6 +29,9 @@ def welcome(request):
         return redirect('/accounts/google/login')
 
 def index(request):
+    # string = "string"
+    # string = string.encode("ascii")
+    #base64.b64encode(string)
     if(request.user.is_authenticated):
         customFields = UserCustomField.objects.filter(User=request.user) 
         goals = CustomGoal.objects.filter(User=request.user)
@@ -92,6 +95,7 @@ def index(request):
         context['goals'] = goals
         context['goalStats'] = goalStats
         context['customChartData'] = customChartData
+        context['string'] = string
         return render(request, 'frontpage/index.html', context)
     else:
         return redirect('frontpage:welcome')
@@ -500,15 +504,17 @@ def fitbitCallback(request):
         'grant_type' : 'authorization_code'
     }
     BodyURLEncoded = urllib.parse.urlencode(BodyText)
-    headers={'Authorization' : 'Basic ' + base64.b64encode(ClientID + ":" + ClientSecret), 'Content-Type' : 'application/x-www-form-urlencoded'}
+    encodedString = ClientID + ":" + ClientSecret
+    encodedString = encodedString.encode()
+    headers={'Authorization' : 'Basic ' + base64.b64encode(encodedString), 'Content-Type' : 'application/x-www-form-urlencoded'}
     req = urllib.request.Request(TokenURL, BodyURLEncoded, headers )
     response = urllib.urlopen(req)
     # req.add_header('Authorization', 'Basic ' + base64.base64encode(ClientID + ":" + ClientSecret))
     # req.add_header('Content-Type', 'application/x-www-form-urlencoded')
     #response = requests.post(TokenURL, data=BodyURLEncoded, headers={'Authorization' : 'Basic ' + base64.base64encode(ClientID + ":" + ClientSecret), 'Content-Type' : 'application/x-www-form-urlencoded'})
     #content = response.content
-    test = response.read()
-    return render(request, 'frontpage/fitbit.html', {'code':code, 'test':test})
+    #test = response.read()
+    return render(request, 'frontpage/fitbit.html', {'code':code, 'test':response})
 
 
 # These are custom error views -pat
