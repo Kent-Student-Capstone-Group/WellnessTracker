@@ -31,36 +31,7 @@ def welcome(request):
         return redirect('/accounts/google/login')
 
 def index(request):
-    # newSocialApp = SocialApp()
-    # newSocialApp.provider = "FitBit"
-    # newSocialApp.name = "test"
-    # newSocialApp.client_id = "4"
-    # newSocialApp.secret = "4"
-    # newSocialApp.key = "4"
-    # newSocialApp.save()
-    # newSocialToken = SocialToken()
-    # newSocialToken.account
-    # string = "string"
-    # string = string.encode("ascii")
-    # string = 'test'.encode() + string
-    # base64.b64encode(string)
-    
-    # ClientID = "238FG4"
-    # ClientSecret = "3cc4f6f0e58d4aa98995e3a63f4513c1"
-    # TokenURL = "https://api.fitbit.com/oauth2/token"
-    # code = 'hello'
-    # BodyText = {
-    #     'code' : code,
-    #     'redirect_uri' : 'https://healm-fqgvr.ondigitalocean.app/fitbitCallback',
-    #     'client_id' : ClientID,
-    #     'grant_type' : 'authorization_code'
-    # }
-    # BodyURLEncoded = urllib.parse.urlencode(BodyText).encode()
-    # encodedString = ClientID + ":" + ClientSecret
-    # encodedString = encodedString.encode()
-    # headers={'Authorization' : 'Basic '.encode() + base64.b64encode(encodedString), 'Content-Type' : 'application/x-www-form-urlencoded'}
-    # req = urllib.request.Request(TokenURL, BodyURLEncoded, headers )
-    # response = urllib.request.urlopen(req)
+
     if(request.user.is_authenticated):
         customFields = UserCustomField.objects.filter(User=request.user) 
         goals = CustomGoal.objects.filter(User=request.user)
@@ -556,7 +527,7 @@ def fitbitCallback(request):
     newFitBitToken.save()
 
     FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json"
-    headers={'Authorization' : 'Bearer '.encode() + newFitBitToken.AccessToken}
+    headers={'Authorization' : 'Bearer '.encode() + newFitBitToken.AccessToken.encode()}
     req = urllib.request.Request(FitBitProfileURL, headers)
     response = urllib.request.urlopen(req)
     fullResponse = response.read()
