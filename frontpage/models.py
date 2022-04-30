@@ -134,3 +134,9 @@ class CustomGoal(models.Model):
 
     def __str__(self):
         return '%s %s %s' % (self.Field.User.username, self.Field.Title , self.StartDate)
+
+class FitBitToken(models.Model):
+    User = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    AccessToken = models.TextField()
+    RefreshToken = models.TextField()
+    Expiration = models.DateTimeField(blank=True, null=True)

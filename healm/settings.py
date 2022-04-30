@@ -173,7 +173,8 @@ SOCIALACCOUNT_PROVIDERS = {
             'secret': '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',
             'key':''
         }
-    }
+    },
+    'fitbit':{}
 }
 
 from django.contrib.messages import constants as messages

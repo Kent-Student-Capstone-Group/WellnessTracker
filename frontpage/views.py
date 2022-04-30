@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.utils import timezone
 import datetime
 from django.contrib.auth import get_user_model
-from .models import DailyReport, UserInfo, UserGroupJoinTable, UserInfo, Group, Chat, UserGroupRequest, FitBitData, UserCustomData, UserCustomField, UserCustomData, CustomGoal
+from .models import DailyReport, UserInfo, UserGroupJoinTable, UserInfo, Group, Chat, UserGroupRequest, FitBitData, UserCustomData, UserCustomField, UserCustomData, CustomGoal, FitBitToken
 from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendChat, SendGroupJoinRequest
 from django.contrib import messages
 import time
@@ -13,6 +13,8 @@ from django.conf import settings
 #import urllib2
 import urllib
 import base64
+#from allauth.socialaccount.models import SocialToken, SocialAccount, SocialApp
+import json
 
 # Create your views here.
 
@@ -29,6 +31,15 @@ def welcome(request):
         return redirect('/accounts/google/login')
 
 def index(request):
+    # newSocialApp = SocialApp()
+    # newSocialApp.provider = "FitBit"
+    # newSocialApp.name = "test"
+    # newSocialApp.client_id = "4"
+    # newSocialApp.secret = "4"
+    # newSocialApp.key = "4"
+    # newSocialApp.save()
+    # newSocialToken = SocialToken()
+    # newSocialToken.account
     # string = "string"
     # string = string.encode("ascii")
     # string = 'test'.encode() + string
@@ -113,7 +124,7 @@ def index(request):
         context['goals'] = goals
         context['goalStats'] = goalStats
         context['customChartData'] = customChartData
-        context['string'] = string
+        #context['string'] = string
         return render(request, 'frontpage/index.html', context)
     else:
         return redirect('frontpage:welcome')
@@ -531,8 +542,15 @@ def fitbitCallback(request):
     # req.add_header('Content-Type', 'application/x-www-form-urlencoded')
     #response = requests.post(TokenURL, data=BodyURLEncoded, headers={'Authorization' : 'Basic ' + base64.base64encode(ClientID + ":" + ClientSecret), 'Content-Type' : 'application/x-www-form-urlencoded'})
     #content = response.content
-    #test = response.read()
-    return render(request, 'frontpage/fitbit.html', {'code':code, 'test':response})
+    test = response.content
+    fullResponse = response.read()
+    ResponseJSON = json.loads(fullResponse)
+    newFitBitToken = FitBitToken()
+    newFitBitToken.User = request.user
+    newFitBitToken.AccessToken = str(ResponseJSON['access_token'])
+    newFitBitToken.RefreshToken = str(ResponseJSON['refresh_token'])
+    newFitBitToken.save()
+    return render(request, 'frontpage/fitbit.html', {'code':code, 'test':test})
 
 
 # These are custom error views -pat
