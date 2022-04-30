@@ -12,6 +12,7 @@ from django.conf import settings
 #import requests
 #import urllib2
 import urllib
+import base64
 
 # Create your views here.
 
@@ -499,7 +500,7 @@ def fitbitCallback(request):
         'grant_type' : 'authorization_code'
     }
     BodyURLEncoded = urllib.parse.urlencode(BodyText)
-    headers={'Authorization' : 'Basic ' + base64.base64encode(ClientID + ":" + ClientSecret), 'Content-Type' : 'application/x-www-form-urlencoded'}
+    headers={'Authorization' : 'Basic ' + base64.b64encode(ClientID + ":" + ClientSecret), 'Content-Type' : 'application/x-www-form-urlencoded'}
     req = urllib.request.Request(TokenURL, BodyURLEncoded, headers )
     response = urllib.urlopen(req)
     # req.add_header('Authorization', 'Basic ' + base64.base64encode(ClientID + ":" + ClientSecret))
