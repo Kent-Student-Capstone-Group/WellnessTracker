@@ -37,4 +37,5 @@ urlpatterns = [
     path('fitbitConnect', views.fitbit, name='fitbitConnect'),
     path('fitbitlogin', fitapp.login, name='fitbitLogin'),
     path('fitbitComplete', fitapp.complete, name='fitbitComplete'),
+    path('fitbitCustom', views.fitbitCustom, name='fitbitCustom'),
 ]

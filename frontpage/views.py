@@ -8,6 +8,7 @@ from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendChat, SendGroup
 from django.contrib import messages
 import time
 import fitapp
+from django.conf import settings
 
 # Create your views here.
 
@@ -475,6 +476,18 @@ def fitbit(request):
             return redirect('frontpage:fitbitLogin')
     else:
         return redirect('frontpage:welcome')
+
+def fitbitCustom(request):
+    authURL = 'https://www.fitbit.com/oauth2/authorize?response_type=code&client_id='
+    authURL += '238FG4'
+    authURL += '&redirect_uri=https://healm-fqgvr.ondigitalocean.app/fitbitCallback&'
+    authURL += 'scope=activity+nutrition+heartrate+location+nutrition+profile+settings+sleep+social+weight'
+    return redirect(authURL)
+
+def fitbitCallback(request):
+    code = request.GET['code']
+    return render(request, 'frontpage/fitbit.html', {'code':code})
+
 
 # These are custom error views -pat
 def custom404(request, exception):

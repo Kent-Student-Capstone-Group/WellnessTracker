@@ -26,7 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('frontpage.urls')),
     path('accounts/', include('allauth.urls')),
-    re_path(r'^fitbit/', include('fitapp.urls')),
+    path('fitbit/', include('fitapp.urls')),
 ]
 
 handler404 = 'frontpage.views.custom404'
