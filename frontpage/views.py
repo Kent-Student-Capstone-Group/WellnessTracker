@@ -509,7 +509,7 @@ def fitbitCallback(request):
     encodedString = encodedString.encode()
     headers={'Authorization' : 'Basic '.encode() + base64.b64encode(encodedString), 'Content-Type' : 'application/x-www-form-urlencoded'}
     req = urllib.request.Request(TokenURL, BodyURLEncoded, headers )
-    response = urllib.urlopen(req)
+    response = urllib.request.urlopen(req)
     # req.add_header('Authorization', 'Basic ' + base64.base64encode(ClientID + ":" + ClientSecret))
     # req.add_header('Content-Type', 'application/x-www-form-urlencoded')
     #response = requests.post(TokenURL, data=BodyURLEncoded, headers={'Authorization' : 'Basic ' + base64.base64encode(ClientID + ":" + ClientSecret), 'Content-Type' : 'application/x-www-form-urlencoded'})
