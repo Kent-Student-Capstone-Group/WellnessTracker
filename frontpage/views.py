@@ -526,9 +526,9 @@ def fitbitCallback(request):
     newFitBitToken.Type = str(ResponseJSON['token_type'])
     newFitBitToken.save()
 
-    FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json"
+    FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json".encode()
     headers={'Authorization' : 'Bearer '.encode() + newFitBitToken.AccessToken.encode()}
-    req = urllib.request.Request(FitBitProfileURL, headers)
+    req = urllib.request.Request(FitBitProfileURL, headers).encode('ascii')
     response = urllib.request.urlopen(req)
     fullResponse = response.read()
     ResponseJSON = json.loads(fullResponse)
