@@ -33,6 +33,23 @@ def index(request):
     # string = string.encode("ascii")
     # string = 'test'.encode() + string
     # base64.b64encode(string)
+    
+    # ClientID = "238FG4"
+    # ClientSecret = "3cc4f6f0e58d4aa98995e3a63f4513c1"
+    # TokenURL = "https://api.fitbit.com/oauth2/token"
+    # code = 'hello'
+    # BodyText = {
+    #     'code' : code,
+    #     'redirect_uri' : 'https://healm-fqgvr.ondigitalocean.app/fitbitCallback',
+    #     'client_id' : ClientID,
+    #     'grant_type' : 'authorization_code'
+    # }
+    # BodyURLEncoded = urllib.parse.urlencode(BodyText).encode()
+    # encodedString = ClientID + ":" + ClientSecret
+    # encodedString = encodedString.encode()
+    # headers={'Authorization' : 'Basic '.encode() + base64.b64encode(encodedString), 'Content-Type' : 'application/x-www-form-urlencoded'}
+    # req = urllib.request.Request(TokenURL, BodyURLEncoded, headers )
+    # response = urllib.request.urlopen(req)
     if(request.user.is_authenticated):
         customFields = UserCustomField.objects.filter(User=request.user) 
         goals = CustomGoal.objects.filter(User=request.user)
@@ -504,7 +521,7 @@ def fitbitCallback(request):
         'client_id' : ClientID,
         'grant_type' : 'authorization_code'
     }
-    BodyURLEncoded = urllib.parse.urlencode(BodyText)
+    BodyURLEncoded = urllib.parse.urlencode(BodyText).encode()
     encodedString = ClientID + ":" + ClientSecret
     encodedString = encodedString.encode()
     headers={'Authorization' : 'Basic '.encode() + base64.b64encode(encodedString), 'Content-Type' : 'application/x-www-form-urlencoded'}
