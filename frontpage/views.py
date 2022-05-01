@@ -520,15 +520,15 @@ def fitbitCallback(request):
     newFitBitToken.Type = str(ResponseJSON['token_type'])
     newFitBitToken.save()
 
-    # FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json"
-    # headers={'Authorization'.encode() : 'Bearer '.encode() + newFitBitToken.AccessToken.encode()}
-    # req = urllib.request.Request(FitBitProfileURL, headers)
-    # response = urllib.request.urlopen(req)
-    # fullResponse = response.read()
-    # ResponseJSON = json.loads(fullResponse)
-    # userInfo_sel = UserInfo.objects.get(user=request.user)
-    # userInfo_sel.Gender = str(ResponseJSON['user']['displayName'])
-    # userInfo_sel.save()
+    FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json"
+    headers={'Authorization'.encode() : 'Bearer '.encode() + newFitBitToken.AccessToken.encode()}
+    req =  FitBitProfileURL + "?" + urllib.parse.urlencode(headers)#urllib.request.Request(FitBitProfileURL, headers)
+    response = urllib.request.urlopen(req)
+    fullResponse = response.read()
+    ResponseJSON = json.loads(fullResponse)
+    userInfo_sel = UserInfo.objects.get(user=request.user)
+    userInfo_sel.Gender = str(ResponseJSON['user']['displayName'])
+    userInfo_sel.save()
     return render(request, 'frontpage/fitbit.html', {'token':newFitBitToken})
 
 
