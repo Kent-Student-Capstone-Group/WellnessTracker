@@ -20,7 +20,7 @@ import fitapp
 
 # DEBUG and DEVELOPMENT_MODE now default to True if enviornment variables are not set
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "True") == "True"  
+DEBUG = os.getenv("DEBUG", "False") == "True"  
 
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "True") == "True" 
 
