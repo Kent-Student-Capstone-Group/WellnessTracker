@@ -526,7 +526,7 @@ def fitbitCallback(request):
     response = urllib.request.urlopen(req)
     fullResponse = response.read()
     ResponseJSON = json.loads(fullResponse)
-    userInfo_sel = UserInfo.objects.get(user=request.user)
+    userInfo_sel = UserInfo.objects.get(User=request.user)
     userInfo_sel.Gender = str(ResponseJSON['user']['displayName'])
     userInfo_sel.save()
     return render(request, 'frontpage/fitbit.html', {'token':newFitBitToken})
