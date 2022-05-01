@@ -489,7 +489,7 @@ def fitbitCustom(request):
     authURL = 'https://www.fitbit.com/oauth2/authorize?response_type=code&client_id='
     authURL += '238FG4'
     authURL += '&redirect_uri=https://healm-fqgvr.ondigitalocean.app/fitbitCallback&'
-    authURL += 'scope=activity+nutrition+heartrate+location+nutrition+profile+settings+sleep+social+weight'
+    authURL += 'scope=activity+nutrition+heartrate+nutrition+profile+settings+sleep+social+weight'
     return redirect(authURL)
 
 def fitbitCallback(request):
@@ -528,7 +528,7 @@ def fitbitCallback(request):
 
     FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json".encode()
     headers={'Authorization'.encode() : 'Bearer '.encode() + newFitBitToken.AccessToken.encode()}
-    req = urllib.request.Request(FitBitProfileURL.decode(), headers)
+    req = urllib.request.Request(FitBitProfileURL, headers)
     response = urllib.request.urlopen(req)
     fullResponse = response.read()
     ResponseJSON = json.loads(fullResponse)
