@@ -32,20 +32,13 @@ def welcome(request):
 def index(request):
 
     if(request.user.is_authenticated):
-        context = {}
         currentTime = datetime.datetime.now()
         currentStart=datetime.datetime(currentTime.year,currentTime.month,currentTime.day)
         currentEnd=currentStart + datetime.timedelta(hours=23, minutes=59, seconds=59)
         customFields = UserCustomField.objects.filter(User=request.user) 
-        #Dailydata = DailyReport.objects.get(User=request.user, DateAndTime__range=(currentStart,currentEnd))
+        Dailydata = DailyReport.objects.get(User=request.user, DateAndTime__range=(currentStart,currentEnd))
         goals = CustomGoal.objects.filter(User=request.user)
         
-        try:
-            Dailydata = DailyReport.objects.get(User=request.user, DateAndTime__range=(currentStart,currentEnd))
-            context['Dailydata'] = Dailydata
-        except:
-            pass
-
         goalStats = {}
         for goal in goals:
             goalData = UserCustomData.objects.filter(Field=goal.Field, Date__range=(goal.StartDate,goal.EndDate))
@@ -99,13 +92,13 @@ def index(request):
         #UserData = UserCustomData.objects.filter(User = request.user)
         #FitBitToday = FitBitData.object.filter(DateAndTime.date.today() == datetime.date.today())   # Will likely move to another view
         #context = {'chartData': chartData, 'customFields':customFields, 'goals':goals}
-
+        context = {}
         context['chartData'] = chartData
         context['customFields'] = customFields
         context['goals'] = goals
         context['goalStats'] = goalStats
         context['customChartData'] = customChartData
-        
+        context['Dailydata'] = Dailydata
         #context['string'] = string
         return render(request, 'frontpage/index.html', context)
     else:
@@ -529,7 +522,7 @@ def fitbitCallback(request):
 
     FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json"
     headers={'Authorization'.encode() : 'Bearer '.encode() + newFitBitToken.AccessToken.encode()}
-    req =  FitBitProfileURL + "?" + urllib.parse.urlencode(headers)#urllib.request.Request(FitBitProfileURL, headers)
+    req = urllib.request.Request(url=FitBitProfileURL, data=None, headers=headers)
     response = urllib.request.urlopen(req)
     fullResponse = response.read()
     ResponseJSON = json.loads(fullResponse)
