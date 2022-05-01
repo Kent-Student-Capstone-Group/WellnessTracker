@@ -341,6 +341,7 @@
 
             <div class="UserStats"> 
                 <h1> Your daily stats are: </h1>
+                {% if Dailydata %}
                 <table>
                     <tr>
                         <th>Statistic</th>
@@ -394,6 +395,9 @@
                         <td>{{Dailydata.AlcoholicDrinks}}</td> 
                     </tr>
                 </table>
+                {% else %}
+                <p>No Data Entered for Today</p>
+                {% endif %}
             </div>
 
           <!--  <table>    Will prob need another view to display this data on another page 
