@@ -32,13 +32,19 @@ def welcome(request):
 def index(request):
 
     if(request.user.is_authenticated):
+        context = {}
         currentTime = datetime.datetime.now()
         currentStart=datetime.datetime(currentTime.year,currentTime.month,currentTime.day)
         currentEnd=currentStart + datetime.timedelta(hours=23, minutes=59, seconds=59)
         customFields = UserCustomField.objects.filter(User=request.user) 
-        Dailydata = DailyReport.objects.get(User=request.user, DateAndTime__range=(currentStart,currentEnd))
         goals = CustomGoal.objects.filter(User=request.user)
         
+        try:
+            Dailydata = DailyReport.objects.get(User=request.user, DateAndTime__range=(currentStart,currentEnd))
+            context['Dailydata'] = Dailydata
+        except:
+            pass
+
         goalStats = {}
         for goal in goals:
             goalData = UserCustomData.objects.filter(Field=goal.Field, Date__range=(goal.StartDate,goal.EndDate))
