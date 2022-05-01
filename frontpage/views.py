@@ -478,7 +478,7 @@ def fitbitCustom(request):
     authURL = 'https://www.fitbit.com/oauth2/authorize?response_type=code&client_id='
     authURL += '238FG4'
     authURL += '&redirect_uri=https://healm-fqgvr.ondigitalocean.app/fitbitCallback&'
-    authURL += 'scope=activity+heartrate+sleep+social'
+    authURL += 'scope=activity+heartrate+sleep+social+profile'
     return redirect(authURL)
 
 def fitbitCallback(request):
