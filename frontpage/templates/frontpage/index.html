@@ -4,7 +4,7 @@
 
 {% block content %}
 
-{% load socialaccount %}
+{% load socialaccount %} 
 {% load static %}
 
 <html>
@@ -347,14 +347,52 @@
                         <th>Data</th>
                     </tr>
                     
-                    <!--a = 0
-                    daily_stats = {0: 'Rating Of Day', 1: 'Steps Taken', 2: 'Hours Sitting', 3: 'Hours Slept', 4: 'LengthOfWorkout', 5: 'IntensityOfWorkout', 6: 'MealsEaten', 7: 'SnacksEaten', 8: 'FoodHealth', 9: 'CigarettesSmoked', 10: 'AlcoholicDrinks'}
-                    {% for x in User_Daily_Data %} !-->
+                    
+                    <!--daily_stats = {0: 'Rating Of Day', 1: 'Steps Taken', 2: 'Hours Sitting', 3: 'Hours Slept', 4: 'LengthOfWorkout', 5: 'IntensityOfWorkout', 6: 'MealsEaten', 7: 'SnacksEaten', 8: 'FoodHealth', 9: 'CigarettesSmoked', 10: 'AlcoholicDrinks'} !-->
                     <tr>
                         <td>Rating Of Day</td>
-                        <td>{{Dailydata.RatingOfDay}}</td> <!--{{Dailydata.StepsTaken}} !-->
+                        <td>{{Dailydata.RatingOfDay}}</td> 
                     </tr>
-                   <!-- {endfor%} !-->
+                    <tr>
+                        <td>Steps Taken</td>
+                        <td>{{Dailydata.StepsTaken}}</td> 
+                    </tr>
+                    <tr>
+                        <td>Hours Sitting</td>
+                        <td>{{Dailydata.HoursSitting}}</td> 
+                    </tr>
+                    <tr>
+                        <td>Hours Slept</td>
+                        <td>{{Dailydata.HoursSlept}}</td> 
+                    </tr>
+                    <tr>
+                        <td>Length Of Workout</td>
+                        <td>{{Dailydata.LengthOfWorkout}}</td> 
+                    </tr>
+                    <tr>
+                        <td>Intensity Of Workout</td>
+                        <td>{{Dailydata.IntensityOfWorkout}}</td> 
+                    </tr>
+                    <tr>
+                        <td>Meals Eaten</td>
+                        <td>{{Dailydata.MealsEaten}}</td> 
+                    </tr>
+                    <tr>
+                        <td>Snacks Eaten</td>
+                        <td>{{Dailydata.SnacksEaten}}</td> 
+                    </tr>
+                    <tr>
+                        <td>Food Health</td>
+                        <td>{{Dailydata.FoodHealth}}</td> 
+                    </tr>
+                    <tr>
+                        <td>Cigarettes Smoked</td>
+                        <td>{{Dailydata.CigarettesSmoked}}</td> 
+                    </tr> 
+                    <tr>
+                        <td>Alcoholic Drinks</td>
+                        <td>{{Dailydata.AlcoholicDrinks}}</td> 
+                    </tr>
                 </table>
             </div>
 
@@ -379,4 +417,4 @@
 
 </html>
 
-{% endblock content %}
+{% endblock content %} 
