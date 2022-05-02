@@ -26,6 +26,34 @@
             font-size: 25px;
         }
 
+        *{
+            font-family: Fredoka;
+            text-align: center;
+            margin: 0;
+        }
+        h1{
+            font-family: Fredoka;
+            font-weight: 600;
+        }
+        
+        .report{
+            display: grid;
+            grid-template-columns: auto auto auto;
+            row-gap: 15px;
+            column-gap: 25px;
+            margin: 10px;
+            width: 100%;
+            height: auto;
+        }
+        .report div{
+            border: 3px solid #659dbd;
+            border-radius: 10px;
+        }
+        .lines{
+            border-bottom: 5px solid grey;
+            width: 100%;
+        }
+
     </style>
     <body>
     <div style="min-height: calc(100vh - 299px);">
@@ -34,6 +62,40 @@
         <div>
             <p>Your current Statistics</p>
             
+        </div>
+    </div>
+    
+    <div>
+        <h1>Your performance over the past week</h1>
+        <div class="lines"></div>
+        <div class="report">
+
+            
+            <div class="water">
+                <p>Number of times you drinked water youv'e planned to:</p>
+
+                <p>Number of times you missed drinking water</p>
+                
+            </div>
+            <div class="steps">
+                <p>Number of steps you have taken over the past week</p>
+            </div>
+            <div class="calories">
+                <p>Calories you have burnt each day over the week</p>
+            </div>
+            <div class="ex">
+                <p>Number of time you have Excercised</p>
+                <p>Number of times you missed</p>
+            </div>
+            <div class="sleep">
+                <p>Number of hours you have slept</p>
+            </div>
+            <div class="cigar">
+                <p>Number of times you have smoked</p>
+            </div>
+            <div class="drinks">
+                <p>Number of alcoholic drinks you've had</p>
+            </div>
         </div>
     </div>
     </body>

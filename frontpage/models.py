@@ -118,7 +118,7 @@ class UserCustomField(models.Model):
         return '%s %s' % (self.User.username, self.Title)
 
 class UserCustomData(models.Model):
-    Field = models.ForeignKey(UserCustomField, on_delete=models.CASCADE)
+    Field = models.ForeignKey(UserCustomField, on_delete=models.CASCADE, null=True)
     Value = models.IntegerField(blank=1, null=True)
     Date = models.DateField(blank=True, null=True)
 

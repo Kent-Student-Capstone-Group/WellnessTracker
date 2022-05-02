@@ -7,7 +7,7 @@ from .models import DailyReport, UserInfo, UserGroupJoinTable, UserInfo, Group, 
 from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendChat, SendGroupJoinRequest
 from django.contrib import messages
 import time
-import fitapp
+#import fitapp
 from django.conf import settings
 #import requests
 #import urllib2

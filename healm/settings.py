@@ -15,7 +15,7 @@ from pathlib import Path
 import os
 import sys
 import dj_database_url
-import fitapp
+#import fitapp
 
 
 # DEBUG and DEVELOPMENT_MODE now default to True if enviornment variables are not set
@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'fitapp',
+    #'fitapp',
 ]
 
 MIDDLEWARE = [
