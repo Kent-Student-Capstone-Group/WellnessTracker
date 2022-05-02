@@ -2,7 +2,6 @@ from django.urls import path, include
 from django.contrib.auth.views import LogoutView
 from . import views
 
-import fitapp.views as fitapp
 #from fitapp import path, include
 
 app_name= 'frontpage'
@@ -35,8 +34,6 @@ urlpatterns = [
     path('profileEdit/', views.profileEdit, name='profileEdit'),
     path('notifications', views.notifications, name='notifications'),
     path('fitbitConnect', views.fitbit, name='fitbitConnect'),
-    path('fitbitlogin', fitapp.login, name='fitbitLogin'),
-    path('fitbitComplete', fitapp.complete, name='fitbitComplete'),
     path('fitbitCustom', views.fitbitCustom, name='fitbitCustom'),
     path('fitbitCallback', views.fitbitCallback, name='fitbitCallback')
 ]
