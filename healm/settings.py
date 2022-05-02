@@ -17,7 +17,6 @@ import sys
 import dj_database_url
 
 
-
 # DEBUG and DEVELOPMENT_MODE now default to True if enviornment variables are not set
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "True") == "True"  
@@ -57,7 +56,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'fitapp',
 ]
 
 MIDDLEWARE = [
