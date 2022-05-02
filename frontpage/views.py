@@ -7,7 +7,6 @@ from .models import DailyReport, UserInfo, UserGroupJoinTable, UserInfo, Group, 
 from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendChat, SendGroupJoinRequest
 from django.contrib import messages
 import time
-import fitapp
 from django.conf import settings
 #import requests
 #import urllib2
@@ -475,16 +474,6 @@ def profileEdit(request):
     else:
         return redirect('frontpage:welcome')
 
-def fitbit(request):
-    if request.user.is_authenticated:
-        if fitapp.utils.is_integrated(request.user):
-            FitBitData.StepsTaken = fitapp.views.get_data(request, 'activities', 'steps')
-            FitBitData.HeartRate = fitapp.views.get_data(request, 'activities', 'heart')
-        else:
-            return redirect('frontpage:fitbitLogin')
-    else:
-        return redirect('frontpage:welcome')
-
 def fitbitCustom(request):
     authURL = 'https://www.fitbit.com/oauth2/authorize?response_type=code&client_id='
     authURL += '238FG4'
@@ -527,7 +516,7 @@ def fitbitCallback(request):
     newFitBitToken.save()
 
     FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json"
-    headers={'Authorization' : 'Bearer '.encode() + newFitBitToken.AccessToken.encode()}
+    headers={'Authorization'.encode() : 'Bearer '.encode() + newFitBitToken.AccessToken.encode()}
     req = urllib.request.Request(FitBitProfileURL, headers)
     response = urllib.request.urlopen(req)
     fullResponse = response.read()
