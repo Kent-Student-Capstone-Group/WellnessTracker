@@ -34,6 +34,7 @@ def index(request):
 
     if(request.user.is_authenticated):
         customFields = UserCustomField.objects.filter(User=request.user) 
+        Dailydata = DailyReport.objects.filter(User=request.user, DateAndTime=datetime.datetime.today())
         goals = CustomGoal.objects.filter(User=request.user)
         
         goalStats = {}
@@ -95,6 +96,7 @@ def index(request):
         context['goals'] = goals
         context['goalStats'] = goalStats
         context['customChartData'] = customChartData
+        context['Dailydata'] = Dailydata
         #context['string'] = string
         return render(request, 'frontpage/index.html', context)
     else:

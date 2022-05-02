@@ -339,20 +339,30 @@
 
             
 
-            <div class="UserStats">  <!-- How do we label the custom values? -->
-                <h1> Your daily custom stats are: </h1>
-                {% for x in Current_stats %}
-                    {%if x is not null%}
-                        x
-                    {%endif%}
-                {%endfor%}
+            <div class="UserStats"> 
+                <h1> Your daily stats are: </h1>
+                <table>
+                    <tr>
+                        <th>Statistic</th>
+                        <th>Data</th>
+                    </tr>
+                    
+                    <!--a = 0
+                    daily_stats = {0: 'Rating Of Day', 1: 'Steps Taken', 2: 'Hours Sitting', 3: 'Hours Slept', 4: 'LengthOfWorkout', 5: 'IntensityOfWorkout', 6: 'MealsEaten', 7: 'SnacksEaten', 8: 'FoodHealth', 9: 'CigarettesSmoked', 10: 'AlcoholicDrinks'}
+                    {% for x in User_Daily_Data %} !-->
+                    <tr>
+                        <td>Rating Of Day</td>
+                        <td>{{Dailydata.RatingOfDay}}</td> <!--{{Dailydata.StepsTaken}} !-->
+                    </tr>
+                   <!-- {endfor%} !-->
+                </table>
             </div>
 
-            <table>   <!-- Will prob need another view to display this data on another page -->
+          <!--  <table>    Will prob need another view to display this data on another page 
                 <tr>
                     <th colspan="2">Your daily Fitbit stats are:</th>
                 </tr>
-              <!--  {% for x in Fit_Bit_Info %}
+                {% for x in Fit_Bit_Info %}
                 <tr>
                     {%if x is not null%}
                         <td><i><p> Steps Taken</p>{{x.StepsTaken}}</i> <br>
@@ -361,8 +371,8 @@
                         <p> Active hours</p>{{ x.ActiveHours }} </td>
                     {%endif%}
                 </tr>
-                {% endfor %}   -->
-            </table>
+                {% endfor %}   
+            </table> -->
 
     </div>
 </body>
