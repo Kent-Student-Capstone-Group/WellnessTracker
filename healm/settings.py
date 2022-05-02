@@ -15,7 +15,7 @@ from pathlib import Path
 import os
 import sys
 import dj_database_url
-import fitapp
+
 
 
 # DEBUG and DEVELOPMENT_MODE now default to True if enviornment variables are not set
