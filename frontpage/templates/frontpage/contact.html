@@ -24,7 +24,7 @@
                 color: black;
         }
         .head img{
-            width: 100px;
+            width: 200px;
         }
         .cardlist{
             display: grid;
@@ -48,11 +48,11 @@
         }
         .card__content {
             flex: 1;
-            color: white;
+            color: rgb(255, 255, 255);
         }
         li{
             list-style: none;
-            color: white;
+            color: rgb(0, 197, 247);
         }
         
     </style>
@@ -62,7 +62,9 @@
         <section>
             <div class="head">
                 <div>
-                    <img src="{% static 'frontpage\src\Healm-logos_black2.png' %}" type="img/png" alt="Healm logo">
+                    <a href="{% url 'frontpage:index' %}">
+                        <img src="{% static 'frontpage\src\Healm-logos_black2.png' %}" type="img/png" alt="Healm logo">
+                    </a>
                 </div>
                 <h1>Team Healm</h1>
             </div>
@@ -98,7 +100,7 @@
             <div class="card">
 
                 <div class="card__cover">
-                    <img src="{% static 'frontpage/src/Teja.JPG' %}" width="50%" alt="img">
+                    <img src="{% static 'frontpage/src/Teja.jpg' %}" width=250px alt="img">
                 </div>
 
                 <div class="card__content">
