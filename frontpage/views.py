@@ -517,7 +517,7 @@ def fitbitCallback(request):
     fullResponse = response.read()
     ResponseJSON = json.loads(fullResponse)
 
-    
+    FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json"
 
     try:
         newUser = FitBitToken.objects.get(User=request.user)
@@ -532,6 +532,24 @@ def fitbitCallback(request):
         newFitBitToken.Type = str(ResponseJSON['token_type'])
         newFitBitToken.save()
 
+        headers={'Authorization'.encode() : 'Bearer '.encode() + newFitBitToken.AccessToken.encode()}
+
+        try:
+            req = urllib.request.Request(url=FitBitProfileURL, data=None, headers=headers)
+            response = urllib.request.urlopen(req)
+            fullResponse = response.read()
+        except urllib.error.URLError as e:
+            HTTPErrorMessage =e.read()
+            if (e.code == 401 and HTTPErrorMessage.find("Access token invalid or expired") > 0):
+                GetNewAccessToken(request, FitBitToken.objects.get(User=request.user, RefreshToken=newFitBitToken.RefreshToken))
+
+        ResponseJSON = json.loads(fullResponse)
+        userInfo_sel = UserInfo.objects.get(User=request.user)
+        userInfo_sel.Gender = str(ResponseJSON['user']['displayName'])
+        userInfo_sel.save()
+        return render(request, 'frontpage/fitbit.html', {'token':newFitBitToken})
+
+        
     except not FitBitToken.DoesNotExist:
         newClass = FitBitToken()
         newClass.User = FitBitToken.objects.get(User=request.user)
@@ -541,32 +559,32 @@ def fitbitCallback(request):
         newClass.Expiration = FitBitToken.objects.get(User=request.user, Expiration=int(ResponseJSON['expires_in']))
         newClass.Scope = FitBitToken.objects.get(User=request.user, Scope=str(ResponseJSON['scope']))
         newClass.Type = FitBitToken.objects.get(User=request.user, Type= str(ResponseJSON['token_type']))
+
+        headers={'Authorization'.encode() : 'Bearer '.encode() + newClass.AccessToken.encode()}
+
+        try:
+            req = urllib.request.Request(url=FitBitProfileURL, data=None, headers=headers)
+            response = urllib.request.urlopen(req)
+            fullResponse = response.read()
+        except urllib.error.URLError as e:
+            HTTPErrorMessage =e.read()
+            if (e.code == 401 and HTTPErrorMessage.find("Access token invalid or expired") > 0):
+                GetNewAccessToken(request, FitBitToken.objects.get(User=request.user, RefreshToken=newClass.RefreshToken))
+
+        ResponseJSON = json.loads(fullResponse)
+        userInfo_sel = UserInfo.objects.get(User=request.user)
+        userInfo_sel.Gender = str(ResponseJSON['user']['displayName'])
+        userInfo_sel.save()
+        return render(request, 'frontpage/fitbit.html', {'token':newClass})
     
     try:
         fitbitUser = FitBitToken.objects.get(User=request.user)
     except:
         return redirect('frontpage:fitbitCustom')
 
-    FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json"
     
     
 
-    headers={'Authorization'.encode() : 'Bearer '.encode() + newFitBitToken.AccessToken.encode()}
-    try:
-        req = urllib.request.Request(url=FitBitProfileURL, data=None, headers=headers)
-        response = urllib.request.urlopen(req)
-        fullResponse = response.read()
-    except urllib.error.URLError as e:
-        HTTPErrorMessage =e.read()
-        if (e.code == 401 and HTTPErrorMessage.find("Access token invalid or expired") > 0):
-            GetNewAccessToken(request, FitBitToken.objects.get(User=request.user, RefreshToken=newFitBitToken.RefreshToken))
-        
-    
-    ResponseJSON = json.loads(fullResponse)
-    userInfo_sel = UserInfo.objects.get(User=request.user)
-    userInfo_sel.Gender = str(ResponseJSON['user']['displayName'])
-    userInfo_sel.save()
-    return render(request, 'frontpage/fitbit.html', {'token':newFitBitToken})
 
 def GetNewAccessToken(request, refreshToken):
     TokenURL = "https://api.fitbit.com/oauth2/token"
