@@ -8,12 +8,11 @@ from .forms import EditUserInfo, MakeGroup, DailyReportForm, SendChat, SendGroup
 from django.contrib import messages
 import time
 from django.conf import settings
-#import requests
-#import urllib2
 import urllib
 import base64
-#from allauth.socialaccount.models import SocialToken, SocialAccount, SocialApp
 import json
+from .fitbitAPI import createToken, fitbitRequest
+
 
 # Create your views here.
 
@@ -104,8 +103,7 @@ def index(request):
         context['goals'] = goals
         context['goalStats'] = goalStats
         context['customChartData'] = customChartData
-        context['Dailydata'] = Dailydata
-        #context['string'] = string
+        
         return render(request, 'frontpage/index.html', context)
     else:
         return redirect('frontpage:welcome')
@@ -486,17 +484,93 @@ def profileEdit(request):
         return redirect('frontpage:welcome')
 
 def fitbitCustom(request):
-    authURL = 'https://www.fitbit.com/oauth2/authorize?response_type=code&client_id='
-    authURL += '238FG4'
-    authURL += '&redirect_uri=https://healm-fqgvr.ondigitalocean.app/fitbitCallback&'
-    authURL += 'scope=activity+heartrate+sleep+social+profile'
-    return redirect(authURL)
+    if request.user.is_authenticated:
+        authURL = 'https://www.fitbit.com/oauth2/authorize?response_type=code&client_id='
+        authURL += '238FG4'
+        authURL += '&redirect_uri=https://healm-fqgvr.ondigitalocean.app/fitbitCallback&'
+        authURL += 'scope=activity+heartrate+sleep+social+profile'
+        return redirect(authURL)
+    else:
+        return redirect('frontpage:welcome')
 
 def fitbitCallback(request):
-    try:
-        fitbitUser = FitBitToken.objects.get(User=request.user)
-    except FitBitToken.DoesNotExist:
-        return redirect('frontpage:fitbitCustom')
+<<<<<<< HEAD
+    if request.user.is_authenticated:
+        # expTime = datetime.datetime.now()
+
+        try:
+            createToken(request.user, request.GET['code'])
+            messages.success(request, "FitBit account connceted.")
+        except:
+            messages.error(request, "Something went wrong while connecting your FitBit account.")
+            
+
+        # ClientID = "238FG4"
+        # ClientSecret = "3cc4f6f0e58d4aa98995e3a63f4513c1"
+        # TokenURL = "https://api.fitbit.com/oauth2/token"
+        # code = request.GET['code']
+        # BodyText = {
+        #     'code' : code,
+        #     'redirect_uri' : 'https://healm-fqgvr.ondigitalocean.app/fitbitCallback',
+        #     'client_id' : ClientID,
+        #     'grant_type' : 'authorization_code'
+        # }
+        # BodyURLEncoded = urllib.parse.urlencode(BodyText).encode()
+        # encodedString = ClientID + ":" + ClientSecret
+        # encodedString = encodedString.encode()
+        # headers={'Authorization' : 'Basic '.encode() + base64.b64encode(encodedString), 'Content-Type' : 'application/x-www-form-urlencoded'}
+        # req = urllib.request.Request(TokenURL, BodyURLEncoded, headers )
+        # response = urllib.request.urlopen(req)
+        # test = response
+        # fullResponse = response.read()
+        # ResponseJSON = json.loads(fullResponse)
+
+
+        # try:
+        #     newFitBitToken = FitBitToken.objects.get(User=request.user)
+        # except FitBitToken.DoesNotExist:
+        #     newFitBitToken = FitBitToken()
+
+        # newFitBitToken.User = request.user
+        # newFitBitToken.AccessToken = str(token['access_token'])
+        # newFitBitToken.RefreshToken = str(token['refresh_token'])
+        # newFitBitToken.UserID = str(token['user_id'])
+        # expTime = expTime + datetime.timedelta(seconds=int(token['expires_in']))
+        # newFitBitToken.Expiration = expTime
+        # newFitBitToken.Scope = str(token['scope'])
+        # newFitBitToken.Type = str(token['token_type'])
+        # try:
+        #     newFitBitToken.save()
+        #     messages.success(request, "Your FitBit account was connected successfully.")
+        # except:
+        #     messages.error(request, "Something went wrong while connecting your FitBit account.")
+        #     return redirect('frontpage:index')
+
+        # FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json"
+
+        # # for classUser in newFitBitToken.User:
+        # #     if hasattr(FitBitToken(), newFitBitToken.AccessToken):
+        # #         newAccessToken = getattr(FitBitToken(), FitBitToken.AccessToken)
+        # try:
+        #     userToken = FitBitToken.objects.get(User=request.user)
+        # except FitBitToken.DoesNotExist:
+        #     return redirect('frontpage:fitbitCustom')
+
+        # headers={'Authorization'.encode() : 'Bearer '.encode() + newFitBitToken.AccessToken.encode()}
+        # req = urllib.request.Request(url=FitBitProfileURL, data=None, headers=headers)
+        # response = urllib.request.urlopen(req)
+        # fullResponse = response.read()
+        try:
+            ResponseJSON = fitbitRequest(request.user, "/1/user/-/profile.json")
+            request.user.first_name = str(ResponseJSON['user']['displayName'])
+            request.user.save()
+        except:
+            pass
+        return redirect('frontpage:index')
+    else:
+        return redirect('frontpage:welcome')
+=======
+    
     ClientID = "238FG4"
     ClientSecret = "3cc4f6f0e58d4aa98995e3a63f4513c1"
     TokenURL = "https://api.fitbit.com/oauth2/token"
@@ -532,21 +606,32 @@ def fitbitCallback(request):
     newFitBitToken.Type = str(ResponseJSON['token_type'])
     newFitBitToken.save()
 
-
+    try:
+        fitbitUser = FitBitToken.objects.get(User=request.user)
+    except FitBitToken.DoesNotExist:
+        return redirect('frontpage:fitbitCustom')
 
     FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json"
     
     
 
     headers={'Authorization'.encode() : 'Bearer '.encode() + newFitBitToken.AccessToken.encode()}
-    req = urllib.request.Request(url=FitBitProfileURL, data=None, headers=headers)
-    response = urllib.request.urlopen(req)
-    fullResponse = response.read()
+    try:
+        req = urllib.request.Request(url=FitBitProfileURL, data=None, headers=headers)
+        response = urllib.request.urlopen(req)
+        fullResponse = response.read()
+    except urllib.error.URLError as e:
+        HTTPErrorMessage =e.read()
+        if (e.code == 401 and HTTPErrorMessage.find("Access token invalid or expired") > 0):
+            GetNewAccessToken(request, FitBitToken.objects.get(User=request.user, RefreshToken=newFitBitToken.RefreshToken))
+        
+    
     ResponseJSON = json.loads(fullResponse)
     userInfo_sel = UserInfo.objects.get(User=request.user)
     userInfo_sel.Gender = str(ResponseJSON['user']['displayName'])
     userInfo_sel.save()
     return render(request, 'frontpage/fitbit.html', {'token':newFitBitToken})
+>>>>>>> d5cce61d78c04841996f7b3a14cd8aab36c8f173
 
 def GetNewAccessToken(request, refreshToken):
     TokenURL = "https://api.fitbit.com/oauth2/token"
@@ -568,6 +653,7 @@ def GetNewAccessToken(request, refreshToken):
     fullResponse = response.read()
     ResponseJSON = json.loads(fullResponse)
     FitBitToken.objects.get(User=request.user).update(AccessToken=str(ResponseJSON['access_token']), RefreshToken=str(ResponseJSON['response_token']))
+    redirect('frontpage:fitbitCallback')
 # These are custom error views -pat
 def custom404(request, exception):
     return render(request, 'errorHandlers/404.html')
