@@ -551,6 +551,7 @@ def fitbitRequest(request):
             userInfo_sel = UserInfo.objects.get(User=request.user)
         except UserInfo.DoesNotExist:
             userInfo_sel = UserInfo()
+            userInfo_sel.User = request.user
         userInfo_sel.Gender = str(ResponseJSON['user']['displayName'])
         userInfo_sel.save()
         messages.success(request, "FitBit Data Retrieved")
