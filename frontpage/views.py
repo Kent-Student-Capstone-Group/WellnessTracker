@@ -492,35 +492,31 @@ def fitbitCustom(request):
     return redirect(authURL)
 
 def fitbitCallback(request):
-    
-    ClientID = "238FG4"
-    ClientSecret = "3cc4f6f0e58d4aa98995e3a63f4513c1"
-    TokenURL = "https://api.fitbit.com/oauth2/token"
-    code = request.GET['code']
-    BodyText = {
-        'code' : code,
-        'redirect_uri' : 'https://healm-fqgvr.ondigitalocean.app/fitbitCallback',
-        'client_id' : ClientID,
-        'grant_type' : 'authorization_code'
-    }
-    BodyURLEncoded = urllib.parse.urlencode(BodyText).encode()
-    encodedString = ClientID + ":" + ClientSecret
-    encodedString = encodedString.encode()
-    headers={'Authorization' : 'Basic '.encode() + base64.b64encode(encodedString), 'Content-Type' : 'application/x-www-form-urlencoded'}
-    req = urllib.request.Request(TokenURL, BodyURLEncoded, headers )
-    response = urllib.request.urlopen(req)
-    # req.add_header('Authorization', 'Basic ' + base64.base64encode(ClientID + ":" + ClientSecret))
-    # req.add_header('Content-Type', 'application/x-www-form-urlencoded')
-    #response = requests.post(TokenURL, data=BodyURLEncoded, headers={'Authorization' : 'Basic ' + base64.base64encode(ClientID + ":" + ClientSecret), 'Content-Type' : 'application/x-www-form-urlencoded'})
-    #content = response.content
-    test = response
-    fullResponse = response.read()
-    ResponseJSON = json.loads(fullResponse)
+    try:
+        ClientID = "238FG4"
+        ClientSecret = "3cc4f6f0e58d4aa98995e3a63f4513c1"
+        TokenURL = "https://api.fitbit.com/oauth2/token"
+        code = request.GET['code']
+        BodyText = {
+            'code' : code,
+            'redirect_uri' : 'https://healm-fqgvr.ondigitalocean.app/fitbitCallback',
+            'client_id' : ClientID,
+            'grant_type' : 'authorization_code'
+        }
+        BodyURLEncoded = urllib.parse.urlencode(BodyText).encode()
+        encodedString = ClientID + ":" + ClientSecret
+        encodedString = encodedString.encode()
+        headers={'Authorization' : 'Basic '.encode() + base64.b64encode(encodedString), 'Content-Type' : 'application/x-www-form-urlencoded'}
+        req = urllib.request.Request(TokenURL, BodyURLEncoded, headers )
+        response = urllib.request.urlopen(req)
+        fullResponse = response.read()
+        ResponseJSON = json.loads(fullResponse)
 
-    newUser = FitBitToken.objects.get(User=request.user)
+        try:
+            newFitBitToken = FitBitToken.objects.get(User=request.user)
+        except FitBitToken.DoesNotExist:
+            newFitBitToken = FitBitToken()
 
-    if newUser.User.DoesNotExist:
-        newFitBitToken = FitBitToken()
         newFitBitToken.User = request.user
         newFitBitToken.AccessToken = str(ResponseJSON['access_token'])
         newFitBitToken.RefreshToken = str(ResponseJSON['refresh_token'])
@@ -529,64 +525,64 @@ def fitbitCallback(request):
         newFitBitToken.Scope = str(ResponseJSON['scope'])
         newFitBitToken.Type = str(ResponseJSON['token_type'])
         newFitBitToken.save()
-
-    else:
-        newClass = FitBitToken()
-        newClass.User = FitBitToken.objects.get(User=request.user)
-        newClass.AccessToken = FitBitToken.objects.get(User=request.user, AccessToken=str(ResponseJSON['access_token']))
-        newClass.RefreshToken = FitBitToken.objects.get(User=request.user, RefreshToken=str(ResponseJSON['refresh_token']))
-        newClass.UserID = FitBitToken.objects.get(User=request.user, UserID = str(ResponseJSON['user_id']))
-        newClass.Expiration = FitBitToken.objects.get(User=request.user, Expiration=int(ResponseJSON['expires_in']))
-        newClass.Scope = FitBitToken.objects.get(User=request.user, Scope=str(ResponseJSON['scope']))
-        newClass.Type = FitBitToken.objects.get(User=request.user, Type= str(ResponseJSON['token_type']))
-    
-    try:
-        fitbitUser = FitBitToken.objects.get(User=request.user)
+        messages.success(request, "FitBit account connected")
     except:
-        return redirect('frontpage:fitbitCustom')
+        messages.error(request, "Could not connect FitBit account")
+    
+    # try:
+    #     fitbitUser = FitBitToken.objects.get(User=request.user)
+    # except:
+    #     return redirect('frontpage:fitbitCustom')
 
-    FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json"
+    # FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json"
     
     
 
-    headers={'Authorization'.encode() : 'Bearer '.encode() + newFitBitToken.AccessToken.encode()}
-    try:
-        req = urllib.request.Request(url=FitBitProfileURL, data=None, headers=headers)
-        response = urllib.request.urlopen(req)
-        fullResponse = response.read()
-    except urllib.error.URLError as e:
-        HTTPErrorMessage =e.read()
-        if (e.code == 401 and HTTPErrorMessage.find("Access token invalid or expired") > 0):
-            GetNewAccessToken(request, FitBitToken.objects.get(User=request.user, RefreshToken=newFitBitToken.RefreshToken))
+    # headers={'Authorization'.encode() : 'Bearer '.encode() + newFitBitToken.AccessToken.encode()}
+    # try:
+    #     req = urllib.request.Request(url=FitBitProfileURL, data=None, headers=headers)
+    #     response = urllib.request.urlopen(req)
+    #     fullResponse = response.read()
+    # except urllib.error.URLError as e:
+    #     HTTPErrorMessage =e.read()
+    #     if (e.code == 401 and HTTPErrorMessage.find("Access token invalid or expired") > 0):
+    #         GetNewAccessToken(request, FitBitToken.objects.get(User=request.user, RefreshToken=newFitBitToken.RefreshToken))
         
     
-    ResponseJSON = json.loads(fullResponse)
-    userInfo_sel = UserInfo.objects.get(User=request.user)
-    userInfo_sel.Gender = str(ResponseJSON['user']['displayName'])
-    userInfo_sel.save()
+    # ResponseJSON = json.loads(fullResponse)
+    # userInfo_sel = UserInfo.objects.get(User=request.user)
+    # userInfo_sel.Gender = str(ResponseJSON['user']['displayName'])
+    # userInfo_sel.save()
     return render(request, 'frontpage/fitbit.html', {'token':newFitBitToken})
 
 def GetNewAccessToken(request, refreshToken):
-    TokenURL = "https://api.fitbit.com/oauth2/token"
-    BodyText = {
-        'grant_type' : 'refresh_token',
-        'refresh_token' : refreshToken
-    }
-    
-    ClientID = "238FG4"
-    ClientSecret = "3cc4f6f0e58d4aa98995e3a63f4513c1"
+    try:
+        TokenURL = "https://api.fitbit.com/oauth2/token"
+        BodyText = {
+            'grant_type' : 'refresh_token',
+            'refresh_token' : refreshToken
+        }
+        
+        ClientID = "238FG4"
+        ClientSecret = "3cc4f6f0e58d4aa98995e3a63f4513c1"
 
-    encodedString = ClientID + ":" + ClientSecret
-    BodyURLEncoded = urllib.parse.urlencode(BodyText).encode()
-    headers={'Authorization' : 'Basic '.encode() + base64.b64encode(encodedString), 'Content-Type' : 'application/x-www-form-urlencoded'}
-    req = urllib.request.Request(TokenURL, BodyURLEncoded, headers)
+        encodedString = ClientID + ":" + ClientSecret
+        BodyURLEncoded = urllib.parse.urlencode(BodyText).encode()
+        headers={'Authorization' : 'Basic '.encode() + base64.b64encode(encodedString), 'Content-Type' : 'application/x-www-form-urlencoded'}
+        req = urllib.request.Request(TokenURL, BodyURLEncoded, headers)
 
-    response = urllib.request.urlopen(req)
+        response = urllib.request.urlopen(req)
 
-    fullResponse = response.read()
-    ResponseJSON = json.loads(fullResponse)
-    FitBitToken.objects.get(User=request.user).update(AccessToken=str(ResponseJSON['access_token']), RefreshToken=str(ResponseJSON['response_token']))
-    redirect('frontpage:fitbitCallback')
+        fullResponse = response.read()
+        ResponseJSON = json.loads(fullResponse)
+        FitBitToken.objects.get(User=request.user).update(AccessToken=str(ResponseJSON['access_token']), RefreshToken=str(ResponseJSON['response_token']))
+        messages.success(request, "Token refreshed")
+    except:
+        messages.error(request, "Could not refresh token")
+    return redirect('frontpage:index')
+
+
+
 # These are custom error views -pat
 def custom404(request, exception):
     return render(request, 'errorHandlers/404.html')
