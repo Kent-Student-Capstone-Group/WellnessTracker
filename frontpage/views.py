@@ -569,27 +569,27 @@ def fitbitCallback(request):
     else:
         return redirect('frontpage:welcome')
 
-def GetNewAccessToken(request, refreshToken):
-    TokenURL = "https://api.fitbit.com/oauth2/token"
-    BodyText = {
-        'grant_type' : 'refresh_token',
-        'refresh_token' : refreshToken
-    }
+# def GetNewAccessToken(request, refreshToken):
+#     TokenURL = "https://api.fitbit.com/oauth2/token"
+#     BodyText = {
+#         'grant_type' : 'refresh_token',
+#         'refresh_token' : refreshToken
+#     }
     
-    ClientID = "238FG4"
-    ClientSecret = "3cc4f6f0e58d4aa98995e3a63f4513c1"
+#     ClientID = "238FG4"
+#     ClientSecret = "3cc4f6f0e58d4aa98995e3a63f4513c1"
 
-    encodedString = ClientID + ":" + ClientSecret
-    BodyURLEncoded = urllib.parse.urlencode(BodyText).encode()
-    headers={'Authorization' : 'Basic '.encode() + base64.b64encode(encodedString), 'Content-Type' : 'application/x-www-form-urlencoded'}
-    req = urllib.request.Request(TokenURL, BodyURLEncoded, headers)
+#     encodedString = ClientID + ":" + ClientSecret
+#     BodyURLEncoded = urllib.parse.urlencode(BodyText).encode()
+#     headers={'Authorization' : 'Basic '.encode() + base64.b64encode(encodedString), 'Content-Type' : 'application/x-www-form-urlencoded'}
+#     req = urllib.request.Request(TokenURL, BodyURLEncoded, headers)
 
-    response = urllib.request.urlopen(req)
+#     response = urllib.request.urlopen(req)
 
-    fullResponse = response.read()
-    ResponseJSON = json.loads(fullResponse)
-    FitBitToken.objects.get(User=request.user).update(AccessToken=str(ResponseJSON['access_token']), RefreshToken=str(ResponseJSON['response_token']))
-    redirect('frontpage:fitbitCallback')
+#     fullResponse = response.read()
+#     ResponseJSON = json.loads(fullResponse)
+#     FitBitToken.objects.get(User=request.user).update(AccessToken=str(ResponseJSON['access_token']), RefreshToken=str(ResponseJSON['response_token']))
+#     redirect('frontpage:fitbitCallback')
 # These are custom error views -pat
 def custom404(request, exception):
     return render(request, 'errorHandlers/404.html')
