@@ -493,10 +493,7 @@ def fitbitCustom(request):
     return redirect(authURL)
 
 def fitbitCallback(request):
-    try:
-        fitbitUser = FitBitToken.objects.get(User=request.user)
-    except FitBitToken.DoesNotExist:
-        return redirect('frontpage:fitbitCustom')
+    
     ClientID = "238FG4"
     ClientSecret = "3cc4f6f0e58d4aa98995e3a63f4513c1"
     TokenURL = "https://api.fitbit.com/oauth2/token"
@@ -532,7 +529,10 @@ def fitbitCallback(request):
     newFitBitToken.Type = str(ResponseJSON['token_type'])
     newFitBitToken.save()
 
-
+    try:
+        fitbitUser = FitBitToken.objects.get(User=request.user)
+    except FitBitToken.DoesNotExist:
+        return redirect('frontpage:fitbitCustom')
 
     FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json"
     
