@@ -4,7 +4,7 @@
 
 {% block content %}
 
-{% load socialaccount %} 
+{% load socialaccount %}
 {% load static %}
 
 <html>
@@ -21,10 +21,10 @@
                 font-family: Fredoka;
             }
             .class{
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
             }
             .username{
                 font-weight: 800;
@@ -98,7 +98,20 @@
             tr:nth-child(even) {
             background-color: #dddddd;
             }
+            .add{
+                margin: 15px;
+                font-weight: 700;
+            }
+            .end{
+                margin-bottom: 25px;
+            }
+            .statistics{
+                text-align: center;
+                line-height: 2em;
+            }
             </style>
+
+
         <script type="text/javascript">
 
             {% for key, value in goalStats.items %}
@@ -267,8 +280,8 @@
             <div class="lines"></div>
 
             <div class="statistics">
-                <h1 style="padding-left:20%">Here's a breakdown of your progress.</h1>
-                <p style="padding-left:5%">Choose a date range: <form style='padding-left:5%'method="GET" action="{% url 'frontpage:index' %}">Start:<input type='date' name="start_date"/>  End:<input type="date" name="end_date"/><input type='submit' value="submit"></form><span style="margin-left:10%;margin-top:5px;padding:5px;" class="w3-button w3-blue w3-giant w3-round" title="Add a Goal" id="switchChart">Switch Chart</span></p>
+                <h1>Here's a breakdown of your progress.</h1>
+                <p>Choose a date range: <form style='padding-left:5%'method="GET" action="{% url 'frontpage:index' %}">Start:<input type='date' name="start_date"/>  End:<input type="date" name="end_date"/><input type='submit' value="submit"></form><span style="margin-left:10%;margin-top:5px;padding:5px;" class="w3-button w3-blue w3-giant w3-round" title="Add a Goal" id="switchChart">Switch Chart</span></p>
                 
                 <canvas id="myChart" width="1200" height="500"></canvas>
                 <canvas id="myChart2" width="1200" height="500"></canvas>
@@ -303,27 +316,28 @@
                 </tr>
                 {% endfor %}
             </table>
-            
-            <p>Add Goal</p>
-            <span style="padding:0px;margin-bottom:5px;" class="material-icons w3-button w3-cyan w3-giant w3-round" title="Add a Goal" id="add-goal">add</span>
-            <form style="margin-bottom:5px;" hidden method="POST" id="goal-form">
-                {% csrf_token %}
-                <select name='field'>
-                    {% for field in customFields %}
-                    <option value="{{field.Title}}">{{field.Title}}</option>
-                    {% endfor %}
-                </select>
-                <input type="number" name="value">
-                <input type="date" name="start_date">
-                <input type="date" name="end_date">
-                <input type="hidden" name="form" value="goalForm">
-                <input type='submit' value='submit'>
-            </form> 
-            
+            <div class="add">
+                <p>Add Goal</p>
+                <span style="padding:0px;margin-bottom:5px;" class="material-icons w3-button w3-cyan w3-giant w3-round" title="Add a Goal" id="add-goal">add</span>
+                <form style="margin-bottom:5px;" hidden method="POST" id="goal-form">
+                    {% csrf_token %}
+                    <select name='field'>
+                        {% for field in customFields %}
+                        <option value="{{field.Title}}">{{field.Title}}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="number" name="value">
+                    <input type="date" name="start_date">
+                    <input type="date" name="end_date">
+                    <input type="hidden" name="form" value="goalForm">
+                    <input type='submit' value='submit'>
+                </form> 
+            </div>
+
             <div class="lines"></div>
             <div class="result">
                 <div>
-                    <img style="max-width:32%;" src="{% static 'frontpage/src/ps.jpg' %}" type="img/jpg"/>
+                    <img style="max-width:37%;" src="{% static 'frontpage/src/ps.jpg' %}" type="img/jpg"/>
                 </div>
                 <div class="left">
                         <h1>You can check your Ideal weight recommended for your height</h1>                        
@@ -334,77 +348,25 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="lines"></div>
             
 
-            
-
-            <div class="UserStats"> 
-                <h1> Your daily stats are: </h1>
-                {% if Dailydata %}
-                <table>
-                    <tr>
-                        <th>Statistic</th>
-                        <th>Data</th>
-                    </tr>
-                    
-                    
-                    <!--daily_stats = {0: 'Rating Of Day', 1: 'Steps Taken', 2: 'Hours Sitting', 3: 'Hours Slept', 4: 'LengthOfWorkout', 5: 'IntensityOfWorkout', 6: 'MealsEaten', 7: 'SnacksEaten', 8: 'FoodHealth', 9: 'CigarettesSmoked', 10: 'AlcoholicDrinks'} !-->
-                    <tr>
-                        <td>Rating Of Day</td>
-                        <td>{{Dailydata.RatingOfDay}}</td> 
-                    </tr>
-                    <tr>
-                        <td>Steps Taken</td>
-                        <td>{{Dailydata.StepsTaken}}</td> 
-                    </tr>
-                    <tr>
-                        <td>Hours Sitting</td>
-                        <td>{{Dailydata.HoursSitting}}</td> 
-                    </tr>
-                    <tr>
-                        <td>Hours Slept</td>
-                        <td>{{Dailydata.HoursSlept}}</td> 
-                    </tr>
-                    <tr>
-                        <td>Length Of Workout</td>
-                        <td>{{Dailydata.LengthOfWorkout}}</td> 
-                    </tr>
-                    <tr>
-                        <td>Intensity Of Workout</td>
-                        <td>{{Dailydata.IntensityOfWorkout}}</td> 
-                    </tr>
-                    <tr>
-                        <td>Meals Eaten</td>
-                        <td>{{Dailydata.MealsEaten}}</td> 
-                    </tr>
-                    <tr>
-                        <td>Snacks Eaten</td>
-                        <td>{{Dailydata.SnacksEaten}}</td> 
-                    </tr>
-                    <tr>
-                        <td>Food Health</td>
-                        <td>{{Dailydata.FoodHealth}}</td> 
-                    </tr>
-                    <tr>
-                        <td>Cigarettes Smoked</td>
-                        <td>{{Dailydata.CigarettesSmoked}}</td> 
-                    </tr> 
-                    <tr>
-                        <td>Alcoholic Drinks</td>
-                        <td>{{Dailydata.AlcoholicDrinks}}</td> 
-                    </tr>
-                </table>
-                {% else %}
-                <p>No Data Entered for Today</p>
-                {% endif %}
+            <div class="UserStats">  <!-- How do we label the custom values? -->
+                <h1> Your daily custom stats are: </h1>
+                {% for x in Current_stats %}
+                    {%if x is not null%}
+                        x
+                    {%endif%}
+                {%endfor%}
             </div>
 
-          <!--  <table>    Will prob need another view to display this data on another page 
+            <table class="end">   <!-- Will prob need another view to display this data on another page -->
                 <tr>
                     <th colspan="2">Your daily Fitbit stats are:</th>
                 </tr>
-                {% for x in Fit_Bit_Info %}
+              <!--  {% for x in Fit_Bit_Info %}
                 <tr>
                     {%if x is not null%}
                         <td><i><p> Steps Taken</p>{{x.StepsTaken}}</i> <br>
@@ -413,12 +375,12 @@
                         <p> Active hours</p>{{ x.ActiveHours }} </td>
                     {%endif%}
                 </tr>
-                {% endfor %}   
-            </table> -->
+                {% endfor %}   -->
+            </table>
 
     </div>
 </body>
 
 </html>
 
-{% endblock content %} 
+{% endblock content %}

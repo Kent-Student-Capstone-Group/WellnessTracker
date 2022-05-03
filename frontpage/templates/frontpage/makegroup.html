@@ -6,25 +6,57 @@
         <title>Make a group</title>
         <meta charset = "UTF-8">
             <meta content="width=device-width,initial-scale=1" name="viewport" />
-            <link href="https://fonts.googleapis.com/css?family=Fredoka" rel="stylesheet" type="text/css">
-            <link rel="shortcut icon" type="image/png" href="{% load static %}" />
-            <link rel="stylesheet" type="text/css" href="scrollbar.css"/>
+
         <style>
             *{
                 margin: 0;
             }
+            
+            .bd{
+                margin-top: 35px;
+                border: 3px solid #17252a;
+                background-color: #41b3a3;
+                text-align: center;
+                color: white;
+                text-transform: uppercase;
+                margin: 15px;
+                border-radius: 15px;
+            }
+
+            .bd a{
+                background-color: black;
+                padding: 10px;
+                border-radius: 10px;
+                text-decoration: none;
+
+            }
+
+            .bd h1{
+                margin-top: 25px;
+                font-family: Fredoka;
+                background-color: #c8eff9;
+                border: 3px solid #17252a;
+                color: #17252a;
+                width: 60%;
+                height: auto;
+                margin-left: auto;
+                margin-right: auto;
+                border-radius: 10px;
+            }
         </style>
     </head>
     <body>
-    <div style="min-height: calc(100vh - 299px);">
-        <a href="{% url 'frontpage:group' %}">Back to Groups</a>
-        <h1>Enter Group Info</h1>
-        <form method='POST'>
-            {% csrf_token %}
-            <p>Group Name: </p>{{ form.GroupName }}
-            <input type="submit" value="Save" />
-        </form>
-    </div>
+        
+        <div class="bd" style="min-height: calc(100vh - 299px);">
+            <a href="{% url 'frontpage:group' %}">Back to Groups</a>
+            
+            <h1>Enter Group Info</h1>
+            <form method='POST'>
+                {% csrf_token %}
+                <p>Group Name: </p>{{ form.GroupName }}
+                <input class="w3-button w3-blue w3-border w3-round-large w3-display-middle w3-center" type="submit" value="Save" />
+            </form>
+        </div>
     </body>
 </html>
 {% endblock content %}

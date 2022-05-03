@@ -16,17 +16,23 @@
                 border: none;
                 border-radius: 15px;
                 background-color: #b3ffb3;
+                margin: 13px;
+                padding-bottom: 15px;
+                margin-bottom: 25px;
             }
             .lines{
-                width: 90%;
+                width: 98%;
                 border-bottom: 4px solid gray;
+                padding-left: 15px;
                 border-radius: 5px;
                 margin-left: auto;
                 margin-right: auto;
                 margin-bottom: 15px;
                 margin-top: 15px;
+                justify-content: center;
             }
             h1{
+                font-family: Fredoka;
                 border: none;
                 background-color: #4dceaa;
                 border-radius: 15px;
@@ -35,6 +41,17 @@
                 margin-right: auto;
                 padding: 5px;
                 margin-bottom: 15px;
+            }
+            p{  
+                text-transform: uppercase;
+            }
+            .member p{
+                font-family: Fredoka;
+                font-weight: 700;
+                font-size: 20px;
+            }
+            .requests{
+                margin-bottom: 25px;
             }
         </style>
     </head>
@@ -68,7 +85,7 @@
             <div class="lines"></div>
             {% endif %}
             {% if groupMembers %}
-            <div>
+            <div class="member">
                 <h1>Members:</h1>
                     {% for member in groupMembers %}
                         <p>{{member.User.username}}</p>
@@ -78,7 +95,7 @@
             <div class="lines"></div>
             {% endif %}
             {% if user == group.Owner %}
-            <div>
+            <div class="requests">
                 <h1>Requests:</h1>
                 {% for request in groupRequests %}
                     <form method="POST">
@@ -87,7 +104,6 @@
                     </form>
                 {% endfor %}
             </div>
-            <div class="lines"></div>
             {% endif %}
         </div>
     </div>
