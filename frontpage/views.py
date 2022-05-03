@@ -521,7 +521,7 @@ def fitbitCallback(request):
 
     try:
         newUser = FitBitToken.objects.get(User=request.user)
-    except newUser.DoesNotExist:
+    except FitBitToken.DoesNotExist:
         newFitBitToken = FitBitToken()
         newFitBitToken.User = request.user
         newFitBitToken.AccessToken = str(ResponseJSON['access_token'])
@@ -531,8 +531,8 @@ def fitbitCallback(request):
         newFitBitToken.Scope = str(ResponseJSON['scope'])
         newFitBitToken.Type = str(ResponseJSON['token_type'])
         newFitBitToken.save()
-        
-    except not newUser.DoesNotExist:
+
+    except not FitBitToken.DoesNotExist:
         newClass = FitBitToken()
         newClass.User = FitBitToken.objects.get(User=request.user)
         newClass.AccessToken = FitBitToken.objects.get(User=request.user, AccessToken=str(ResponseJSON['access_token']))
