@@ -518,20 +518,30 @@ def fitbitCallback(request):
     fullResponse = response.read()
     ResponseJSON = json.loads(fullResponse)
 
-    
-    newFitBitToken = FitBitToken()
-    newFitBitToken.User = request.user
-    newFitBitToken.AccessToken = str(ResponseJSON['access_token'])
-    newFitBitToken.RefreshToken = str(ResponseJSON['refresh_token'])
-    newFitBitToken.UserID = str(ResponseJSON['user_id'])
-    newFitBitToken.Expiration = int(ResponseJSON['expires_in'])
-    newFitBitToken.Scope = str(ResponseJSON['scope'])
-    newFitBitToken.Type = str(ResponseJSON['token_type'])
-    newFitBitToken.save()
+    if not FitBitToken.objects.get(User=request.user):
+        newFitBitToken = FitBitToken()
+        newFitBitToken.User = request.user
+        newFitBitToken.AccessToken = str(ResponseJSON['access_token'])
+        newFitBitToken.RefreshToken = str(ResponseJSON['refresh_token'])
+        newFitBitToken.UserID = str(ResponseJSON['user_id'])
+        newFitBitToken.Expiration = int(ResponseJSON['expires_in'])
+        newFitBitToken.Scope = str(ResponseJSON['scope'])
+        newFitBitToken.Type = str(ResponseJSON['token_type'])
+        newFitBitToken.save()
 
+    else:
+        newClass = FitBitToken()
+        newClass.User = FitBitToken.objects.get(User=request.user)
+        newClass.AccessToken = FitBitToken.objects.get(User=request.user, AccessToken=str(ResponseJSON['access_token']))
+        newClass.RefreshToken = FitBitToken.objects.get(User=request.user, RefreshToken=str(ResponseJSON['refresh_token']))
+        newClass.UserID = FitBitToken.objects.get(User=request.user, UserID = str(ResponseJSON['user_id']))
+        newClass.Expiration = FitBitToken.objects.get(User=request.user, Expiration=int(ResponseJSON['expires_in']))
+        newClass.Scope = FitBitToken.objects.get(User=request.user, Scope=str(ResponseJSON['scope']))
+        newClass.Type = FitBitToken.objects.get(User=request.user, Type= str(ResponseJSON['token_type']))
+    
     try:
         fitbitUser = FitBitToken.objects.get(User=request.user)
-    except FitBitToken.DoesNotExist:
+    except:
         return redirect('frontpage:fitbitCustom')
 
     FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json"
