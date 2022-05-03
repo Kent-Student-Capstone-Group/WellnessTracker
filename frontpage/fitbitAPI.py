@@ -3,6 +3,7 @@ import json
 import urllib
 import base64
 from .models import FitBitToken
+from django.contrib.auth import get_user_model
 
 def createToken(user, code):
     expTime = datetime.datetime.now()
@@ -27,7 +28,7 @@ def createToken(user, code):
 
     
     try:
-        newFitBitToken = FitBitToken.objects.get(User=request.user)
+        newFitBitToken = FitBitToken.objects.get(User=get_user_model().objects.get(user=user))
     except FitBitToken.DoesNotExist:
         newFitBitToken = FitBitToken()
 
@@ -44,7 +45,7 @@ def createToken(user, code):
 
 
 def refreshToken(user):
-    userToken = FitBitToken.objects.get(User=user)
+    userToken = FitBitToken.objects.get(User=get_user_model().objects.get(user=user))
     expTime = datetime.datetime.now()
     ClientID = "238FG4"
     ClientSecret = "3cc4f6f0e58d4aa98995e3a63f4513c1"
@@ -76,7 +77,7 @@ def refreshToken(user):
 
 def fitbitRequest(user, url):
 
-    userToken = FitBitToken.objects.get(User=user)
+    userToken = FitBitToken.objects.get(User=get_user_model().objects.get(user=user))
     if datetime.datetime.now() > userToken.Expiration:
         refreshToken(user)
 
