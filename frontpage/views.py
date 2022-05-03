@@ -1,5 +1,3 @@
-from tempfile import TemporaryFile
-from tokenize import Token
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.utils import timezone
