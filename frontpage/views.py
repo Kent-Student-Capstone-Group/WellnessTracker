@@ -104,8 +104,7 @@ def index(request):
         context['goals'] = goals
         context['goalStats'] = goalStats
         context['customChartData'] = customChartData
-        context['Dailydata'] = Dailydata
-        #context['string'] = string
+
         return render(request, 'frontpage/index.html', context)
     else:
         return redirect('frontpage:welcome')
