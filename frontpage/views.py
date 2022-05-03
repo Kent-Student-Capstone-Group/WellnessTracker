@@ -552,12 +552,30 @@ def fitbitRequest(request):
         except UserInfo.DoesNotExist:
             userInfo_sel = UserInfo()
             userInfo_sel.User = request.user
-        userInfo_sel.Gender = str(ResponseJSON['user']['gender'])
-        userInfo_sel.Weight = int(ResponseJSON['user']['weight'])
-        userInfo_sel.UserSteps = int(ResponseJSON['summary']['steps'])
-        userInfo_sel.save()
-        request.user.first_name =str(ResponseJSON['user']['displayName'])
-        request.user.save()
+        try:
+            userInfo_sel.Gender = str(ResponseJSON['user']['gender'])
+        except:
+            pass
+        try:
+            userInfo_sel.Weight = int(ResponseJSON['user']['weight'])
+        except:
+            pass
+        # try:
+        #     userInfo_sel.UserSteps = int(ResponseJSON['summary']['steps'])
+        # except:
+        #     pass
+        try:
+            userInfo_sel.save()
+        except:
+            pass
+        try:
+            request.user.first_name =str(ResponseJSON['user']['displayName'])
+        except:
+            pass
+        try:
+            request.user.save()
+        except:
+            pass
         messages.success(request, "FitBit Data Retrieved")
     except:
         messages.error(request, "Could not retrieve FitBit data")
