@@ -1,3 +1,5 @@
+from tempfile import TemporaryFile
+from tokenize import Token
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.utils import timezone
@@ -493,6 +495,10 @@ def fitbitCustom(request):
     return redirect(authURL)
 
 def fitbitCallback(request):
+    try:
+        fitbitUser = FitBitToken.objects.get(User=request.user)
+    except FitBitToken.DoesNotExist:
+        return redirect('frontpage:fitbitCustom')
     ClientID = "238FG4"
     ClientSecret = "3cc4f6f0e58d4aa98995e3a63f4513c1"
     TokenURL = "https://api.fitbit.com/oauth2/token"
@@ -516,6 +522,8 @@ def fitbitCallback(request):
     test = response
     fullResponse = response.read()
     ResponseJSON = json.loads(fullResponse)
+
+    
     newFitBitToken = FitBitToken()
     newFitBitToken.User = request.user
     newFitBitToken.AccessToken = str(ResponseJSON['access_token'])
@@ -526,11 +534,11 @@ def fitbitCallback(request):
     newFitBitToken.Type = str(ResponseJSON['token_type'])
     newFitBitToken.save()
 
-    FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json"
 
-    for classUser in newFitBitToken.User:
-        if hasattr(FitBitToken(), newFitBitToken.AccessToken):
-            newAccessToken = getattr(FitBitToken(), FitBitToken.AccessToken)
+
+    FitBitProfileURL = "https://api.fitbit.com/1/user/-/profile.json"
+    
+    
 
     headers={'Authorization'.encode() : 'Bearer '.encode() + newFitBitToken.AccessToken.encode()}
     req = urllib.request.Request(url=FitBitProfileURL, data=None, headers=headers)
@@ -542,7 +550,26 @@ def fitbitCallback(request):
     userInfo_sel.save()
     return render(request, 'frontpage/fitbit.html', {'token':newFitBitToken})
 
+def GetNewAccessToken(request, refreshToken):
+    TokenURL = "https://api.fitbit.com/oauth2/token"
+    BodyText = {
+        'grant_type' : 'refresh_token',
+        'refresh_token' : refreshToken
+    }
+    
+    ClientID = "238FG4"
+    ClientSecret = "3cc4f6f0e58d4aa98995e3a63f4513c1"
 
+    encodedString = ClientID + ":" + ClientSecret
+    BodyURLEncoded = urllib.parse.urlencode(BodyText).encode()
+    headers={'Authorization' : 'Basic '.encode() + base64.b64encode(encodedString), 'Content-Type' : 'application/x-www-form-urlencoded'}
+    req = urllib.request.Request(TokenURL, BodyURLEncoded, headers)
+
+    response = urllib.request.urlopen(req)
+
+    fullResponse = response.read()
+    ResponseJSON = json.loads(fullResponse)
+    FitBitToken.objects.get(User=request.user).update(AccessToken=str(ResponseJSON['access_token']), RefreshToken=str(ResponseJSON['response_token']))
 # These are custom error views -pat
 def custom404(request, exception):
     return render(request, 'errorHandlers/404.html')
