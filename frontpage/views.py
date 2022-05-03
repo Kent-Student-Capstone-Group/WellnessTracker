@@ -539,9 +539,16 @@ def fitbitCallback(request):
     
 
     headers={'Authorization'.encode() : 'Bearer '.encode() + newFitBitToken.AccessToken.encode()}
-    req = urllib.request.Request(url=FitBitProfileURL, data=None, headers=headers)
-    response = urllib.request.urlopen(req)
-    fullResponse = response.read()
+    try:
+        req = urllib.request.Request(url=FitBitProfileURL, data=None, headers=headers)
+        response = urllib.request.urlopen(req)
+        fullResponse = response.read()
+    except urllib.error.URLError as e:
+        HTTPErrorMessage =e.read()
+        if (e.code == 401 and HTTPErrorMessage.find("Access token invalid or expired") > 0):
+            GetNewAccessToken(request, FitBitToken.objects.get(User=request.user, RefreshToken=newFitBitToken.RefreshToken))
+        
+    
     ResponseJSON = json.loads(fullResponse)
     userInfo_sel = UserInfo.objects.get(User=request.user)
     userInfo_sel.Gender = str(ResponseJSON['user']['displayName'])
@@ -568,6 +575,7 @@ def GetNewAccessToken(request, refreshToken):
     fullResponse = response.read()
     ResponseJSON = json.loads(fullResponse)
     FitBitToken.objects.get(User=request.user).update(AccessToken=str(ResponseJSON['access_token']), RefreshToken=str(ResponseJSON['response_token']))
+    redirect('frontpage:fitbitCallback')
 # These are custom error views -pat
 def custom404(request, exception):
     return render(request, 'errorHandlers/404.html')
